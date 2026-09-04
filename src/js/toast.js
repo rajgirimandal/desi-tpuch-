@@ -1,6 +1,8 @@
-// Toast Notification System for Desi Touch
+// Toast Notification System for Desi Touch (Hardened)
+// - Uses textContent by default
+// - Optional allowHtml true will sanitize via DOMPurify (if loaded)
 
-export function showToast(message, type = 'success', duration = 3500) {
+export function showToast(message, type = 'success', duration = 3500, { allowHtml = false } = {}) {
   const container = document.getElementById('toast-container');
   if (!container) return;
 
@@ -14,11 +16,28 @@ export function showToast(message, type = 'success', duration = 3500) {
     info: 'ℹ️'
   };
 
-  toast.innerHTML = `
-    <span class="toast-icon" style="font-size: 1.2rem;">${iconMap[type] || '🌱'}</span>
-    <span class="toast-message">${message}</span>
-  `;
+  const icon = document.createElement('span');
+  icon.className = 'toast-icon';
+  icon.style.fontSize = '1.2rem';
+  icon.textContent = iconMap[type] || '🌱';
 
+  const msg = document.createElement('span');
+  msg.className = 'toast-message';
+
+  if (allowHtml && typeof DOMPurify !== 'undefined') {
+    // sanitize incoming HTML before inserting
+    try {
+      msg.innerHTML = DOMPurify.sanitize(message);
+    } catch (e) {
+      msg.textContent = message;
+    }
+  } else {
+    // safe default: treat message as plain text
+    msg.textContent = message;
+  }
+
+  toast.appendChild(icon);
+  toast.appendChild(msg);
   container.appendChild(toast);
 
   setTimeout(() => {
