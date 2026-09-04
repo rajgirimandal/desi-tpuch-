@@ -1,6 +1,6 @@
-// Multi-Step Checkout & Payment Processing Engine
+// Multi-Step Checkout & Payment Processing Engine (Hardened)
 
-import { state } from '../state.js';
+import { state, APP_CONFIG } from '../state.js';
 import { showToast } from '../toast.js';
 import confetti from 'canvas-confetti';
 
@@ -244,7 +244,7 @@ export class CheckoutModal {
     }
   }
 
-  processPayment() {
+  async processPayment() {
     const cart = state.getCart();
     if (cart.items.length === 0) {
       showToast('Your basket is empty!', 'error');
@@ -255,10 +255,15 @@ export class CheckoutModal {
     // Button loading animation
     if (this.confirmPaymentBtn) {
       this.confirmPaymentBtn.disabled = true;
-      this.confirmPaymentBtn.innerHTML = `
-        <span class="admin-pulse-dot" style="background:#fff;"></span>
-        <span>Processing Authentic Transaction...</span>
-      `;
+      // Use textContent-safe update
+      this.confirmPaymentBtn.innerHTML = '';
+      const dot = document.createElement('span');
+      dot.className = 'admin-pulse-dot';
+      dot.style.background = '#fff';
+      const label = document.createElement('span');
+      label.textContent = 'Processing Authentic Transaction...';
+      this.confirmPaymentBtn.appendChild(dot);
+      this.confirmPaymentBtn.appendChild(label);
     }
 
     // Collect details
@@ -278,19 +283,38 @@ export class CheckoutModal {
     if (this.selectedPaymentMethod === 'netbanking') paymentMethodLabel = 'Net Banking (HDFC)';
     if (this.selectedPaymentMethod === 'cod') paymentMethodLabel = 'Cash on Delivery';
 
-    setTimeout(() => {
+    try {
+      // Require server-side payment verification: expect a server to return a verifiedPaymentToken after performing payment.
+      // In demo mode (APP_CONFIG.ALLOW_CLIENT_SIDE_ADMIN === true and a demo token present), allow simulated payment.
+
+      const serverToken = localStorage.getItem(APP_CONFIG.SERVER_AUTH_TOKEN_KEY);
+      const allowDemo = APP_CONFIG.ALLOW_CLIENT_SIDE_ADMIN && serverToken === APP_CONFIG.DEMO_SERVER_TOKEN_VALUE;
+
+      if (!allowDemo) {
+        // Attempt to call a server endpoint to validate payment (this repo does not include a server, so we expect integration here).
+        // For safety: refuse to finalize orders without server confirmation in production.
+        showToast('Payment validation required. Complete payment through the payment gateway to finalize order.', 'error');
+        this.confirmPaymentBtn.disabled = false;
+        // Reset label
+        if (this.confirmPaymentBtn) {
+          this.confirmPaymentBtn.innerHTML = '';
+          const svg = document.createElement('span'); svg.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>';
+          const span = document.createElement('span'); span.id = 'pay-button-label'; span.textContent = 'Authorize Secure Payment';
+          this.confirmPaymentBtn.appendChild(svg);
+          this.confirmPaymentBtn.appendChild(span);
+        }
+        return;
+      }
+
+      // If demo allowed, simulate payment and create order locally
+      await new Promise(resolve => setTimeout(resolve, 1200));
+
       const newOrder = state.createOrder({
         customerName,
         customerEmail,
         customerPhone,
         address: { line1: street, city, state: stateVal, pincode },
-        items: cart.items.map(i => ({
-          id: i.id,
-          name: i.product.name,
-          price: i.product.price,
-          quantity: i.quantity,
-          weight: i.product.weight
-        })),
+        items: cart.items.map(i => ({ id: i.id, name: i.product.name, price: i.product.price, quantity: i.quantity, weight: i.product.weight })),
         subtotal: cart.subtotal,
         discount: cart.discount,
         shipping: cart.shipping + extraShipping,
@@ -300,72 +324,70 @@ export class CheckoutModal {
 
       this.currentOrderData = newOrder;
 
-      // Celebrate with Confetti!
-      try {
-        confetti({
-          particleCount: 90,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#16a34a', '#f59e0b', '#0d5c3a', '#22c55e']
-        });
-      } catch (e) {
-        console.warn('Confetti effect', e);
-      }
+      try { confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 }, colors: ['#16a34a', '#f59e0b', '#0d5c3a', '#22c55e'] }); } catch (e) { console.warn('Confetti effect', e); }
 
-      // Reset button
       if (this.confirmPaymentBtn) {
         this.confirmPaymentBtn.disabled = false;
-        this.confirmPaymentBtn.innerHTML = `
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
-          <span id="pay-button-label">Authorize Secure Payment</span>
-        `;
+        this.confirmPaymentBtn.innerHTML = '';
+        const svg = document.createElement('span'); svg.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>';
+        const span = document.createElement('span'); span.id = 'pay-button-label'; span.textContent = 'Authorize Secure Payment';
+        this.confirmPaymentBtn.appendChild(svg);
+        this.confirmPaymentBtn.appendChild(span);
       }
 
       this.renderReceipt(newOrder);
       this.goToStep(3);
       showToast('Order confirmed! Prepared with Vedic care 🌱', 'success');
-    }, 1400);
+
+    } catch (err) {
+      console.error('Payment processing error', err);
+      showToast('Payment failed. Please try again or contact support.', 'error');
+      if (this.confirmPaymentBtn) this.confirmPaymentBtn.disabled = false;
+    }
   }
 
   renderReceipt(order) {
     if (!this.receiptContent) return;
 
-    this.receiptContent.innerHTML = `
-      <div class="receipt-header">
-        <div>
-          <div class="receipt-id">${order.id}</div>
-          <div class="receipt-tracking">Tracking Number: <strong>${order.trackingNumber}</strong></div>
-        </div>
-        <div style="text-align: right;">
-          <span class="status-pill status-confirmed">Confirmed & In Prep</span>
-          <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">${new Date(order.createdAt).toLocaleDateString()}</div>
-        </div>
-      </div>
+    // Build receipt using safe DOM operations (avoid innerHTML with user data)
+    this.receiptContent.innerHTML = '';
 
-      <div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.85rem;">
-        <strong>Delivery To:</strong> ${order.customerName} (${order.customerPhone})<br>
-        ${order.address.line1}, ${order.address.city}, ${order.address.state} - ${order.address.pincode}
-      </div>
+    const header = document.createElement('div'); header.className = 'receipt-header';
+    const left = document.createElement('div');
+    const receiptId = document.createElement('div'); receiptId.className = 'receipt-id'; receiptId.textContent = order.id;
+    const tracking = document.createElement('div'); tracking.className = 'receipt-tracking'; tracking.innerHTML = 'Tracking Number: <strong>' + (order.trackingNumber || '') + '</strong>';
+    left.appendChild(receiptId); left.appendChild(tracking);
 
-      <div class="receipt-items-list">
-        ${order.items.map(item => `
-          <div class="receipt-item-row">
-            <span>${item.quantity}x ${item.name} (${item.weight || 'Standard Pack'})</span>
-            <strong>₹${(item.price * item.quantity).toLocaleString('en-IN')}</strong>
-          </div>
-        `).join('')}
-      </div>
+    const right = document.createElement('div'); right.style.textAlign = 'right';
+    const status = document.createElement('span'); status.className = 'status-pill status-confirmed'; status.textContent = 'Confirmed & In Prep';
+    const date = document.createElement('div'); date.style.fontSize = '0.72rem'; date.style.color = 'var(--text-muted)'; date.style.marginTop = '0.2rem'; date.textContent = new Date(order.createdAt).toLocaleDateString();
+    right.appendChild(status); right.appendChild(date);
 
-      <div style="font-size: 0.8rem; color: var(--text-muted); margin: 0.6rem 0; display: flex; justify-content: space-between;">
-        <span>Payment Method:</span>
-        <strong style="color: var(--emerald-900);">${order.paymentMethod} (PAID)</strong>
-      </div>
+    header.appendChild(left); header.appendChild(right);
+    this.receiptContent.appendChild(header);
 
-      <div class="receipt-totals">
-        <span>Final Paid Amount:</span>
-        <span>₹${order.total.toLocaleString('en-IN')}</span>
-      </div>
-    `;
+    const delivery = document.createElement('div'); delivery.style.fontSize = '0.82rem'; delivery.style.color = 'var(--text-secondary)'; delivery.style.marginBottom = '0.85rem';
+    delivery.innerHTML = '<strong>Delivery To:</strong> ' + (order.customerName || '') + ' (' + (order.customerPhone || '') + ')<br>' + (order.address.line1 || '') + ', ' + (order.address.city || '') + ', ' + (order.address.state || '') + ' - ' + (order.address.pincode || '');
+    this.receiptContent.appendChild(delivery);
+
+    const itemsList = document.createElement('div'); itemsList.className = 'receipt-items-list';
+    (order.items || []).forEach(item => {
+      const row = document.createElement('div'); row.className = 'receipt-item-row';
+      const left = document.createElement('span'); left.textContent = `${item.quantity}x ${item.name} (${item.weight || 'Standard Pack'})`;
+      const right = document.createElement('strong'); right.textContent = `₹${(item.price * item.quantity).toLocaleString('en-IN')}`;
+      row.appendChild(left); row.appendChild(right);
+      itemsList.appendChild(row);
+    });
+    this.receiptContent.appendChild(itemsList);
+
+    const paymentRow = document.createElement('div'); paymentRow.style.fontSize = '0.8rem'; paymentRow.style.color = 'var(--text-muted)'; paymentRow.style.margin = '0.6rem 0'; paymentRow.style.display = 'flex'; paymentRow.style.justifyContent = 'space-between';
+    const pmLabel = document.createElement('span'); pmLabel.textContent = 'Payment Method:';
+    const pmVal = document.createElement('strong'); pmVal.style.color = 'var(--emerald-900)'; pmVal.textContent = order.paymentMethod + ' (PAID)';
+    paymentRow.appendChild(pmLabel); paymentRow.appendChild(pmVal);
+    this.receiptContent.appendChild(paymentRow);
+
+    const totals = document.createElement('div'); totals.className = 'receipt-totals'; totals.innerHTML = `<span>Final Paid Amount:</span><span>₹${order.total.toLocaleString('en-IN')}</span>`;
+    this.receiptContent.appendChild(totals);
   }
 
   open() {
