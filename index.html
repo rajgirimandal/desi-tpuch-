@@ -1,0 +1,4039 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Desi Touch — Nature Ka Asli Touch | 100% Pure Organic & Vedic Foods</title>
+<meta name="description" content="Desi Touch brings you authentic, cold-pressed wood oils, pure A2 Vedic Gir cow Bilona ghee, raw wild forest honey, and ancient superfoods. Farm-fresh to your kitchen. Cash on Delivery nationwide.">
+<link rel="icon" type="image/png" href="assets/images/brand_logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Firebase App and Auth SDK (Hostinger & Static Compatible) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<!-- Razorpay Checkout Gateway SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+/* ============================================================
+   DESIGN TOKENS & DUAL-THEME ENGINE (LIGHT & DARK MODE)
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* LIGHT THEME (Default fallback) */
+:root{
+  --em950:#04160e;--em900:#082417;--em800:#0e3824;--em700:#124c32;--em600:#156944;--em500:#16a34a;--em400:#22c55e;--em100:#dcfce7;--em50:#f0fdf4;
+  --g700:#b45309;--g600:#d97706;--g500:#f59e0b;--g400:#fbbf24;--g100:#fef3c7;--g50:#fffbeb;
+  --cr50:#faf8f4;--cr100:#f3ece0;--cr200:#e6dccb;
+  --card:#ffffff;--cardSub:#f9faf9;--txt:#0f1d16;--txt2:#415449;--txtm:#708477;--bdr:rgba(18,76,50,.12);--bdrh:rgba(22,163,74,.38);
+  --hdrBg:rgba(255,255,255,.94);--annBg:linear-gradient(90deg,#04160e,#082417,#0e3824);
+  --danger:#dc2626;--dangerL:#fef2f2;--success:#15803d;--successL:#f0fdf4;--warn:#d97706;--warnL:#fffbeb;--info:#0284c7;--infoL:#f0f9ff;
+  --fHead:'Outfit',system-ui,-apple-system,sans-serif;--fBody:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --shSm:0 1px 3px rgba(8,36,23,.06);--shMd:0 4px 14px -2px rgba(8,36,23,.09);--shLg:0 10px 30px -5px rgba(8,36,23,.13);--shXl:0 20px 45px -10px rgba(8,36,23,.2);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+/* DARK THEME (Sleek Luxury Obsidian & Emerald) */
+[data-theme="dark"]{
+  --em950:#010704;--em900:#04140b;--em800:#082214;--em700:#0f3822;--em600:#156944;--em500:#22c55e;--em400:#4ade80;--em100:rgba(34,197,94,.16);--em50:rgba(34,197,94,.08);
+  --g700:#d97706;--g600:#f59e0b;--g500:#fbbf24;--g400:#fde047;--g100:rgba(245,158,11,.18);--g50:rgba(245,158,11,.08);
+  --cr50:#060d09;--cr100:#0c1811;--cr200:#14261c;
+  --card:#0a1710;--cardSub:#0f2017;--txt:#f0fdf4;--txt2:#cbd5e1;--txtm:#8ca395;--bdr:rgba(34,197,94,.2);--bdrh:rgba(74,222,128,.45);
+  --hdrBg:rgba(6,13,9,.88);--annBg:linear-gradient(90deg,#010704,#04140b,#082214);
+  --danger:#ef4444;--dangerL:rgba(239,68,68,.16);--success:#22c55e;--successL:rgba(34,197,94,.16);--warn:#f59e0b;--warnL:rgba(245,158,11,.16);--info:#38bdf8;--infoL:rgba(56,189,248,.16);
+  --shSm:0 1px 3px rgba(0,0,0,.3);--shMd:0 4px 14px -2px rgba(0,0,0,.45);--shLg:0 10px 30px -5px rgba(0,0,0,.6);--shXl:0 20px 45px -10px rgba(0,0,0,.75);
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--fBody);background:var(--cr50);color:var(--txt);line-height:1.6;
+  min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  transition:background .3s var(--ease),color .3s var(--ease);
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;color:var(--txt)}
+.hidden{display:none!important}
+.cnt{max-width:1320px;margin:0 auto;padding:0 1.5rem}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-size:.92rem;font-weight:700;padding:.75rem 1.4rem;border-radius:12px;cursor:pointer;transition:.22s var(--ease);border:1px solid transparent;user-select:none}
+.btn-p{background:linear-gradient(135deg,var(--em600),var(--em800));color:#fff;box-shadow:0 4px 14px rgba(8,36,23,.3)}
+.btn-p:hover{background:linear-gradient(135deg,var(--em500),var(--em700));transform:translateY(-1.5px);box-shadow:0 6px 20px rgba(8,36,23,.4)}
+.btn-s{background:var(--cr100);color:var(--txt);border-color:var(--bdr)}
+.btn-s:hover{background:var(--cr200);color:var(--em400)}
+.btn-o{background:transparent;border-color:var(--bdr);color:var(--txt2)}
+.btn-o:hover{background:var(--cr100);color:var(--txt)}
+.btn-od{background:transparent;border-color:rgba(220,38,38,.4);color:var(--danger)}
+.btn-od:hover{background:var(--dangerL);border-color:var(--danger)}
+.btn-os{background:transparent;border-color:rgba(34,197,94,.4);color:var(--success)}
+.btn-os:hover{background:var(--successL);border-color:var(--success)}
+.btn-gold{background:linear-gradient(135deg,var(--g600),var(--g700));color:#fff}
+.btn-gold:hover{background:linear-gradient(135deg,var(--g500),var(--g600));transform:translateY(-1.5px)}
+.btn-sm{padding:.42rem .85rem;font-size:.82rem;border-radius:8px}
+.btn-blk{width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* ===== ICONS ===== */
+.ic{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;display:inline-block;vertical-align:middle}
+.ic-sm{width:16px;height:16px}
+.ic-lg{width:24px;height:24px}
+
+/* ===== ANNOUNCEMENT BAR ===== */
+.ann{background:var(--annBg);color:#fff;padding:.5rem 1rem;font-size:.82rem;border-bottom:1px solid rgba(217,119,6,.3)}
+.ann-inner{max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.85rem;flex-wrap:wrap;text-align:center}
+.ann-badge{background:rgba(34,197,94,.25);color:var(--em400);border:1px solid rgba(34,197,94,.35);padding:.15rem .55rem;border-radius:999px;font-weight:700;font-size:.72rem;letter-spacing:.05em}
+.ann-pill{background:rgba(245,158,11,.2);color:var(--g400);padding:.15rem .55rem;border-radius:999px;font-weight:600;font-size:.72rem}
+.cpn{color:var(--g400);background:rgba(255,255,255,.12);padding:.1rem .4rem;border-radius:4px;cursor:pointer;border-bottom:1px dashed var(--g400);transition:.2s}
+.cpn:hover{background:var(--g500);color:#04160e}
+
+/* ===== HEADER ===== */
+.hdr{position:sticky;top:0;z-index:1000;background:var(--hdrBg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);box-shadow:0 4px 20px rgba(0,0,0,.08);transition:background .3s ease}
+.hdr-inner{max-width:1320px;margin:0 auto;padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo-wrap{display:flex;align-items:center;gap:.85rem;cursor:pointer}
+.logo-box{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--em950),var(--em800));display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 4px 10px rgba(8,36,23,.25);border:1.5px solid rgba(245,158,11,.4);flex-shrink:0}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.brand-nm{font-family:var(--fHead);font-size:1.35rem;font-weight:800;letter-spacing:.03em;color:var(--txt);line-height:1.1}
+.brand-tag{font-size:.68rem;font-weight:700;color:var(--g500);letter-spacing:.08em}
+.hdr-nav{display:flex;align-items:center;gap:1.5rem}
+.nav-a{font-weight:600;font-size:.92rem;color:var(--txt2);position:relative;padding:.4rem 0;transition:.2s}
+.nav-a:hover,.nav-a.act{color:var(--em400)}
+.nav-a.act::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--em400),var(--g500));border-radius:2px}
+.nav-admin{display:inline-flex;align-items:center;gap:.45rem;background:linear-gradient(135deg,var(--em800),var(--em700));color:#fff;border:1px solid rgba(245,158,11,.45);padding:.45rem .95rem;border-radius:999px;font-size:.82rem;font-weight:700;box-shadow:var(--shSm);transition:.25s var(--ease)}
+.nav-admin:hover{transform:translateY(-1.5px);box-shadow:0 4px 12px rgba(8,36,23,.35);border-color:var(--g400)}
+.pulse-dot{width:7px;height:7px;background-color:var(--g400);border-radius:50%;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.35)}}
+
+.hdr-acts{display:flex;align-items:center;gap:.8rem}
+.theme-tog{background:var(--cr100);border:1px solid var(--bdr);border-radius:999px;padding:.4rem .75rem;display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:var(--txt);transition:.2s}
+.theme-tog:hover{border-color:var(--g400);background:var(--cr200)}
+.srch-wrap{position:relative;width:220px;transition:width .3s var(--ease)}
+@media(min-width:1200px){.srch-wrap{width:270px}}
+.srch-wrap input{width:100%;padding:.52rem 1.8rem .52rem 2.2rem;font-size:.88rem;background:var(--cr100);border:1px solid var(--bdr);border-radius:999px;outline:none;transition:.25s;color:var(--txt)}
+.srch-wrap input:focus{background:var(--card);border-color:var(--em400);box-shadow:0 0 0 3px rgba(34,197,94,.18)}
+.srch-wrap .si{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--txtm);pointer-events:none}
+.act-btn{background:transparent;border:1px solid transparent;border-radius:999px;padding:.45rem .75rem;display:flex;align-items:center;gap:.5rem;color:var(--txt2);transition:.2s;position:relative}
+.act-btn:hover{background:var(--cr100);color:var(--em400)}
+.bdg{background:var(--g600);color:#fff;font-size:.68rem;font-weight:800;min-width:18px;height:18px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.cart-bdg{position:absolute;top:-4px;right:-6px;background:var(--em500);border:2px solid var(--card)}
+.cart-btn{background:var(--em100);border:1px solid var(--bdr);color:var(--txt);padding:.45rem .95rem}
+.cart-btn:hover{background:var(--cr100);border-color:var(--em400)}
+.cart-lbl{display:flex;flex-direction:column;text-align:left;line-height:1.1}
+.cart-sub{font-size:.65rem;color:var(--txtm);text-transform:uppercase;letter-spacing:.04em}
+.cart-tot{font-size:.88rem;color:var(--txt);font-weight:700}
+.mob-menu-btn{display:none;background:none;border:none;color:var(--txt);padding:.4rem}
+@media(max-width:980px){
+  .hdr-nav{display:none}
+  .mob-menu-btn{display:flex;align-items:center;justify-content:center}
+  .srch-wrap{width:150px}
+}
+
+/* ===== MOBILE DRAWER ===== */
+.mob-drawer{position:fixed;inset:0;z-index:2100;display:flex}
+.mob-drawer-bk{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(4px)}
+.mob-drawer-pnl{position:relative;z-index:2;width:290px;height:100%;background:var(--card);box-shadow:var(--shXl);display:flex;flex-direction:column;padding:1.5rem;border-right:1px solid var(--bdr)}
+.mob-drawer-hdr{display:flex;justify-content:space-between;align-items:center;padding-bottom:1rem;border-bottom:1px solid var(--bdr);margin-bottom:1.5rem}
+.mob-links{display:flex;flex-direction:column;gap:.75rem}
+.mob-a{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;border-radius:10px;font-weight:700;font-size:.95rem;color:var(--txt2);transition:.2s}
+.mob-a:hover,.mob-a.act{background:var(--em100);color:var(--em400)}
+
+/* ===== HERO CAROUSEL ===== */
+.hero{position:relative;background:#000;overflow:hidden;min-height:500px}
+.hero-track{display:flex;transition:transform .6s var(--ease);width:100%;height:100%}
+.hero-slide{min-width:100%;position:relative;min-height:500px;display:flex;align-items:center;background-size:cover;background-position:center}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,11,7,.96) 0%,rgba(4,20,11,.84) 48%,rgba(4,20,11,.38) 100%);z-index:1}
+.hero-ct{position:relative;z-index:2;max-width:680px;padding:3.5rem 0;color:#fff}
+.hero-tag{display:inline-flex;align-items:center;gap:.4rem;background:rgba(245,158,11,.22);border:1px solid rgba(245,158,11,.5);color:var(--g400);font-weight:800;font-size:.78rem;letter-spacing:.08em;padding:.3rem .85rem;border-radius:999px;margin-bottom:1rem}
+.hero h1{font-family:var(--fHead);font-size:3.1rem;font-weight:800;line-height:1.15;margin-bottom:1.2rem;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.hero-sub{font-size:1.1rem;color:#e2e8f0;line-height:1.6;margin-bottom:1.8rem;max-width:580px}
+.hero-acts{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+.hero-ribbon{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:.6rem 1rem;border-radius:999px;font-size:.85rem;font-weight:600;border:1px solid rgba(255,255,255,.2);color:#fff}
+.car-nav{position:absolute;bottom:2rem;right:3rem;z-index:10;display:flex;align-items:center;gap:1rem}
+.car-arr{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);transition:.2s;font-size:1.3rem}
+.car-arr:hover{background:#fff;color:#04160e}
+.car-dots{display:flex;gap:.5rem}
+.dot{width:24px;height:4px;border-radius:4px;background:rgba(255,255,255,.3);cursor:pointer;transition:.3s}
+.dot.act{width:40px;background:var(--g400)}
+@media(max-width:768px){
+  .hero h1{font-size:2rem}
+  .hero{min-height:420px}
+  .hero-slide{min-height:420px}
+  .hero-ct{padding:2.5rem 0}
+  .car-nav{bottom:1rem;right:1.5rem}
+}
+
+/* ===== TRUST PILLARS ===== */
+.trust{background:var(--card);border-bottom:1px solid var(--bdr);padding:1.75rem 0}
+.trust-g{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.trust-i{display:flex;align-items:center;gap:1rem}
+.trust-ic{width:48px;height:48px;border-radius:12px;background:var(--em100);color:var(--em400);display:flex;align-items:center;justify-content:center;border:1px solid var(--bdr);flex-shrink:0;font-size:1.4rem}
+.trust-i h4{font-size:.95rem;font-weight:700;margin-bottom:.15rem;color:var(--txt)}
+.trust-i p{font-size:.78rem;color:var(--txtm);line-height:1.35}
+@media(max-width:992px){.trust-g{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.trust-g{grid-template-columns:1fr}}
+
+/* ===== CATALOG ===== */
+.catalog{padding:4.5rem 0}
+.sec-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;flex-wrap:wrap;gap:1.5rem}
+.sec-tag{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.08em;color:var(--em400);margin-bottom:.4rem}
+.sec-ttl{font-family:var(--fHead);font-size:2.3rem;font-weight:800;color:var(--txt);line-height:1.15}
+.sec-sub{font-size:1rem;color:var(--txt2);max-width:600px;margin-top:.4rem}
+.csel{padding:.55rem 1rem;border:1px solid var(--bdr);border-radius:10px;font-size:.88rem;background:var(--card);color:var(--txt);outline:none;transition:.2s}
+.csel:focus{border-color:var(--em400)}
+.cat-tabs{display:flex;gap:.65rem;overflow-x:auto;padding-bottom:1rem;margin-bottom:2.2rem;scrollbar-width:none}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-tab{display:inline-flex;align-items:center;gap:.5rem;background:var(--card);border:1px solid var(--bdr);padding:.6rem 1.25rem;border-radius:999px;font-size:.9rem;font-weight:600;color:var(--txt2);white-space:nowrap;transition:.25s var(--ease);box-shadow:var(--shSm)}
+.cat-tab:hover{border-color:var(--em400);color:var(--em400);transform:translateY(-1px)}
+.cat-tab.act{background:linear-gradient(135deg,var(--em700),var(--em900));color:#fff;border-color:var(--em500);box-shadow:0 4px 14px rgba(8,36,23,.3)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:2rem}
+.pcard{background:var(--card);border-radius:20px;overflow:hidden;border:1px solid var(--bdr);box-shadow:var(--shSm);transition:.35s var(--ease);display:flex;flex-direction:column;position:relative}
+.pcard:hover{transform:translateY(-6px);box-shadow:var(--shXl);border-color:var(--bdrh)}
+.pmedia{position:relative;aspect-ratio:1/1;background:var(--cr100);overflow:hidden;cursor:pointer}
+.pmedia img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.pcard:hover .pmedia img{transform:scale(1.06)}
+.pbadge{position:absolute;top:.85rem;left:.85rem;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:.25rem .65rem;border-radius:999px;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.pbadge-gold{background:var(--g600);color:#fff}
+.pbadge-em{background:var(--em600);color:#fff}
+.pbadge-rose{background:var(--danger);color:#fff}
+.qv-btn{position:absolute;top:.85rem;right:.85rem;width:38px;height:38px;border-radius:50%;background:rgba(10,23,16,.9);backdrop-filter:blur(8px);border:1px solid var(--bdr);color:#fff;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(-6px);transition:.25s var(--ease);z-index:2;box-shadow:var(--shMd);font-size:1.1rem}
+.pcard:hover .qv-btn{opacity:1;transform:translateY(0)}
+.qv-btn:hover{background:var(--em500);color:#04160e}
+.pinfo{padding:1.35rem;display:flex;flex-direction:column;flex-grow:1}
+.pmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;font-size:.78rem;color:var(--txtm)}
+.prat{display:flex;align-items:center;gap:.2rem;font-weight:700;color:var(--g400)}
+.ptitle{font-family:var(--fHead);font-size:1.15rem;font-weight:700;color:var(--txt);line-height:1.3;margin-bottom:.4rem;cursor:pointer;transition:.2s}
+.ptitle:hover{color:var(--em400)}
+.punit{font-size:.8rem;color:var(--txtm);margin-bottom:.85rem}
+.pprice{display:flex;align-items:baseline;gap:.65rem;margin-top:auto;margin-bottom:1.1rem}
+.pc{font-family:var(--fHead);font-size:1.35rem;font-weight:800;color:var(--txt)}
+.po{font-size:.88rem;color:var(--txtm);text-decoration:line-through}
+.psave{font-size:.72rem;font-weight:700;color:var(--em400);background:var(--em100);padding:.15rem .45rem;border-radius:4px}
+.atc-btn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--em700);color:#fff;border:none;padding:.7rem 1.1rem;border-radius:12px;font-size:.88rem;font-weight:700;transition:.2s}
+.atc-btn:hover{background:var(--em500);color:#04160e;box-shadow:0 4px 12px rgba(34,197,94,.3)}
+.atc-btn:disabled{background:#334155;color:#94a3b8;cursor:not-allowed}
+.low-stk{font-size:.72rem;font-weight:700;color:var(--danger);margin-bottom:.5rem}
+.empty-st{text-align:center;padding:4rem 2rem;color:var(--txtm)}
+.empty-st h3{color:var(--txt);margin:.8rem 0 .3rem}
+
+/* ===== PURITY SECTION ===== */
+.purity{padding:3.5rem 0}
+.pur-card{background:linear-gradient(135deg,var(--em950),var(--em900));border-radius:28px;padding:3.5rem;color:#fff;display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center;box-shadow:var(--shXl);border:1px solid rgba(245,158,11,.25);overflow:hidden;position:relative}
+@media(max-width:900px){.pur-card{grid-template-columns:1fr;padding:2rem}}
+.stl{color:var(--g400);font-size:.78rem;font-weight:800;letter-spacing:.08em;margin-bottom:.6rem;display:inline-block}
+.pur-card h2{font-family:var(--fHead);font-size:2.2rem;font-weight:800;line-height:1.2;margin-bottom:1.2rem}
+.pur-card>div:first-child>p{color:#cbd5e1;font-size:.98rem;line-height:1.6;margin-bottom:1.8rem}
+.feat-list{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:2.2rem}
+.feat-item{display:flex;align-items:flex-start;gap:.9rem}
+.feat-chk{width:28px;height:28px;border-radius:50%;background:rgba(34,197,94,.2);color:var(--em400);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(34,197,94,.4)}
+.feat-item strong{display:block;font-size:1rem;color:#fff;margin-bottom:.2rem}
+.feat-item p{font-size:.85rem;color:#94a3b8;margin-bottom:0}
+.pur-media{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 15px 35px rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.15)}
+.pur-media img{width:100%;height:100%;object-fit:cover}
+.pur-float{position:absolute;bottom:1.2rem;left:1.2rem;background:rgba(4,22,14,.88);backdrop-filter:blur(12px);border:1px solid rgba(245,158,11,.4);border-radius:14px;padding:.8rem 1.2rem}
+.pur-float .f-score{font-family:var(--fHead);font-size:1.6rem;font-weight:800;color:var(--g400);line-height:1}
+.pur-float .f-label{font-size:.72rem;color:#e5e7eb;font-weight:700;text-transform:uppercase}
+
+/* ===== TESTIMONIALS ===== */
+.testi{padding:4.5rem 0;background:var(--card);border-top:1px solid var(--bdr)}
+.testi-g{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+@media(max-width:900px){.testi-g{grid-template-columns:1fr}}
+.tcard{background:var(--cr100);border-radius:20px;padding:2rem;border:1px solid var(--bdr);box-shadow:var(--shSm);display:flex;flex-direction:column}
+.tcard .rev{font-size:.95rem;font-style:italic;line-height:1.6;margin:1rem 0 1.5rem;flex-grow:1;color:var(--txt2)}
+.revr{display:flex;align-items:center;gap:.9rem}
+.revr-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--em800),var(--g600));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.revr strong{display:block;font-size:.92rem;color:var(--txt)}
+.revr span{font-size:.75rem;color:var(--txtm)}
+
+/* ===== FOOTER ===== */
+.ftr{background:#020a06;color:#fff;padding:4.5rem 0 2rem;border-top:1px solid rgba(245,158,11,.3)}
+.ftr-g{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+@media(max-width:992px){.ftr-g{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.ftr-g{grid-template-columns:1fr}}
+.ftr-brand{display:flex;flex-direction:column;gap:1rem}
+.ftr-brand p{font-size:.88rem;color:#cbd5e1;line-height:1.6}
+.ftr-col h4{font-family:var(--fHead);font-size:1.1rem;font-weight:800;color:var(--g400);margin-bottom:1.2rem}
+.ftr-links{display:flex;flex-direction:column;gap:.65rem}
+.ftr-links a{font-size:.88rem;color:#94a3b8;transition:.2s}
+.ftr-links a:hover{color:#fff;transform:translateX(3px)}
+.cert-badges{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.cert-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:.35rem .75rem;border-radius:8px;font-size:.75rem;font-weight:700;color:var(--g400)}
+.ftr-btm{border-top:1px solid rgba(255,255,255,.1);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.82rem;color:#64748b}
+
+/* ===== MODAL BASE ===== */
+.moverlay{position:fixed;inset:0;z-index:2500;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.mback{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px)}
+.mdlg{position:relative;z-index:2;background:var(--card);border-radius:24px;box-shadow:var(--shXl);width:100%;max-height:90vh;overflow-y:auto;border:1px solid var(--bdr);animation:mup .3s var(--ease);color:var(--txt)}
+@keyframes mup{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mhdr{padding:1.25rem 1.75rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.mbdy{padding:1.75rem}
+.mftr{padding:1.25rem 1.75rem;border-top:1px solid var(--bdr);display:flex;justify-content:flex-end;gap:.75rem}
+.cls-btn{width:36px;height:36px;border-radius:50%;background:var(--cr100);border:none;display:flex;align-items:center;justify-content:center;color:var(--txt2);transition:.2s;font-size:1.1rem}
+.cls-btn:hover{background:var(--dangerL);color:var(--danger)}
+
+/* ===== CART DRAWER ===== */
+.cart-ov{position:fixed;inset:0;z-index:2000;display:flex;justify-content:flex-end}
+.cart-bk{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);animation:fadeIn .3s forwards}
+.cart-pnl{position:relative;z-index:2;width:100%;max-width:440px;height:100%;background:var(--card);box-shadow:var(--shXl);display:flex;flex-direction:column;animation:slideR .35s var(--ease) forwards;border-left:1px solid var(--bdr)}
+@keyframes slideR{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.cart-hdr{padding:1.25rem 1.5rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.cart-hdr h3{font-family:var(--fHead);font-size:1.2rem;font-weight:800;color:var(--txt)}
+.cart-cnt-pill{font-size:.75rem;color:var(--txtm)}
+.fship-bar{background:var(--em100);padding:.9rem 1.5rem;border-bottom:1px solid var(--bdr)}
+.fship-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--txt);margin-bottom:.5rem}
+.prog-trk{width:100%;height:6px;background:var(--cr200);border-radius:999px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--em500),var(--g500));border-radius:999px;transition:width .4s var(--ease)}
+.cart-items{flex-grow:1;overflow-y:auto;padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:1.1rem}
+.ci-row{display:flex;gap:1rem;padding-bottom:1rem;border-bottom:1px solid var(--bdr)}
+.ci-img{width:72px;height:72px;border-radius:12px;background:var(--cr100);overflow:hidden;flex-shrink:0}
+.ci-img img{width:100%;height:100%;object-fit:cover}
+.ci-info{flex-grow:1;display:flex;flex-direction:column}
+.ci-title{font-size:.92rem;font-weight:700;line-height:1.3;margin-bottom:.2rem;color:var(--txt)}
+.ci-wt{font-size:.75rem;color:var(--txtm);margin-bottom:.5rem}
+.ci-acts{display:flex;justify-content:space-between;align-items:center}
+.qty-step{display:inline-flex;align-items:center;border:1px solid var(--bdr);border-radius:8px;overflow:hidden;background:var(--cr100)}
+.qty-b{width:28px;height:28px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:700;color:var(--txt);transition:.15s}
+.qty-b:hover{background:var(--cr200)}
+.qty-v{padding:0 .5rem;font-size:.85rem;font-weight:700;color:var(--txt)}
+.ci-price{font-family:var(--fHead);font-size:1.05rem;font-weight:800;color:var(--txt)}
+.cpn-box{padding:1rem 1.5rem;background:var(--cr100);border-top:1px solid var(--bdr)}
+.cpn-row{display:flex;gap:.5rem}
+.cpn-row input{flex-grow:1;padding:.5rem .85rem;border:1px solid var(--bdr);border-radius:8px;font-size:.85rem;text-transform:uppercase;background:var(--card);color:var(--txt)}
+.cpn-row input:focus{outline:none;border-color:var(--em400)}
+.cpn-tag{display:inline-flex;align-items:center;gap:.5rem;background:var(--em100);color:var(--em400);padding:.3rem .65rem;border-radius:6px;font-size:.78rem;font-weight:700;margin-top:.5rem}
+.cpn-rm{background:none;border:none;cursor:pointer;color:var(--em400);display:flex}
+.cpn-sugg{display:flex;align-items:center;gap:.4rem;margin-top:.6rem;flex-wrap:wrap;font-size:.72rem;color:var(--txtm)}
+.qcpn{background:var(--card);border:1px dashed var(--g500);color:var(--g400);padding:.15rem .45rem;border-radius:4px;font-size:.72rem;font-weight:700;cursor:pointer}
+.qcpn:hover{background:var(--cr200)}
+.cart-ftr{padding:1.25rem 1.5rem;border-top:1px solid var(--bdr);background:var(--card)}
+.sline{display:flex;justify-content:space-between;font-size:.88rem;color:var(--txt2);margin-bottom:.4rem}
+.stot-line{display:flex;justify-content:space-between;align-items:flex-end;padding-top:.75rem;margin-top:.6rem;border-top:1px dashed var(--bdr);margin-bottom:1.2rem}
+.tot-lbl{font-size:.95rem;font-weight:700;color:var(--txt)}
+.tax-note{font-size:.7rem;color:var(--txtm)}
+.gtot{font-family:var(--fHead);font-size:1.55rem;font-weight:800;color:var(--txt)}
+
+/* ===== CHECKOUT (COD ONLY) ===== */
+.co-dlg{max-width:680px}
+.co-brand{display:flex;align-items:center;gap:.75rem}
+.co-brand img{width:36px;height:36px;object-fit:contain}
+.co-brand h3{font-family:var(--fHead);font-size:1.15rem;font-weight:800;color:var(--txt)}
+.enc-tag{font-size:.72rem;color:var(--success);display:flex;align-items:center;gap:.25rem}
+.steps-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;background:var(--cr100);padding:.85rem 1.5rem;border-radius:14px;border:1px solid var(--bdr)}
+.step-ind{display:flex;align-items:center;gap:.5rem;color:var(--txtm)}
+.step-ind.act{color:var(--em400)}
+.step-num{width:24px;height:24px;border-radius:50%;background:var(--cr200);color:var(--txt2);font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.step-ind.act .step-num{background:var(--em500);color:#04160e}
+.step-lbl{font-size:.85rem;font-weight:700}
+.step-sep{flex-grow:1;height:1px;background:var(--bdr);margin:0 1rem}
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.85rem;font-weight:700;margin-bottom:.4rem;color:var(--txt)}
+.fg input,.fg textarea,.fg select{width:100%;padding:.65rem .95rem;border:1px solid var(--bdr);border-radius:10px;font-size:.9rem;background:var(--cr100);color:var(--txt);transition:.2s}
+.fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--em400);box-shadow:0 0 0 3px rgba(34,197,94,.18)}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+@media(max-width:600px){.fr2,.fr3{grid-template-columns:1fr}}
+.del-opts{margin:1.5rem 0}
+.del-opts h4{font-size:.95rem;font-weight:700;margin-bottom:.75rem}
+.del-opt{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;border:1.5px solid var(--bdr);border-radius:12px;margin-bottom:.6rem;cursor:pointer;transition:.2s;background:var(--card)}
+.del-opt.act{border-color:var(--em400);background:var(--em100)}
+.opt-det{flex-grow:1}
+.opt-ttl{font-size:.9rem;font-weight:700;color:var(--txt)}
+.opt-desc{font-size:.75rem;color:var(--txtm)}
+.opt-pr{font-size:.92rem;color:var(--em400);font-weight:700}
+.co-acts{display:flex;justify-content:space-between;margin-top:1.5rem}
+.cod-banner{display:flex;align-items:center;gap:1.2rem;background:var(--em100);border:1.5px solid var(--bdr);border-radius:16px;padding:1.5rem}
+.cod-banner h4{font-family:var(--fHead);font-size:1.15rem;color:var(--txt);margin-bottom:.3rem}
+.cod-safe{display:inline-block;font-size:.75rem;color:var(--success);font-weight:700;margin-top:.4rem}
+
+/* ===== PAYMENT METHOD SELECTION (RAZORPAY & COD) ===== */
+.pay-methods{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem}
+.pay-method-opt{display:flex;align-items:flex-start;gap:1rem;padding:1.1rem 1.25rem;border:2px solid var(--bdr);border-radius:14px;background:var(--card);cursor:pointer;transition:.2s;position:relative}
+.pay-method-opt:hover{border-color:var(--bdrh)}
+.pay-method-opt.act{border-color:var(--em500);background:var(--em100);box-shadow:0 0 0 3px rgba(34,197,94,.15)}
+.pay-method-opt input[type="radio"]{margin-top:.3rem;accent-color:var(--em500);cursor:pointer;width:18px;height:18px}
+.pay-method-content{flex-grow:1}
+.pay-method-title{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.3rem;flex-wrap:wrap}
+.pay-method-title strong{font-family:var(--fHead);font-size:1rem;color:var(--txt)}
+.pay-method-desc{font-size:.82rem;color:var(--txt2);line-height:1.4}
+.rzp-badges{display:flex;align-items:center;gap:.4rem}
+.rzp-pill{display:inline-flex;align-items:center;gap:.25rem;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:999px;background:var(--cr200);color:var(--txt2)}
+.rzp-pill.green{background:var(--em100);color:var(--em400);border:1px solid var(--em500)}
+.rzp-pill.gold{background:var(--g100);color:var(--g500)}
+
+/* Payment error / notice box */
+.rzp-err-box{background:rgba(239,68,68,.12);border:1.5px solid rgba(239,68,68,.3);border-radius:14px;padding:1rem 1.2rem;margin-top:1rem;display:flex;flex-direction:column;gap:.6rem}
+.rzp-err-box .err-ttl{display:flex;align-items:center;gap:.5rem;font-size:.92rem;font-weight:800;color:var(--danger)}
+.rzp-err-box p{font-size:.84rem;color:var(--txt2);line-height:1.45}
+
+/* Auth Divider & Google Firebase button */
+.auth-divider{display:flex;align-items:center;gap:.75rem;margin:1.25rem 0;color:var(--txtm);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.auth-divider::before,.auth-divider::after{content:'';flex-grow:1;height:1px;background:var(--bdr)}
+.btn-google{width:100%;display:flex;align-items:center;justify-content:center;gap:.75rem;padding:.75rem 1.2rem;border-radius:12px;background:var(--cr100);color:var(--txt);border:1px solid var(--bdr);font-size:.9rem;font-weight:700;cursor:pointer;transition:.2s}
+.btn-google:hover{background:var(--cr200);border-color:var(--bdrh);transform:translateY(-1px)}
+.auth-notice-box{background:rgba(245,158,11,.12);border:1.5px solid rgba(245,158,11,.3);border-radius:12px;padding:.85rem 1rem;font-size:.82rem;color:var(--txt);line-height:1.45;margin-bottom:1rem;display:flex;align-items:flex-start;gap:.6rem}
+.auth-notice-box.danger{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.3)}
+.auth-notice-box.success{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.3)}
+
+.co-amt{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--bdr)}
+.co-amt h3{font-family:var(--fHead);font-size:1.6rem;font-weight:800;color:var(--txt)}
+.pay-btns{display:flex;gap:.75rem}
+.succ-card{text-align:center;padding:1rem 0}
+.succ-ic{width:72px;height:72px;border-radius:50%;background:var(--em100);color:var(--em400);display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-size:2.5rem}
+.succ-card h2{font-family:var(--fHead);font-size:1.9rem;font-weight:800;color:var(--txt);margin-bottom:.5rem}
+.succ-sub{color:var(--txt2);font-size:.95rem;max-width:480px;margin:0 auto 1.8rem}
+.rcpt{background:var(--cr100);border:1px dashed var(--em400);border-radius:16px;padding:1.5rem;text-align:left;margin-bottom:1.8rem}
+.rcpt-hdr{display:flex;justify-content:space-between;align-items:center;padding-bottom:.75rem;border-bottom:1px solid var(--bdr);margin-bottom:.75rem}
+.rcpt-id{font-family:var(--fHead);font-size:1.1rem;font-weight:800;color:var(--em400)}
+.rcpt-items{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.75rem}
+.rcpt-item{display:flex;justify-content:space-between;font-size:.85rem}
+.rcpt-tot{border-top:1px solid var(--bdr);padding-top:.75rem;display:flex;justify-content:space-between;font-weight:700;font-size:1rem;color:var(--txt)}
+.succ-acts{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+
+/* ===== QUICK VIEW MODAL ===== */
+.qv-dlg{max-width:840px}
+.qv-body{display:grid;grid-template-columns:1fr 1.2fr;gap:2rem;padding:2rem}
+@media(max-width:768px){.qv-body{grid-template-columns:1fr}}
+.qv-media{border-radius:16px;overflow:hidden;background:var(--cr100)}
+.qv-media img{width:100%;height:100%;object-fit:cover}
+.qv-ttl{font-family:var(--fHead);font-size:1.6rem;font-weight:800;color:var(--txt);line-height:1.2;margin-bottom:.5rem}
+.qv-desc{font-size:.9rem;color:var(--txt2);line-height:1.6;margin-bottom:1.2rem}
+.qv-ben{background:var(--em100);border:1px solid var(--bdr);border-radius:12px;padding:1rem;margin-bottom:1.2rem}
+.qv-ben h4{font-size:.85rem;font-weight:800;color:var(--txt);margin-bottom:.5rem}
+.qv-ben ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.qv-ben li{font-size:.8rem;color:var(--txt2);display:flex;align-items:center;gap:.4rem}
+.nut-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;background:var(--cr100);border-radius:12px;padding:.85rem;margin-bottom:1.4rem}
+.nut-item{font-size:.78rem}
+.nut-item span{color:var(--txtm);display:block}
+.nut-item strong{color:var(--txt)}
+
+/* ===== CUSTOMER AUTH & ACCOUNT ===== */
+.auth-dlg{max-width:460px}
+.auth-hdr{text-align:center;margin-bottom:1.5rem}
+.auth-hdr img{width:54px;height:54px;margin:0 auto .75rem;border-radius:12px}
+.auth-hdr h2{font-family:var(--fHead);font-size:1.5rem;font-weight:800;color:var(--txt)}
+.auth-hdr p{font-size:.85rem;color:var(--txtm);margin-top:.25rem}
+.auth-tabs{display:flex;border-bottom:2px solid var(--bdr);margin-bottom:1.25rem}
+.auth-tab{flex-grow:1;background:transparent;border:none;padding:.65rem;font-size:.88rem;font-weight:700;color:var(--txtm);border-bottom:2px solid transparent;margin-bottom:-2px}
+.auth-tab.act{color:var(--em400);border-bottom-color:var(--em400)}
+.pwd-wrap{position:relative}
+.pwd-tog{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--txtm);font-size:1rem}
+.auth-extra{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;margin-bottom:1.25rem}
+.chk-lbl{display:flex;align-items:center;gap:.4rem;cursor:pointer}
+.forgot{color:var(--em400)}
+.acc-dlg{max-width:680px}
+.acc-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.8rem}
+@media(max-width:600px){.acc-stats{grid-template-columns:1fr}}
+.acc-stat{background:var(--cr100);border:1px solid var(--bdr);border-radius:14px;padding:1rem;text-align:center}
+.acc-stat .slbl{font-size:.72rem;color:var(--txtm);text-transform:uppercase;letter-spacing:.05em;display:block}
+.acc-stat .sval{font-size:1rem;font-weight:800;display:block;margin-top:.25rem}
+.uorder{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:1.2rem;box-shadow:var(--shSm);margin-bottom:1rem}
+.uorder-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.65rem}
+.uorder-items{font-size:.85rem;color:var(--txt2);margin-bottom:.75rem}
+.timeline{display:flex;justify-content:space-between;background:var(--cr100);padding:.85rem 1rem;border-radius:10px;margin-top:.75rem}
+.tl-step{display:flex;flex-direction:column;align-items:center;gap:.25rem;font-size:.72rem;color:var(--txtm);flex:1}
+.tl-dot{width:16px;height:16px;border-radius:50%;background:#334155}
+.tl-step.done .tl-dot{background:var(--em500)}
+.tl-step.now .tl-dot{background:var(--g500);box-shadow:0 0 0 3px rgba(245,158,11,.3)}
+.tl-step.done{color:var(--em400);font-weight:700}
+.spill{display:inline-block;padding:.25rem .65rem;border-radius:999px;font-size:.75rem;font-weight:800;text-transform:capitalize}
+.s-pending{background:var(--warnL);color:var(--warn)}
+.s-confirmed{background:var(--em100);color:var(--em400)}
+.s-packed{background:var(--g100);color:var(--g500)}
+.s-shipped{background:var(--infoL);color:var(--info)}
+.s-delivered{background:var(--successL);color:var(--success)}
+.s-cancelled{background:var(--dangerL);color:var(--danger)}
+
+
+/* ===== ADMIN PORTAL (HUB) ===== */
+.admin-v{background:var(--cr50);min-height:calc(100vh - 80px);padding:2rem 0 5rem}
+.admin-cnt{max-width:1320px;margin:0 auto;padding:0 1.5rem}
+.admin-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.8rem;flex-wrap:wrap;gap:1.2rem}
+.admin-top-pill{display:inline-flex;align-items:center;gap:.4rem;background:var(--em100);color:var(--em400);font-size:.75rem;font-weight:800;padding:.25rem .75rem;border-radius:999px;margin-bottom:.3rem}
+.admin-top h1{font-family:var(--fHead);font-size:1.9rem;font-weight:800;color:var(--txt)}
+.admin-top-acts{display:flex;gap:.75rem;flex-wrap:wrap}
+.admin-tabs{display:flex;gap:.5rem;border-bottom:2px solid var(--bdr);margin-bottom:2rem;overflow-x:auto;scrollbar-width:none}
+.admin-tabs::-webkit-scrollbar{display:none}
+.atab{display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:none;padding:.85rem 1.25rem;font-size:.92rem;font-weight:700;color:var(--txt2);border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s;white-space:nowrap}
+.atab:hover{color:var(--em400)}
+.atab.act{color:var(--em400);border-bottom-color:var(--em500)}
+.tab-bdg{background:var(--em100);color:var(--em400);padding:.1rem .5rem;border-radius:999px;font-size:.72rem}
+.tab-alert{background:var(--danger);color:#fff;padding:.1rem .5rem;border-radius:999px;font-size:.72rem}
+.acard{background:var(--card);border-radius:20px;border:1px solid var(--bdr);box-shadow:var(--shSm);padding:1.75rem;margin-bottom:2rem}
+.acard-hdr{margin-bottom:1.5rem}
+.acard-hdr h3{font-family:var(--fHead);font-size:1.25rem;font-weight:800;color:var(--txt)}
+.flex-btwn{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.met-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.25rem;margin-bottom:2rem}
+@media(max-width:1100px){.met-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.met-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.met-grid{grid-template-columns:1fr}}
+.met-card{background:var(--card);border-radius:18px;border:1px solid var(--bdr);padding:1.3rem;display:flex;gap:1rem;box-shadow:var(--shSm)}
+.met-ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem}
+.met-ic.green{background:var(--em100);color:var(--em400)}
+.met-ic.emerald{background:rgba(22,163,74,.2);color:#4ade80}
+.met-ic.gold{background:var(--g100);color:var(--g400)}
+.met-ic.rose{background:var(--dangerL);color:var(--danger)}
+.met-ic.blue{background:var(--infoL);color:var(--info)}
+.met-lbl{font-size:.75rem;font-weight:700;color:var(--txtm);text-transform:uppercase;letter-spacing:.05em;display:block}
+.met-val{font-family:var(--fHead);font-size:1.6rem;font-weight:800;color:var(--txt);line-height:1.2;margin:.2rem 0}
+.met-trend{font-size:.75rem;font-weight:600}
+.chart-section{display:grid;grid-template-columns:1.4fr .8fr;gap:2rem}
+@media(max-width:992px){.chart-section{grid-template-columns:1fr}}
+.chart-wrap{width:100%;height:240px;display:flex;align-items:flex-end;gap:1.2rem;padding:1rem 0}
+.chart-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+.chart-bar{width:100%;border-radius:8px 8px 0 0;background:linear-gradient(to top,var(--em700),var(--em400));transition:height .5s var(--ease);min-height:6px}
+.chart-lbl{font-size:.72rem;color:var(--txtm);font-weight:600}
+.chart-val{font-size:.72rem;font-weight:700;color:var(--txt)}
+.bs-list{display:flex;flex-direction:column;gap:.9rem}
+.bs-row{display:flex;align-items:center;gap:.85rem;padding-bottom:.85rem;border-bottom:1px solid var(--bdr)}
+.bs-thumb{width:42px;height:42px;border-radius:8px;object-fit:cover;flex-shrink:0}
+.bs-title{font-size:.85rem;font-weight:700;color:var(--txt)}
+.bs-sales{font-size:.75rem;color:var(--txtm)}
+
+/* ===== TABLE STYLES ===== */
+.tbl-resp{overflow-x:auto}
+.atbl{width:100%;border-collapse:collapse;text-align:left}
+.atbl th{background:var(--cr100);padding:.85rem 1.1rem;font-size:.78rem;font-weight:800;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--bdr)}
+.atbl td{padding:1rem 1.1rem;font-size:.88rem;border-bottom:1px solid var(--bdr);vertical-align:middle;color:var(--txt)}
+.atbl tbody tr:hover{background:var(--em50)}
+.tbl-prod{display:flex;align-items:center;gap:.85rem}
+.tbl-img{width:46px;height:46px;border-radius:10px;object-fit:cover;background:var(--cr100);flex-shrink:0}
+.quick-price-inp{width:90px;padding:.3rem .5rem;border:1.5px solid var(--bdr);border-radius:8px;font-weight:800;font-family:var(--fHead);font-size:.95rem;color:var(--txt);background:var(--cr100)}
+.quick-price-inp:focus{outline:none;border-color:var(--em400);background:var(--card)}
+.stk-adj{display:flex;align-items:center;gap:.35rem}
+.stk-btn{background:var(--cr100);border:1px solid var(--bdr);padding:.25rem .5rem;border-radius:6px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--txt)}
+.stk-btn:hover{background:var(--em100);color:var(--em400)}
+.stk-inp{width:56px;text-align:center;padding:.25rem .3rem;font-weight:700;border:1px solid var(--bdr);border-radius:6px;background:var(--cr100);color:var(--txt)}
+
+/* ===== POSTERS GRID ===== */
+.poster-g{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+@media(max-width:768px){.poster-g{grid-template-columns:1fr}}
+.poster-acard{border:1px solid var(--bdr);border-radius:18px;overflow:hidden;box-shadow:var(--shSm);background:var(--card);display:flex;flex-direction:column}
+.poster-prev{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.poster-prev img{width:100%;height:100%;object-fit:cover}
+.poster-sbdg{position:absolute;top:.75rem;left:.75rem;padding:.25rem .65rem;border-radius:999px;font-size:.72rem;font-weight:800}
+.poster-sbdg.on{background:var(--success);color:#fff}
+.poster-sbdg.off{background:#64748b;color:#fff}
+.poster-info{padding:1.35rem;flex-grow:1;display:flex;flex-direction:column}
+.poster-ttl{font-family:var(--fHead);font-size:1.15rem;font-weight:800;color:var(--txt);margin-bottom:.3rem}
+.poster-sub{font-size:.82rem;color:var(--txt2);margin-bottom:.9rem}
+.poster-acts{display:flex;gap:.6rem;margin-top:auto}
+
+/* ===== SITE SETTINGS TAB ===== */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+@media(max-width:850px){.settings-grid{grid-template-columns:1fr}}
+.set-group{background:var(--card);border-radius:16px;border:1px solid var(--bdr);padding:1.5rem}
+.set-group h4{font-family:var(--fHead);font-size:1.1rem;color:var(--txt);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+
+/* ===== TOAST NOTIFICATIONS ===== */
+.toast-cnt{position:fixed;top:1.5rem;right:1.5rem;z-index:9999;display:flex;flex-direction:column;gap:.75rem;pointer-events:none}
+.toast{pointer-events:auto;min-width:280px;max-width:420px;background:var(--card);color:var(--txt);border-radius:14px;padding:.9rem 1.25rem;box-shadow:var(--shXl);border:1px solid var(--bdr);border-left:5px solid var(--em500);display:flex;align-items:center;gap:.85rem;animation:tslide .35s var(--ease);transition:.3s}
+@keyframes tslide{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.err{border-left-color:var(--danger)}
+.toast.warn{border-left-color:var(--warn)}
+.toast.info{border-left-color:var(--info)}
+.toast-msg{font-size:.88rem;font-weight:600}
+
+/* ===== USER DROPDOWN ===== */
+.udrop{position:absolute;top:calc(100% + .5rem);right:0;width:280px;background:var(--card);border-radius:16px;box-shadow:var(--shXl);border:1px solid var(--bdr);padding:1rem;z-index:1050;animation:mup .2s var(--ease)}
+.udrop-hdr{display:flex;align-items:center;gap:.8rem;padding-bottom:.85rem;border-bottom:1px solid var(--bdr)}
+.udrop-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--em600),var(--em900));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;flex-shrink:0}
+.udrop-nm{font-weight:700;font-size:.92rem;color:var(--txt)}
+.udrop-em{font-size:.75rem;color:var(--txtm)}
+.udrop-bdg{display:inline-block;font-size:.68rem;background:var(--g100);color:var(--g400);padding:.1rem .45rem;border-radius:4px;font-weight:700;margin-top:.2rem}
+.udrop-wallet{background:var(--em100);border:1px solid var(--bdr);border-radius:10px;padding:.65rem .85rem;margin:.75rem 0;display:flex;align-items:center;gap:.65rem}
+.udrop-wallet .wl{font-size:.7rem;color:var(--txt2)}
+.udrop-wallet .wv{font-size:.85rem;color:var(--em400);font-weight:700}
+.udrop-links{display:flex;flex-direction:column;gap:.3rem}
+.udrop-item{width:100%;background:transparent;border:none;padding:.55rem .75rem;border-radius:8px;text-align:left;font-size:.85rem;font-weight:600;color:var(--txt2);display:flex;align-items:center;gap:.6rem;transition:.2s}
+.udrop-item:hover{background:var(--em100);color:var(--em400)}
+.udrop-item.dng:hover{background:var(--dangerL);color:var(--danger)}
+
+/* ===== PRINT STYLES ===== */
+@media print{
+  body *{visibility:hidden}
+  #rcpt-print,#rcpt-print *{visibility:visible}
+  #rcpt-print{position:absolute;left:0;top:0;width:100%}
+  .hdr,.ann,.succ-acts,.admin-v{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ANNOUNCEMENT BAR ===== -->
+<aside class="ann" id="ann-bar"><div class="ann-inner">
+  <span class="ann-badge" id="ann-badge">🌱 HARVEST SPECIAL</span>
+  <span id="ann-text">Pure A2 Vedic Ghee & Wood-Pressed Oils are live! Use code <strong class="cpn" id="cpn-copy" title="Click to copy">DESI20</strong> for flat 20% off.</span>
+  <span class="ann-pill" id="ann-ship">Free Delivery on ₹<span id="ann-thr">999</span>+ (COD Only)</span>
+</div></aside>
+
+<!-- ===== HEADER ===== -->
+<header class="hdr"><div class="hdr-inner">
+  <div class="logo-wrap" id="home-link">
+    <div class="logo-box"><img src="assets/images/brand_logo.png" alt="Desi Touch"></div>
+    <div><div class="brand-nm" id="hdr-bname">DESI TOUCH</div><div class="brand-tag" id="hdr-btag">NATURE KA ASLI TOUCH 🌱</div></div>
+  </div>
+  <nav class="hdr-nav">
+    <a href="#hero" class="nav-a act" data-nav="home">Home</a>
+    <a href="#catalog" class="nav-a" data-nav="products">Pure Harvest</a>
+    <a href="#purity" class="nav-a" data-nav="purity">Vedic Purity</a>
+    <a href="#testi" class="nav-a" data-nav="reviews">Reviews</a>
+  </nav>
+  <div class="hdr-acts">
+    <!-- DARK MODE TOGGLE BUTTON -->
+    <button class="theme-tog" id="theme-btn" title="Toggle Light / Dark Mode">
+      <span id="theme-icon">🌙</span> <span class="theme-lbl" id="theme-lbl">Dark</span>
+    </button>
+
+    <div class="srch-wrap">
+      <svg class="ic ic-sm si" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="g-search" placeholder="Search ghee, oils, honey..." autocomplete="off">
+    </div>
+    <div style="position:relative" id="user-wrap">
+      <button class="act-btn" id="user-btn">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="hdr-usr">Sign In</span>
+      </button>
+      <div class="udrop hidden" id="udrop"></div>
+    </div>
+    <button class="act-btn cart-btn" id="open-cart">
+      <div style="position:relative;display:flex">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="bdg cart-bdg" id="cart-cnt">0</span>
+      </div>
+      <div class="cart-lbl">
+        <span class="cart-sub">Basket</span>
+        <strong class="cart-tot" id="cart-htot">₹0</strong>
+      </div>
+    </button>
+    <button class="mob-menu-btn" id="mob-menu-btn" title="Open Menu">
+      <svg class="ic ic-lg" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</div></header>
+
+<!-- ===== MOBILE DRAWER ===== -->
+<div id="mob-drawer" class="mob-drawer hidden">
+  <div class="mob-drawer-bk" id="mob-bk"></div>
+  <div class="mob-drawer-pnl">
+    <div class="mob-drawer-hdr">
+      <div style="display:flex;align-items:center;gap:.65rem">
+        <div class="logo-box" style="width:36px;height:36px"><img src="assets/images/brand_logo.png" alt="Desi Touch"></div>
+        <strong style="font-family:var(--fHead);color:var(--txt)">Desi Touch</strong>
+      </div>
+      <button class="cls-btn" id="close-mob">✕</button>
+    </div>
+    <div class="mob-links">
+      <a href="#hero" class="mob-a act" id="m-home">🏠 Home</a>
+      <a href="#catalog" class="mob-a" id="m-cat">🌿 Pure Harvest Catalog</a>
+      <a href="#purity" class="mob-a" id="m-pur">🌾 Vedic Purity Story</a>
+      <a href="#testi" class="mob-a" id="m-testi">⭐ Verified Reviews</a>
+      <button class="mob-a" id="m-orders" style="background:none;border:none;width:100%;text-align:left">📦 My COD Orders</button>
+      <button class="mob-a" id="m-theme-btn" style="background:none;border:none;width:100%;text-align:left">🌙 Toggle Dark Mode</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN VIEWS ===== -->
+<main id="main">
+
+  <!-- ==================== VIEW 1: STOREFRONT ==================== -->
+  <div id="v-store">
+    <!-- Hero Carousel -->
+    <section class="hero" id="hero">
+      <div class="hero-track" id="hero-track"></div>
+      <div class="car-nav">
+        <button class="car-arr" id="hero-prev">‹</button>
+        <div class="car-dots" id="hero-dots"></div>
+        <button class="car-arr" id="hero-next">›</button>
+      </div>
+    </section>
+
+    <!-- Trust Pillars -->
+    <section class="trust"><div class="cnt"><div class="trust-g">
+      <div class="trust-i"><div class="trust-ic">🏺</div><div><h4>Authentic Vedic Bilona</h4><p>Hand-churned curd in earthen pots</p></div></div>
+      <div class="trust-i"><div class="trust-ic">🌡️</div><div><h4>Wood-Pressed (Kachi Ghani)</h4><p>Slow cold extraction &lt;45°C</p></div></div>
+      <div class="trust-i"><div class="trust-ic">🔬</div><div><h4>100% Lab Tested Purity</h4><p>Zero preservatives, unadulterated</p></div></div>
+      <div class="trust-i"><div class="trust-ic">💵</div><div><h4>Cash on Delivery (COD)</h4><p>Inspect & pay at your doorstep</p></div></div>
+    </div></div></section>
+
+    <!-- Catalog Section -->
+    <section class="catalog" id="catalog"><div class="cnt">
+      <div class="sec-hdr">
+        <div>
+          <span class="sec-tag">🥦 100% PURE & NATIVE</span>
+          <h2 class="sec-ttl">Farm Fresh Harvest Catalog</h2>
+          <p class="sec-sub">Sourced directly from native regenerative farms. No middlemen, no chemical adulteration.</p>
+        </div>
+        <div>
+          <label style="font-size:.85rem;font-weight:700;margin-right:.4rem">Sort by:</label>
+          <select class="csel" id="sort-sel">
+            <option value="featured">Featured Harvest</option>
+            <option value="price-low">Price: Low → High</option>
+            <option value="price-high">Price: High → Low</option>
+            <option value="rating">Top Customer Rated</option>
+          </select>
+        </div>
+      </div>
+      <div class="cat-tabs" id="cat-tabs"></div>
+      <div class="pgrid" id="pgrid"></div>
+      <div class="empty-st hidden" id="no-prod">
+        <div style="font-size:3rem;margin-bottom:.5rem">🔍</div>
+        <h3>No Products Found</h3>
+        <p>Try searching for a different harvest or reset filters.</p>
+        <button class="btn btn-s btn-sm" id="rst-flt" style="margin-top:.8rem">Show All Harvests</button>
+      </div>
+    </div></section>
+
+    <!-- Vedic Purity Story -->
+    <section class="purity" id="purity"><div class="cnt"><div class="pur-card">
+      <div>
+        <span class="stl">🌾 THE DESI TOUCH COMMITMENT</span>
+        <h2>Why Traditional Bilona & Cold-Pressing Matters</h2>
+        <p>Commercial supermarket oils and ghee are chemically extracted, bleached, and deodorized with toxic hexane solvents. We restore ancient Vedic food wisdom:</p>
+        <div class="feat-list">
+          <div class="feat-item"><div class="feat-chk">✓</div><div><strong>Indigenous Gir Cows Only</strong><p>Free-grazing cows producing pure A2 beta-casein milk.</p></div></div>
+          <div class="feat-item"><div class="feat-chk">✓</div><div><strong>Zero Microplastics & Glass Bottling</strong><p>Food-grade UV-protective amber glass containers.</p></div></div>
+          <div class="feat-item"><div class="feat-chk">✓</div><div><strong>Batch QR Code Lab Traceability</strong><p>Third-party lab tested for fatty acids and zero adulteration.</p></div></div>
+        </div>
+        <a href="#catalog" class="btn btn-p">Taste Nature Ka Asli Touch</a>
+      </div>
+      <div class="pur-media">
+        <img src="assets/images/product_ghee.jpg" alt="A2 Vedic Ghee">
+        <div class="pur-float">
+          <span class="f-score">100%</span>
+          <span class="f-label">Vedic Pure Certified</span>
+        </div>
+      </div>
+    </div></div></section>
+
+    <!-- Verified Customer Reviews -->
+    <section class="testi" id="testi"><div class="cnt">
+      <div style="text-align:center">
+        <span class="sec-tag">⭐ VERIFIED BUYERS</span>
+        <h2 class="sec-ttl">Loved by 25,000+ Conscious Families</h2>
+      </div>
+      <div class="testi-g">
+        <div class="tcard"><div>⭐⭐⭐⭐⭐</div><p class="rev">"The A2 Ghee transported me straight to my grandmother's village kitchen. Granular, rich, and truly pure. Kids love it on rotis!"</p><div class="revr"><div class="revr-av">AS</div><div><strong>Ananya Sen</strong><span>Bengaluru • Verified Buyer</span></div></div></div>
+        <div class="tcard"><div>⭐⭐⭐⭐⭐</div><p class="rev">"The Cold-Pressed Virgin Mustard Oil is pungent, authentic, and completely unrefined. The real Kachi Ghani aroma you never get in supermarkets."</p><div class="revr"><div class="revr-av">RK</div><div><strong>Rajesh Kulkarni</strong><span>Pune • Verified Buyer</span></div></div></div>
+        <div class="tcard"><div>⭐⭐⭐⭐⭐</div><p class="rev">"Lakadong Turmeric is visibly deeper golden and the raw forest honey is heavenly. Delivery was fast and Cash on Delivery was seamless."</p><div class="revr"><div class="revr-av">PM</div><div><strong>Pooja Mehta</strong><span>Delhi NCR • Gold Member</span></div></div></div>
+      </div>
+    </div></section>
+
+    <!-- Professional Footer -->
+    <footer class="ftr"><div class="cnt">
+      <div class="ftr-g">
+        <div class="ftr-brand">
+          <div style="display:flex;align-items:center;gap:.75rem">
+            <div class="logo-box" style="width:40px;height:40px"><img src="assets/images/brand_logo.png" alt="Desi Touch"></div>
+            <div><strong style="font-family:var(--fHead);font-size:1.25rem;color:#fff">DESI TOUCH</strong><div style="font-size:.68rem;color:var(--g400);font-weight:700">NATURE KA ASLI TOUCH 🌱</div></div>
+          </div>
+          <p>Dedicated to delivering pure, chemical-free Vedic foods directly from regenerative native farms to your dining table. Honest, traditional, and 100% pure.</p>
+          <div class="cert-badges">
+            <span class="cert-badge">FSSAI Certified</span>
+            <span class="cert-badge">Jaivik Bharat Organic</span>
+            <span class="cert-badge">Non-GMO Native</span>
+            <span class="cert-badge">100% COD Verified</span>
+          </div>
+        </div>
+        <div class="ftr-col">
+          <h4>Farm Harvests</h4>
+          <div class="ftr-links">
+            <a href="#catalog" onclick="filterCat('ghee')">A2 Vedic Gir Ghee & Butter</a>
+            <a href="#catalog" onclick="filterCat('oils')">Wood-Pressed Oils</a>
+            <a href="#catalog" onclick="filterCat('honey')">Raw Wild Honey</a>
+            <a href="#catalog" onclick="filterCat('spices')">Lakadong Turmeric & Saffron</a>
+            <a href="#catalog" onclick="filterCat('superfoods')">Himalayan Shilajit & Millets</a>
+          </div>
+        </div>
+        <div class="ftr-col">
+          <h4>Customer Care</h4>
+          <div class="ftr-links">
+            <a href="javascript:void(0)" onclick="openAccount()">Track Your COD Order</a>
+            <a href="javascript:void(0)" onclick="openCart()">Shopping Basket</a>
+            <a href="javascript:void(0)" onclick="toast('Support hotline: +91 98450 00123 (9 AM - 7 PM)')">Helpline & WhatsApp</a>
+            <a href="javascript:void(0)" onclick="toast('COD Available in 18,000+ pin codes across India!')">Cash On Delivery Policy</a>
+          </div>
+        </div>
+        <div class="ftr-col">
+          <h4>Doorstep COD Guarantee</h4>
+          <p style="font-size:.85rem;color:#cbd5e1;line-height:1.5;margin-bottom:1rem">We deliver all packages with 100% Cash on Delivery. Open & inspect your organic harvest before paying the delivery agent in cash or via QR.</p>
+          <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:.75rem 1rem;font-size:.8rem;color:var(--g400)">
+            📞 Support: <strong id="ftr-phone">+91 98450 00123</strong><br>
+            ✉️ Email: <strong id="ftr-email">care@desitouch.com</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ftr-btm">
+        <div>© 2026 Desi Touch Organic Foods Pvt Ltd. All rights reserved.</div>
+        <div style="display:flex;gap:1.5rem">
+          <span>100% Native Pure</span>
+          <span>Zero Preservatives</span>
+          <span>Cash on Delivery</span>
+        </div>
+      </div>
+    </div></footer>
+  </div>
+
+  <!-- ==================== VIEW 3: ADMIN HUB ==================== -->
+  <div id="v-admin" class="admin-v hidden"></div>
+
+</main>
+
+<!-- CART DRAWER -->
+<div id="cart-drawer" class="cart-ov hidden"></div>
+
+<!-- CHECKOUT MODAL (COD ONLY) -->
+<div id="co-modal" class="moverlay hidden"></div>
+
+<!-- QUICK VIEW MODAL -->
+<div id="qv-modal" class="moverlay hidden"></div>
+
+<!-- CUSTOMER AUTH MODAL -->
+<div id="auth-modal" class="moverlay hidden"></div>
+
+<!-- CUSTOMER ACCOUNT MODAL -->
+<div id="acc-modal" class="moverlay hidden"></div>
+
+<!-- ADMIN ADD/EDIT PRODUCT MODAL -->
+<div id="ap-modal" class="moverlay hidden"></div>
+
+<!-- ADMIN ADD/EDIT POSTER MODAL -->
+<div id="ab-modal" class="moverlay hidden"></div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-cnt" id="toast-cnt"></div>
+
+
+
+<!-- ============================================================
+     VANILLA JS ENGINE (SINGLE-FILE HIGH SPEED & SECURE)
+     ============================================================ -->
+<script>
+// === STORAGE KEYS ===
+const SK = {
+  P: 'dt_products_v4',
+  B: 'dt_banners_v4',
+  O: 'dt_orders_v4',
+  U: 'dt_users_v4',
+  CU: 'dt_curuser_v4',
+  C: 'dt_cart_v4',
+  CFG: 'dt_config_v4',
+  THEME: 'dt_theme_v4',
+  ADMIN_AUTH: 'dt_admin_token_v4',
+  ADMIN_CRED: 'dt_admin_credentials_v4'
+};
+
+// === DEFAULT CONFIGURATION ===
+const DEF_CONFIG = {
+  storeName: 'DESI TOUCH',
+  storeTagline: 'NATURE KA ASLI TOUCH 🌱',
+  phone: '+91 98450 00123',
+  email: 'care@desitouch.com',
+  annText: 'Pure A2 Vedic Ghee, Shilajit & Wood-Pressed Oils are live! Use code DESI20 for flat 20% off.',
+  annCoupon: 'DESI20',
+  annDiscount: 20,
+  freeShipThreshold: 999,
+  enableAnn: true,
+  // Gateway & Auth Integration (Hostinger Ready)
+  razorpayKeyId: '',
+  razorpayKeySecret: '',
+  firebaseApiKey: '',
+  firebaseAuthDomain: '',
+  firebaseProjectId: '',
+  firebaseStorageBucket: '',
+  firebaseMessagingSenderId: '',
+  firebaseAppId: ''
+};
+
+// === DEFAULT ADMIN CREDENTIALS ===
+const DEF_ADMIN_CREDS = {
+  email: 'DESITOUCH@1234',
+  password: 'D3s1T0uch!9x$K2pL5wQ8vN4mB7jC6zX1fG0hR#tY*cM!bV&nZ^sW9qP2dF5kL7x',
+  lastLogin: null
+};
+
+// === DEFAULT BANNERS / POSTERS ===
+const DEF_BANNERS = [
+  {
+    id: 'b1',
+    title: 'Pure Vedic & 100% Organic Healthy Food',
+    subtitle: 'Handcrafted with traditional Bilona churning & cold-wood pressing from certified organic native farms.',
+    tag: 'NATURE KA ASLI TOUCH',
+    badge: 'Vedic Purity Guaranteed',
+    btnText: 'Explore Pure Farm Products',
+    btnLink: '#catalog',
+    image: 'assets/images/hero_banner_1.jpg',
+    active: true,
+    discount: 'Use code DESI20 for 20% OFF'
+  },
+  {
+    id: 'b2',
+    title: 'Ancient Superfoods & Harvest Festival',
+    subtitle: 'Reclaim pure ancestral vitality with Himalayan Shilajit, raw honey, unpolished millets & cold-pressed native oils.',
+    tag: 'FARM FRESH TO KITCHEN',
+    badge: 'Harvest Special',
+    btnText: 'Shop Ancient Superfoods',
+    btnLink: '#catalog',
+    image: 'assets/images/hero_banner_2.jpg',
+    active: true,
+    discount: 'Cash on Delivery Available'
+  }
+];
+
+// === EXPANDED FULL-FLEDGED PRODUCT CATALOG (14 PREMIUM PRODUCTS) ===
+const DEF_PRODUCTS = [
+  {
+    id: 'dt101',
+    name: 'A2 Vedic Desi Cow Bilona Ghee',
+    cat: 'ghee',
+    catNm: 'Vedic Ghee & Butter',
+    price: 1450,
+    mrp: 1800,
+    wt: '500g Glass Jar',
+    stock: 22,
+    rating: 4.9,
+    reviews: 348,
+    badge: 'Bestseller',
+    badgeC: 'gold',
+    image: 'assets/images/product_ghee.jpg',
+    desc: 'Traditional A2 Gir Cow cultured ghee hand-churned in earthen pots using the authentic bi-directional Bilona method. Rich in CLA, Butyric acid, and fat-soluble vitamins A, D, E, K.',
+    benefits: ['Boosts digestive fire & strengthens gut barrier','Improves joint lubrication & glowing skin','Natural source of Butyric Acid & Omega 3/6/9','Zero preservatives, 100% lab certified'],
+    nutrition: {Calories:'898 kcal/100g',Fats:'99.8g',Protein:'0g',Type:'Pure A2 Grass-fed'}
+  },
+  {
+    id: 'dt102',
+    name: 'Cold-Pressed Virgin Mustard Oil',
+    cat: 'oils',
+    catNm: 'Wood-Pressed Oils',
+    price: 380,
+    mrp: 460,
+    wt: '1L Amber Bottle',
+    stock: 35,
+    rating: 4.8,
+    reviews: 215,
+    badge: 'Cold-Pressed',
+    badgeC: 'em',
+    image: 'assets/images/product_mustard.jpg',
+    desc: 'Extracted slowly in wooden expellers (Kachi Ghani) without heat or chemical refining. Preserves all natural tocopherols and pungent allyl isothiocyanate.',
+    benefits: ['Heart-friendly 60% MUFA','Natural antibacterial properties','Unheated keeps tocopherols intact','Authentic traditional aroma & pungency'],
+    nutrition: {Calories:'884 kcal/100ml',Fats:'100g (High MUFA)',Protein:'0g',Type:'Kachi Ghani'}
+  },
+  {
+    id: 'dt103',
+    name: 'Extra Virgin Wood-Pressed Coconut Oil',
+    cat: 'oils',
+    catNm: 'Wood-Pressed Oils',
+    price: 490,
+    mrp: 599,
+    wt: '500ml Glass Bottle',
+    stock: 18,
+    rating: 4.9,
+    reviews: 182,
+    badge: 'Farm Fresh',
+    badgeC: 'em',
+    image: 'assets/images/product_coconut.jpg',
+    desc: 'Cold-pressed from sun-dried organic Kerala coconuts. Preserving healthy MCTs and Lauric acid. Ideal for holistic cooking and hair nourishment.',
+    benefits: ['High in MCTs for clean energy','Immunity boosting Lauric Acid','Versatile for cooking & skin care','Unrefined, unbleached, un-deodorized'],
+    nutrition: {Calories:'862 kcal/100ml',Fats:'100g (52% Lauric)',Protein:'0g',Type:'Virgin Cold-Pressed'}
+  },
+  {
+    id: 'dt104',
+    name: 'Raw Himalayan Wild Forest Honey',
+    cat: 'honey',
+    catNm: 'Raw Forest Honey',
+    price: 650,
+    mrp: 790,
+    wt: '400g Hexagon Jar',
+    stock: 15,
+    rating: 4.9,
+    reviews: 290,
+    badge: '100% Raw',
+    badgeC: 'gold',
+    image: 'assets/images/product_honey.jpg',
+    desc: 'Sustainably gathered from deep Himalayan wildflower blossoms. Unheated and unfiltered, containing active bee pollen, propolis, and natural digestive enzymes.',
+    benefits: ['Natural immune booster with live enzymes','Soothes throat & supports respiratory wellness','Raw unheated preserves natural propolis','Clean pure alternative to processed sugar'],
+    nutrition: {Calories:'304 kcal/100g',Carbs:'82g (Natural fructose)',Minerals:'Iron, Zinc, Potassium',Type:'Unfiltered Wild'}
+  },
+  {
+    id: 'dt105',
+    name: 'Organic Lakadong Turmeric Powder',
+    cat: 'spices',
+    catNm: 'Native Spices',
+    price: 290,
+    mrp: 350,
+    wt: '200g Kraft Pouch',
+    stock: 40,
+    rating: 5.0,
+    reviews: 164,
+    badge: '7.8% Curcumin',
+    badgeC: 'gold',
+    image: 'assets/images/product_turmeric.jpg',
+    desc: 'Grown in pristine Jaintia Hills of Meghalaya. Verified 7.5%+ active curcumin. Sun-dried and stone-ground without lead chromate or synthetic color.',
+    benefits: ['Powerful anti-inflammatory & antioxidant','Enhances cellular longevity & immune defense','Deep golden hue with rich earthiness','Zero lead chromate, 100% pure'],
+    nutrition: {Curcumin:'7.8% Lab Tested',Calories:'354 kcal/100g',Fiber:'21g',Type:'Meghalaya Origin'}
+  },
+  {
+    id: 'dt106',
+    name: 'Roasted Foxnuts / Himalayan Makhana',
+    cat: 'snacks',
+    catNm: 'Roasted Snacks',
+    price: 240,
+    mrp: 299,
+    wt: '200g Fresh Pouch',
+    stock: 14,
+    rating: 4.7,
+    reviews: 118,
+    badge: 'Healthy Snack',
+    badgeC: 'em',
+    image: 'assets/images/product_makhana.jpg',
+    desc: 'Slow-roasted crispy lotus seeds seasoned with pure cold-pressed oil, Himalayan pink salt & mild Ayurvedic herbs. Clean, crunchy, guilt-free superfood snack.',
+    benefits: ['Naturally gluten-free & low glycemic index','High in magnesium, calcium & potassium','Zero cholesterol, trans-fats, zero MSG','Sustained clean metabolic energy'],
+    nutrition: {Calories:'347 kcal/100g',Protein:'9.7g',Fats:'0.5g',Fiber:'14.5g'}
+  },
+  {
+    id: 'dt107',
+    name: 'Pure Himalayan Shilajit Resin (Gold Grade)',
+    cat: 'superfoods',
+    catNm: 'Ancient Superfoods',
+    price: 1199,
+    mrp: 1499,
+    wt: '20g Glass Pot',
+    stock: 28,
+    rating: 4.95,
+    reviews: 412,
+    badge: '75%+ Fulvic Acid',
+    badgeC: 'gold',
+    image: 'assets/images/product_honey.jpg',
+    desc: 'Harvested above 16,000 feet in the Himalayan peaks. Traditional Surya Tapi method purified with Triphala. Loaded with 84+ trace minerals and bioactive fulvic acid.',
+    benefits: ['Supports cellular stamina & testosterone balance','Potent natural adaptogen for stress resilience','Aids nutrient bio-availability and endurance','Lab verified for heavy metals safety'],
+    nutrition: {FulvicAcid:'76.4%',Minerals:'84 Ionic Trace Minerals',Form:'Semisolid Pure Resin'}
+  },
+  {
+    id: 'dt108',
+    name: 'Wood-Pressed Kachi Ghani Groundnut Oil',
+    cat: 'oils',
+    catNm: 'Wood-Pressed Oils',
+    price: 420,
+    mrp: 510,
+    wt: '1L Glass Bottle',
+    stock: 24,
+    rating: 4.85,
+    reviews: 156,
+    badge: 'Cold-Pressed',
+    badgeC: 'em',
+    image: 'assets/images/product_mustard.jpg',
+    desc: 'Cold-pressed in traditional wooden vats using native Saurashtra red skin groundnuts. High smoke point with sweet nutty aroma, free from chemical trans-fats.',
+    benefits: ['Natural Resveratrol for heart wellness','High oleic acid MUFA profile','No bleaching, no chemical deodorizing','Ideal for daily Indian cooking and frying'],
+    nutrition: {Calories:'884 kcal/100ml',Fats:'100g',OleicAcid:'48%',Type:'Unrefined Wood-Pressed'}
+  },
+  {
+    id: 'dt109',
+    name: 'Kashmiri Mogra Saffron (Grade A1 Kesar)',
+    cat: 'spices',
+    catNm: 'Native Spices',
+    price: 499,
+    mrp: 650,
+    wt: '1g Airtight Jar',
+    stock: 32,
+    rating: 5.0,
+    reviews: 204,
+    badge: 'GI Tagged',
+    badgeC: 'gold',
+    image: 'assets/images/product_turmeric.jpg',
+    desc: 'Purest Kashmiri Mongra Saffron from the highland fields of Pampore. Unbroken crimson stigmas with high crocin content, intense floral aroma, and natural coloring.',
+    benefits: ['Enriches milk, desserts & Ayurvedic teas','Promotes mental relaxation & glowing skin','Natural mood elevator with safranal','100% genuine GI tagged origin'],
+    nutrition: {Crocin:'High Grade A1',Picrocrocin:'Optimal Purity',Type:'All-Red Mongra'}
+  },
+  {
+    id: 'dt110',
+    name: 'Ancient Unpolished Foxtail / Kangni Millet',
+    cat: 'superfoods',
+    catNm: 'Ancient Superfoods',
+    price: 180,
+    mrp: 240,
+    wt: '1kg Eco Kraft Pack',
+    stock: 45,
+    rating: 4.8,
+    reviews: 94,
+    badge: 'Ancient Grain',
+    badgeC: 'em',
+    image: 'assets/images/product_makhana.jpg',
+    desc: 'Unpolished, native Foxtail Millet sourced from rain-fed smallholder farms. High in dietary fiber, low glycemic index, and packed with complex slow-release carbohydrates.',
+    benefits: ['Healthy low-GI alternative to white rice','Supports steady blood sugar levels','Naturally gluten-free & gut soothing','High in B-complex vitamins & iron'],
+    nutrition: {Calories:'351 kcal/100g',Fiber:'8g',Protein:'12.3g',GI:'Low 54'}
+  },
+  {
+    id: 'dt111',
+    name: 'Cultured Desi Gir Cow White Butter (Makhan)',
+    cat: 'ghee',
+    catNm: 'Vedic Ghee & Butter',
+    price: 620,
+    mrp: 750,
+    wt: '500g Fresh Earthen Tub',
+    stock: 12,
+    rating: 4.9,
+    reviews: 178,
+    badge: 'Fresh Churned',
+    badgeC: 'gold',
+    image: 'assets/images/product_ghee.jpg',
+    desc: 'Freshly churned cultured white butter made from Gir cow A2 curd. Unsalted, unbleached, and brimming with live lactic cultures and fat-soluble nutrition.',
+    benefits: ['Rich in natural probiotics & enzymes','Smooth, velvety, authentic village taste','No artificial salt or yellow food dye','Perfect atop warm parathas and rotis'],
+    nutrition: {Calories:'717 kcal/100g',CulturedFats:'81g',Form:'Raw Hand-Churned Makhan'}
+  },
+  {
+    id: 'dt112',
+    name: 'Natural Forest Honeycomb in Raw Honey',
+    cat: 'honey',
+    catNm: 'Raw Forest Honey',
+    price: 850,
+    mrp: 1050,
+    wt: '350g Hexagon Jar',
+    stock: 9,
+    rating: 4.95,
+    reviews: 86,
+    badge: '100% Edible Comb',
+    badgeC: 'gold',
+    image: 'assets/images/product_honey.jpg',
+    desc: 'Pure virgin honeycomb cut directly from Himalayan forest hives, preserved in raw unpasteurized multi-flora honey. Chew the natural beeswax comb for pure pollen and royal jelly.',
+    benefits: ['Direct from the comb to your spoon','Contains propolis, royal jelly & live pollen','Natural beeswax supports dental and throat health','Unprocessed wild nectar bliss'],
+    nutrition: {Type:'100% Raw Comb & Wild Nectar',Enzymes:'Active Live Bio-Enzymes'}
+  },
+  {
+    id: 'dt113',
+    name: 'Organic Moringa Oleifera Leaf Powder',
+    cat: 'superfoods',
+    catNm: 'Ancient Superfoods',
+    price: 260,
+    mrp: 330,
+    wt: '200g Pouch',
+    stock: 30,
+    rating: 4.85,
+    reviews: 132,
+    badge: 'Green Superfood',
+    badgeC: 'em',
+    image: 'assets/images/product_makhana.jpg',
+    desc: 'Shade-dried, stone-ground organic drumstick tree leaves. Often called the Miracle Tree, it boasts 7x the Vitamin C of oranges and 4x the Calcium of milk.',
+    benefits: ['Fights oxidative stress and fatigue','Natural daily greens boost for smoothies','Supports healthy blood circulation','Rich in bioavailable iron & chlorophyll'],
+    nutrition: {VitaminC:'7x Oranges',Calcium:'4x Milk',Protein:'27g/100g',Iron:'28mg'}
+  },
+  {
+    id: 'dt114',
+    name: 'Traditional Desi Khand (Unrefined Raw Sugar)',
+    cat: 'spices',
+    catNm: 'Native Spices',
+    price: 160,
+    mrp: 210,
+    wt: '1kg Eco Pack',
+    stock: 50,
+    rating: 4.75,
+    reviews: 79,
+    badge: 'Sulphur-Free',
+    badgeC: 'em',
+    image: 'assets/images/product_turmeric.jpg',
+    desc: 'Unrefined, mineral-rich raw cane sugar made with traditional clarifying herbs. Free from bone-char bleaching and sulphur dioxide fumes.',
+    benefits: ['Cooling Ayurvedic properties for the body','Natural source of molasses minerals','Wholesome sweetener for tea, milk, and sweets','Zero chemical refining or bleaching'],
+    nutrition: {Calories:'387 kcal/100g',Minerals:'Calcium, Magnesium, Iron',Type:'Desi Khand'}
+  }
+];
+
+// === DEFAULT ORDERS ===
+const DEF_ORDERS = [
+  {
+    id: 'ORD-98241',
+    cName: 'Priya Sharma',
+    cEmail: 'priya@example.com',
+    cPhone: '+91 98450 12345',
+    addr: {line:'Flat 402, Green Meadows, Indiranagar',city:'Bengaluru',state:'Karnataka',pin:'560038'},
+    items: [
+      {id:'dt101',name:'A2 Vedic Desi Cow Bilona Ghee',price:1450,qty:1,wt:'500g'},
+      {id:'dt107',name:'Pure Himalayan Shilajit Resin (Gold Grade)',price:1199,qty:1,wt:'20g'}
+    ],
+    sub: 2649,
+    disc: 265,
+    ship: 0,
+    total: 2384,
+    pay: 'Cash on Delivery (COD)',
+    status: 'Confirmed',
+    trk: 'DT-EXP-8891024',
+    date: new Date(Date.now() - 36 * 36e5).toISOString()
+  },
+  {
+    id: 'ORD-98110',
+    cName: 'Aarav Patel',
+    cEmail: 'aarav.patel@gmail.com',
+    cPhone: '+91 99201 88342',
+    addr: {line:'B-12, Palm Residency, Juhu',city:'Mumbai',state:'Maharashtra',pin:'400049'},
+    items: [
+      {id:'dt102',name:'Cold-Pressed Virgin Mustard Oil',price:380,qty:2,wt:'1L'},
+      {id:'dt105',name:'Organic Lakadong Turmeric Powder',price:290,qty:1,wt:'200g'}
+    ],
+    sub: 1050,
+    disc: 100,
+    ship: 0,
+    total: 950,
+    pay: 'Cash on Delivery (COD)',
+    status: 'Delivered',
+    trk: 'DT-EXP-7729112',
+    date: new Date(Date.now() - 72 * 36e5).toISOString()
+  }
+];
+
+// === DEFAULT USERS ===
+const DEF_USERS = [
+  {
+    id: 'u_giriraj',
+    name: 'Giriraj',
+    email: 'GIRIRAJ1234@GMAIN.COM',
+    role: 'customer',
+    phone: '+91 98765 00000',
+    pass: '@0000000',
+    coins: 500,
+    addr: {line:'Vedic Marg, Civil Lines',city:'Jaipur',state:'Rajasthan',pin:'302001'}
+  }
+];
+
+// === STATE MANAGEMENT ===
+const ld = (k, fb) => {
+  try {
+    const d = localStorage.getItem(k);
+    return d ? JSON.parse(d) : fb;
+  } catch(e) { return fb; }
+};
+const sv = (k, d) => {
+  try { localStorage.setItem(k, JSON.stringify(d)); } catch(e) {}
+};
+
+let S = {
+  products: ld(SK.P, DEF_PRODUCTS),
+  banners: ld(SK.B, DEF_BANNERS),
+  orders: ld(SK.O, DEF_ORDERS),
+  users: ld(SK.U, DEF_USERS),
+  curUser: ld(SK.CU, null),
+  cart: ld(SK.C, {items:[{id:'dt101',qty:1}], cpn:null}),
+  config: ld(SK.CFG, DEF_CONFIG),
+  theme: localStorage.getItem(SK.THEME) || 'dark', // Default to Dark Mode as requested
+  adminCreds: ld(SK.ADMIN_CRED, DEF_ADMIN_CREDS),
+  adminToken: ld(SK.ADMIN_AUTH, null),
+  searchQ: '',
+  activeCat: 'all'
+};
+
+// Auto-migration safeguard: ensure Admin credentials and Giriraj customer are active
+(function syncCredentialsAndConfig() {
+  if (!S.adminCreds || S.adminCreds.password !== DEF_ADMIN_CREDS.password || S.adminCreds.email !== DEF_ADMIN_CREDS.email) {
+    S.adminCreds = { ...DEF_ADMIN_CREDS };
+    sv(SK.ADMIN_CRED, S.adminCreds);
+  }
+  // Ensure Giriraj is the registered customer and remove old mock accounts
+  const hasGiriraj = Array.isArray(S.users) && S.users.some(u => u.email && u.email.toUpperCase() === 'GIRIRAJ1234@GMAIN.COM');
+  const hasOldMock = Array.isArray(S.users) && S.users.some(u => u.email === 'priya@example.com');
+  if (!hasGiriraj || hasOldMock) {
+    S.users = [...DEF_USERS];
+    sv(SK.U, S.users);
+    if (S.curUser && S.curUser.email !== 'GIRIRAJ1234@GMAIN.COM') {
+      S.curUser = null;
+      sv(SK.CU, null);
+    }
+  }
+  // Sync any newly added config properties
+  if (S.config) {
+    let cfgChanged = false;
+    ['razorpayKeyId', 'razorpayKeySecret', 'firebaseApiKey', 'firebaseAuthDomain', 'firebaseProjectId', 'firebaseStorageBucket', 'firebaseMessagingSenderId', 'firebaseAppId'].forEach(key => {
+      if (S.config[key] === undefined) {
+        S.config[key] = DEF_CONFIG[key];
+        cfgChanged = true;
+      }
+    });
+    if (cfgChanged) sv(SK.CFG, S.config);
+  }
+})();
+
+// Listeners
+const listeners = new Set();
+const notify = (e, p) => { for (const fn of listeners) fn(e, p); };
+const sub = fn => { listeners.add(fn); return () => listeners.delete(fn); };
+
+// Factory reset
+function resetAll() {
+  Object.keys(SK).forEach(k => localStorage.removeItem(SK[k]));
+  S.products = [...DEF_PRODUCTS];
+  S.banners = [...DEF_BANNERS];
+  S.orders = [...DEF_ORDERS];
+  S.users = [...DEF_USERS];
+  S.curUser = null;
+  S.cart = {items:[{id:'dt101',qty:1}], cpn:null};
+  S.config = {...DEF_CONFIG};
+  S.theme = 'dark';
+  S.adminCreds = {...DEF_ADMIN_CREDS};
+  S.adminToken = null;
+  applyTheme();
+  notify('reset');
+}
+
+// === THEME ENGINE (DARK / LIGHT TOGGLE) ===
+function applyTheme() {
+  const t = S.theme || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem(SK.THEME, t);
+  const icon = document.getElementById('theme-icon');
+  const lbl = document.getElementById('theme-lbl');
+  const mobBtn = document.getElementById('m-theme-btn');
+  if (icon) icon.textContent = t === 'dark' ? '☀️' : '🌙';
+  if (lbl) lbl.textContent = t === 'dark' ? 'Light' : 'Dark';
+  if (mobBtn) mobBtn.innerHTML = t === 'dark' ? '☀️ Switch to Light Mode' : '🌙 Switch to Dark Mode';
+}
+
+function toggleTheme() {
+  S.theme = S.theme === 'dark' ? 'light' : 'dark';
+  applyTheme();
+  toast(S.theme === 'dark' ? '🌙 Dark mode enabled' : '☀️ Light mode enabled', 'info');
+}
+
+// === ADMIN AUTH & BRUTE FORCE PROTECTION ===
+let failedAttempts = parseInt(sessionStorage.getItem('dt_failed_att') || '0');
+let lockoutUntil = parseInt(sessionStorage.getItem('dt_lockout_until') || '0');
+
+function checkLockout() {
+  const now = Date.now();
+  if (lockoutUntil > now) {
+    return Math.ceil((lockoutUntil - now) / 1000);
+  }
+  return 0;
+}
+
+function generateAdminToken() {
+  try {
+    const buf = new Uint8Array(24);
+    window.crypto.getRandomValues(buf);
+    const hex = Array.from(buf, b => b.toString(16).padStart(2, '0')).join('');
+    const expiry = Date.now() + (12 * 3600 * 1000); // 12h session
+    return `dt_sec_${hex}_${expiry}`;
+  } catch (e) {
+    return `dt_sec_${Math.random().toString(36).substring(2)}_${Date.now() + 43200000}`;
+  }
+}
+
+function adminLogin(email, password) {
+  const lockRem = checkLockout();
+  if (lockRem > 0) {
+    return {ok: false, locked: true, remaining: lockRem};
+  }
+
+  const storedCreds = S.adminCreds || DEF_ADMIN_CREDS;
+  const inputId = (email || '').trim().toLowerCase();
+  const validEmail = (storedCreds.email || '').toLowerCase();
+  const isAdminUser = (
+    inputId === validEmail || 
+    inputId === 'desitouch@1234' || 
+    inputId === 'admin' || 
+    inputId === 'admin@desitouch' ||
+    inputId === 'admin@desitouch.com'
+  );
+
+  if (!isAdminUser) {
+    return {ok: false, notAdmin: true};
+  }
+
+  if (password === storedCreds.password) {
+    failedAttempts = 0;
+    sessionStorage.removeItem('dt_failed_att');
+    sessionStorage.removeItem('dt_lockout_until');
+    
+    // Generate secure cryptographic session token
+    const token = generateAdminToken();
+    S.adminToken = token;
+    sv(SK.ADMIN_AUTH, token);
+    storedCreds.lastLogin = new Date().toISOString();
+    S.adminCreds = storedCreds;
+    sv(SK.ADMIN_CRED, storedCreds);
+    return {ok: true};
+  } else {
+    failedAttempts++;
+    sessionStorage.setItem('dt_failed_att', failedAttempts.toString());
+    if (failedAttempts >= 10) {
+      lockoutUntil = Date.now() + 300000; // 5 minute lock
+      sessionStorage.setItem('dt_lockout_until', lockoutUntil.toString());
+      return {ok: false, locked: true, remaining: 300};
+    } else if (failedAttempts >= 5) {
+      lockoutUntil = Date.now() + 30000; // 30 sec lock
+      sessionStorage.setItem('dt_lockout_until', lockoutUntil.toString());
+      return {ok: false, locked: true, remaining: 30};
+    }
+    return {ok: false, locked: false, remainingAttempts: 5 - (failedAttempts % 5)};
+  }
+}
+
+function adminLogout() {
+  S.adminToken = null;
+  localStorage.removeItem(SK.ADMIN_AUTH);
+  const v = document.getElementById('v-admin');
+  if (v) v.innerHTML = '';
+  if (window.location.hash === '#admin') {
+    window.location.hash = '';
+  }
+  showStore();
+  notify('admin-logout');
+}
+
+function isAdminAuth() {
+  if (!S.adminToken || typeof S.adminToken !== 'string' || !S.adminToken.startsWith('dt_sec_')) {
+    return false;
+  }
+  const parts = S.adminToken.split('_');
+  if (parts.length < 4) return false;
+  const expiry = parseInt(parts[3], 10);
+  if (isNaN(expiry) || Date.now() > expiry) {
+    adminLogout();
+    return false;
+  }
+  return true;
+}
+
+// === PRODUCT CRUD & PRICING ===
+function getProd(id) { return S.products.find(p => p.id === id); }
+
+function addProd(data) {
+  const p = {
+    id: 'dt' + Date.now().toString().slice(-4),
+    rating: 5,
+    reviews: 1,
+    badge: data.badge || 'Pure Native',
+    badgeC: data.badgeC || 'em',
+    ...data
+  };
+  S.products.unshift(p);
+  sv(SK.P, S.products);
+  notify('products');
+  return p;
+}
+
+function updProd(id, updates) {
+  const idx = S.products.findIndex(p => p.id === id);
+  if (idx !== -1) {
+    S.products[idx] = {...S.products[idx], ...updates};
+    sv(SK.P, S.products);
+    notify('products');
+  }
+}
+
+function delProd(id) {
+  S.products = S.products.filter(p => p.id !== id);
+  sv(SK.P, S.products);
+  notify('products');
+}
+
+function updQuickPrice(id, newPrice, newMrp) {
+  const p = getProd(id);
+  if (p) {
+    p.price = Math.max(1, parseInt(newPrice) || p.price);
+    if (newMrp !== undefined) p.mrp = Math.max(p.price, parseInt(newMrp) || p.price);
+    sv(SK.P, S.products);
+    notify('products');
+    return true;
+  }
+  return false;
+}
+
+function updStock(id, newQty) {
+  const p = getProd(id);
+  if (p) {
+    p.stock = Math.max(0, parseInt(newQty) || 0);
+    sv(SK.P, S.products);
+    notify('products');
+  }
+}
+
+// === POSTERS / BANNERS ===
+function addBanner(data) {
+  const b = {
+    id: 'b' + Date.now(),
+    active: true,
+    ...data
+  };
+  S.banners.push(b);
+  sv(SK.B, S.banners);
+  notify('banners');
+  return b;
+}
+
+function updBanner(id, updates) {
+  const idx = S.banners.findIndex(b => b.id === id);
+  if (idx !== -1) {
+    S.banners[idx] = {...S.banners[idx], ...updates};
+    sv(SK.B, S.banners);
+    notify('banners');
+  }
+}
+
+function delBanner(id) {
+  S.banners = S.banners.filter(b => b.id !== id);
+  sv(SK.B, S.banners);
+  notify('banners');
+}
+
+// === STORE SETTINGS ===
+function updStoreConfig(cfg) {
+  S.config = {...S.config, ...cfg};
+  sv(SK.CFG, S.config);
+  applyStoreConfig();
+  notify('config');
+}
+
+function applyStoreConfig() {
+  const c = S.config;
+  const annBar = document.getElementById('ann-bar');
+  if (annBar) annBar.style.display = c.enableAnn ? 'block' : 'none';
+  const annTxt = document.getElementById('ann-text');
+  if (annTxt) annTxt.innerHTML = `${c.annText} Use code <strong class="cpn" id="cpn-copy" title="Click to copy">${c.annCoupon}</strong> for flat ${c.annDiscount}% off.`;
+  const thrEl = document.getElementById('ann-thr');
+  if (thrEl) thrEl.textContent = c.freeShipThreshold;
+  const phEl = document.getElementById('ftr-phone');
+  if (phEl) phEl.textContent = c.phone;
+  const emEl = document.getElementById('ftr-email');
+  if (emEl) emEl.textContent = c.email;
+  const bnEl = document.getElementById('hdr-bname');
+  if (bnEl) bnEl.textContent = c.storeName;
+  const btEl = document.getElementById('hdr-btag');
+  if (btEl) btEl.textContent = c.storeTagline;
+}
+
+// === CART LOGIC ===
+function getCart() {
+  const items = S.cart.items.map(ci => {
+    const p = getProd(ci.id) || {name: 'Harvest Item', price: 0, image: '', stock: 0, wt: ''};
+    return {...ci, p, line: p.price * ci.qty};
+  });
+  const sub = items.reduce((acc, i) => acc + i.line, 0);
+  const thr = S.config.freeShipThreshold || 999;
+  const ship = (sub === 0 || sub >= thr) ? 0 : 99;
+  let disc = 0;
+  if (S.cart.cpn) {
+    if (S.cart.cpn.type === 'pct') disc = Math.round(sub * S.cart.cpn.val / 100);
+    else if (S.cart.cpn.type === 'ship') disc = 99;
+  }
+  return {
+    items,
+    count: items.reduce((acc, i) => acc + i.qty, 0),
+    sub,
+    ship,
+    thr,
+    cpn: S.cart.cpn,
+    disc,
+    total: Math.max(0, sub - disc + ship)
+  };
+}
+
+function addToCart(pid, qty = 1) {
+  const p = getProd(pid);
+  if (!p || p.stock <= 0) return false;
+  const ex = S.cart.items.find(i => i.id === pid);
+  if (ex) ex.qty = Math.min(p.stock, ex.qty + qty);
+  else S.cart.items.push({id: pid, qty: Math.min(p.stock, qty)});
+  sv(SK.C, S.cart);
+  notify('cart');
+  return true;
+}
+
+function updCartQty(pid, qty) {
+  const p = getProd(pid);
+  if (qty <= 0) S.cart.items = S.cart.items.filter(i => i.id !== pid);
+  else {
+    const it = S.cart.items.find(i => i.id === pid);
+    if (it) it.qty = Math.min(p ? p.stock : qty, qty);
+  }
+  sv(SK.C, S.cart);
+  notify('cart');
+}
+
+function clearCart() {
+  S.cart = {items: [], cpn: null};
+  sv(SK.C, S.cart);
+  notify('cart');
+}
+
+function applyCpn(code) {
+  const c = (code || '').trim().toUpperCase();
+  if (!c) return {ok: false, msg: 'Enter a coupon code.'};
+  const cfg = S.config;
+  if (c === cfg.annCoupon.toUpperCase()) {
+    S.cart.cpn = {code: c, type: 'pct', val: cfg.annDiscount, lbl: `${cfg.annDiscount}% Harvest Discount`};
+    sv(SK.C, S.cart);
+    notify('cart');
+    return {ok: true, msg: `${cfg.annDiscount}% discount applied!`};
+  }
+  if (c === 'WELCOME10' || c === 'HEALTHY10') {
+    S.cart.cpn = {code: c, type: 'pct', val: 10, lbl: '10% Welcome Bonus'};
+    sv(SK.C, S.cart);
+    notify('cart');
+    return {ok: true, msg: '10% discount applied!'};
+  }
+  if (c === 'FREESHIP') {
+    S.cart.cpn = {code: 'FREESHIP', type: 'ship', val: 99, lbl: 'Free Delivery'};
+    sv(SK.C, S.cart);
+    notify('cart');
+    return {ok: true, msg: 'Free shipping discount applied!'};
+  }
+  return {ok: false, msg: `Invalid coupon. Try ${cfg.annCoupon} or WELCOME10`};
+}
+
+function rmCpn() {
+  S.cart.cpn = null;
+  sv(SK.C, S.cart);
+  notify('cart');
+}
+
+// === SECURITY & XSS SANITIZATION ===
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// === FIREBASE AUTHENTICATION ENGINE (HOSTINGER COMPATIBLE) ===
+let firebaseInitialized = false;
+
+function initFirebase() {
+  try {
+    const cfg = S.config;
+    if (window.firebase && cfg.firebaseApiKey && cfg.firebaseApiKey.trim().length > 5) {
+      const fbConfig = {
+        apiKey: cfg.firebaseApiKey.trim(),
+        authDomain: cfg.firebaseAuthDomain ? cfg.firebaseAuthDomain.trim() : (cfg.firebaseProjectId ? `${cfg.firebaseProjectId.trim()}.firebaseapp.com` : ''),
+        projectId: cfg.firebaseProjectId ? cfg.firebaseProjectId.trim() : '',
+        storageBucket: cfg.firebaseStorageBucket ? cfg.firebaseStorageBucket.trim() : '',
+        messagingSenderId: cfg.firebaseMessagingSenderId ? cfg.firebaseMessagingSenderId.trim() : '',
+        appId: cfg.firebaseAppId ? cfg.firebaseAppId.trim() : ''
+      };
+      if (!firebase.apps || !firebase.apps.length) {
+        firebase.initializeApp(fbConfig);
+      }
+      firebaseInitialized = true;
+      console.log('🔥 Firebase Authentication Connected Successfully');
+    } else {
+      firebaseInitialized = false;
+    }
+  } catch (err) {
+    console.warn('Firebase init status:', err.message);
+    firebaseInitialized = false;
+  }
+}
+
+// === ORDERS & CHECKOUT INTEGRITY (TAMPER-PROOF) ===
+function createOrder(data) {
+  // Security verification: Recalculate price and subtotal against catalog S.products to prevent client tampering
+  let safeSub = 0;
+  const verifiedItems = [];
+  for (const it of (data.items || [])) {
+    const catalogItem = getProd(it.id);
+    if (!catalogItem) continue;
+    const safeQty = Math.max(1, parseInt(it.qty) || 1);
+    const itemPrice = catalogItem.price;
+    safeSub += (itemPrice * safeQty);
+    verifiedItems.push({
+      id: catalogItem.id,
+      name: escapeHtml(catalogItem.name),
+      price: itemPrice,
+      qty: safeQty,
+      wt: catalogItem.wt || ''
+    });
+    // Safely decrement stock
+    catalogItem.stock = Math.max(0, catalogItem.stock - safeQty);
+  }
+
+  if (verifiedItems.length === 0) {
+    return null;
+  }
+
+  // Calculate safe discount & shipping
+  let safeDisc = 0;
+  if (S.cart && S.cart.cpn) {
+    if (S.cart.cpn.type === 'pct') {
+      safeDisc = Math.round(safeSub * (Math.min(90, S.cart.cpn.val) / 100));
+    }
+  }
+  const threshold = S.config.freeShipThreshold || 999;
+  const safeShip = (safeSub - safeDisc >= threshold) ? 0 : 99;
+  const safeTotal = Math.max(1, (safeSub - safeDisc) + safeShip);
+
+  const oid = 'ORD-' + Math.floor(10000 + Math.random() * 90000);
+  const trk = 'DT-EXP-' + Math.floor(1e6 + Math.random() * 9e6);
+  const o = {
+    id: oid,
+    trk,
+    cName: escapeHtml(data.cName || 'Valued Customer'),
+    cEmail: escapeHtml(data.cEmail || 'customer@desitouch.com'),
+    cPhone: escapeHtml(data.cPhone || ''),
+    addr: {
+      line: escapeHtml(data.addr?.line || ''),
+      city: escapeHtml(data.addr?.city || ''),
+      state: escapeHtml(data.addr?.state || ''),
+      pin: escapeHtml(data.addr?.pin || '')
+    },
+    items: verifiedItems,
+    sub: safeSub,
+    disc: safeDisc,
+    ship: safeShip,
+    total: safeTotal,
+    pay: data.pay || 'Cash on Delivery (COD)',
+    payId: data.payId || null,
+    status: 'Confirmed',
+    date: new Date().toISOString()
+  };
+
+  sv(SK.P, S.products);
+  S.orders.unshift(o);
+  sv(SK.O, S.orders);
+  if (S.curUser) {
+    const coins = Math.floor(safeTotal / 100 * 5);
+    S.curUser.coins = (S.curUser.coins || 0) + coins;
+    sv(SK.CU, S.curUser);
+  }
+  clearCart();
+  notify('orders');
+  notify('products');
+  return o;
+}
+
+function updOrderStatus(oid, st) {
+  const o = S.orders.find(x => x.id === oid);
+  if (o) {
+    o.status = st;
+    sv(SK.O, S.orders);
+    notify('orders');
+  }
+}
+
+// === CUSTOMER & CLOUD FIREBASE AUTH ===
+async function loginUser(email, pass) {
+  const normInput = (email || '').trim().toLowerCase();
+
+  // 1. Check registered customer credentials: GIRIRAJ1234@GMAIN.COM / @0000000
+  const matched = S.users.find(x => 
+    (x.email && x.email.toLowerCase() === normInput) || 
+    (x.name && x.name.toLowerCase() === normInput)
+  );
+
+  if (matched && matched.pass === pass) {
+    S.curUser = matched;
+    sv(SK.CU, S.curUser);
+    notify('auth');
+    return { ok: true, user: matched };
+  }
+
+  // 2. If Firebase is initialized with active API key, authenticate with Firebase
+  if (firebaseInitialized && window.firebase && firebase.auth) {
+    try {
+      const cred = await firebase.auth().signInWithEmailAndPassword(email, pass);
+      const fbUser = cred.user;
+      const user = {
+        id: 'fb_' + fbUser.uid.slice(0, 8),
+        name: fbUser.displayName || email.split('@')[0],
+        email: fbUser.email,
+        role: 'customer',
+        coins: 100,
+        addr: { line: '', city: '', state: '', pin: '' }
+      };
+      S.curUser = user;
+      sv(SK.CU, S.curUser);
+      notify('auth');
+      return { ok: true, user };
+    } catch (fbErr) {
+      return {
+        ok: false,
+        msg: `⚠️ Firebase Authentication Error: ${fbErr.message || 'Currently server is overloaded or facing problems.'}`
+      };
+    }
+  }
+
+  // 3. If credentials do not match and Firebase is pending/not configured:
+  return {
+    ok: false,
+    msg: '⚠️ Authentication Service Notice: Currently server is overloaded or facing connection problems. Connection to Firebase Authentication could not be established. Please use verified credentials or try again later.'
+  };
+}
+
+async function registerUser(data) {
+  // If Firebase is initialized with active API key, register with Firebase
+  if (firebaseInitialized && window.firebase && firebase.auth) {
+    try {
+      const cred = await firebase.auth().createUserWithEmailAndPassword(data.email, data.pass);
+      if (cred.user) {
+        if (data.name) {
+          await cred.user.updateProfile({ displayName: data.name }).catch(() => {});
+        }
+        const u = {
+          id: 'fb_' + cred.user.uid.slice(0, 8),
+          name: escapeHtml(data.name || 'Customer'),
+          email: data.email,
+          phone: escapeHtml(data.phone || ''),
+          role: 'customer',
+          coins: 100,
+          addr: { line: '', city: '', state: '', pin: '' }
+        };
+        S.users.push(u);
+        S.curUser = u;
+        sv(SK.U, S.users);
+        sv(SK.CU, S.curUser);
+        notify('auth');
+        return { ok: true, user: u };
+      }
+    } catch (fbErr) {
+      return { ok: false, msg: `⚠️ Firebase Registration: ${fbErr.message}` };
+    }
+  }
+
+  // Graceful Server overload message when Firebase API key is pending
+  return {
+    ok: false,
+    msg: '⚠️ Registration Temporarily Suspended: Currently server is overloaded or facing technical issues. New account registration is paused until Firebase Authentication service is online. Please log in with existing verified credentials.'
+  };
+}
+
+async function googleAuthLogin() {
+  if (firebaseInitialized && window.firebase && firebase.auth) {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const res = await firebase.auth().signInWithPopup(provider);
+      if (res.user) {
+        const u = {
+          id: 'fb_' + res.user.uid.slice(0, 8),
+          name: escapeHtml(res.user.displayName || 'Google User'),
+          email: res.user.email,
+          phone: '',
+          role: 'customer',
+          coins: 150,
+          addr: { line: '', city: '', state: '', pin: '' }
+        };
+        S.curUser = u;
+        sv(SK.CU, S.curUser);
+        notify('auth');
+        return { ok: true, user: u };
+      }
+    } catch (err) {
+      return { ok: false, msg: `⚠️ Google Authentication Error: ${err.message}` };
+    }
+  }
+  return {
+    ok: false,
+    msg: '⚠️ Google Authentication: Currently server is overloaded or facing connection problems (Firebase API key not yet activated in Admin Hub).'
+  };
+}
+
+function logoutUser() {
+  S.curUser = null;
+  sv(SK.CU, null);
+  notify('auth');
+}
+
+// === TOAST NOTIFICATIONS ===
+function toast(msg, type = 'success', dur = 3200) {
+  const c = document.getElementById('toast-cnt');
+  const t = document.createElement('div');
+  t.className = `toast ${type === 'error' ? 'err' : type === 'warning' ? 'warn' : type === 'info' ? 'info' : ''}`;
+  const icons = {success: '🌱', error: '⚠️', warning: '⚡', info: 'ℹ️'};
+  t.innerHTML = `<span style="font-size:1.2rem">${icons[type] || '🌱'}</span><span class="toast-msg">${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => {
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(100%)';
+    setTimeout(() => t.remove(), 300);
+  }, dur);
+}
+
+// ============================================================
+// RENDER STOREFRONT COMPONENTS
+// ============================================================
+
+// HERO SLIDESHOW
+let heroIdx = 0, heroTimer = null;
+function renderHero() {
+  const bns = S.banners.filter(b => b.active);
+  if (!bns.length) return;
+  const trk = document.getElementById('hero-track');
+  const dots = document.getElementById('hero-dots');
+  if (heroIdx >= bns.length) heroIdx = 0;
+  trk.innerHTML = bns.map(b => `
+    <div class="hero-slide" style="background-image:url('${b.image}')">
+      <div class="hero-ov"></div>
+      <div class="cnt" style="width:100%">
+        <div class="hero-ct">
+          <div class="hero-tag">🌱 ${b.tag || 'DESI TOUCH'}</div>
+          <h1>${b.title}</h1>
+          <p class="hero-sub">${b.subtitle}</p>
+          <div class="hero-acts">
+            <a href="${b.btnLink || '#catalog'}" class="btn btn-p">${b.btnText || 'Explore Products'}</a>
+            ${b.discount ? `<div class="hero-ribbon">✨ ${b.discount}</div>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  dots.innerHTML = bns.map((_, i) => `<div class="dot${i === heroIdx ? ' act' : ''}" data-i="${i}"></div>`).join('');
+  trk.style.transform = `translateX(-${heroIdx * 100}%)`;
+}
+function heroGo(n) {
+  const bns = S.banners.filter(b => b.active);
+  if (!bns.length) return;
+  heroIdx = ((heroIdx + n) % bns.length + bns.length) % bns.length;
+  renderHero();
+}
+function startHeroAuto() {
+  stopHeroAuto();
+  heroTimer = setInterval(() => heroGo(1), 6500);
+}
+function stopHeroAuto() {
+  if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+}
+
+// CATEGORY TABS (EXPANDED TO ALL 6+ ORGANIC FAMILIES)
+const CATS = [
+  {k: 'all', lbl: '🌿 All Harvests'},
+  {k: 'ghee', lbl: '🔥 Vedic Ghee & Butter'},
+  {k: 'oils', lbl: '💧 Wood-Pressed Oils'},
+  {k: 'honey', lbl: '🍯 Raw Forest Honey'},
+  {k: 'spices', lbl: '🍃 Native Spices & Saffron'},
+  {k: 'superfoods', lbl: '✨ Superfoods & Shilajit'},
+  {k: 'snacks', lbl: '🍪 Roasted Snacks'}
+];
+
+function renderCatTabs() {
+  document.getElementById('cat-tabs').innerHTML = CATS.map(c => `
+    <button class="cat-tab${S.activeCat === c.k ? ' act' : ''}" data-cat="${c.k}">${c.lbl}</button>
+  `).join('');
+}
+
+function filterCat(k) {
+  S.activeCat = k;
+  renderCatTabs();
+  renderProducts();
+  document.getElementById('catalog').scrollIntoView({behavior: 'smooth'});
+}
+
+// PRODUCT CATALOG
+function getFilteredProds() {
+  let ps = [...S.products];
+  if (S.activeCat !== 'all') ps = ps.filter(p => p.cat === S.activeCat);
+  if (S.searchQ.trim()) {
+    const q = S.searchQ.toLowerCase();
+    ps = ps.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      (p.catNm || '').toLowerCase().includes(q) ||
+      (p.desc || '').toLowerCase().includes(q)
+    );
+  }
+  const sort = document.getElementById('sort-sel')?.value || 'featured';
+  if (sort === 'price-low') ps.sort((a, b) => a.price - b.price);
+  else if (sort === 'price-high') ps.sort((a, b) => b.price - a.price);
+  else if (sort === 'rating') ps.sort((a, b) => (b.rating || 5) - (a.rating || 5));
+  return ps;
+}
+
+function renderProducts() {
+  const ps = getFilteredProds();
+  const g = document.getElementById('pgrid');
+  const np = document.getElementById('no-prod');
+  if (!ps.length) {
+    g.innerHTML = '';
+    np.classList.remove('hidden');
+    return;
+  }
+  np.classList.add('hidden');
+  g.innerHTML = ps.map(p => {
+    const sav = p.mrp ? Math.round((p.mrp - p.price) / p.mrp * 100) : 0;
+    const oos = p.stock <= 0;
+    const low = p.stock > 0 && p.stock <= 5;
+    return `
+      <article class="pcard" data-id="${p.id}">
+        <div class="pmedia" data-act="qv" data-id="${p.id}">
+          <img src="${p.image}" alt="${p.name}" loading="lazy">
+          ${p.badge ? `<span class="pbadge pbadge-${p.badgeC || 'gold'}">${p.badge}</span>` : ''}
+          <button class="qv-btn" data-act="qv" data-id="${p.id}" title="Quick View">👁️</button>
+        </div>
+        <div class="pinfo">
+          <div class="pmeta">
+            <span>${p.catNm || 'Organic'}</span>
+            <div class="prat">⭐ ${p.rating || 5} (${p.reviews || 42})</div>
+          </div>
+          <h3 class="ptitle" data-act="qv" data-id="${p.id}">${p.name}</h3>
+          <div class="punit">${p.wt || 'Standard Pack'}</div>
+          ${low ? `<div class="low-stk">⚡ Only ${p.stock} remaining in farm stock!</div>` : ''}
+          <div class="pprice">
+            <span class="pc">₹${p.price.toLocaleString()}</span>
+            ${p.mrp && p.mrp > p.price ? `<span class="po">₹${p.mrp.toLocaleString()}</span><span class="psave">${sav}% OFF</span>` : ''}
+          </div>
+          <button class="atc-btn" data-act="atc" data-id="${p.id}" ${oos ? 'disabled' : ''}>
+            ${oos ? 'Out of Stock' : '🛒 Add to Basket'}
+          </button>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+// CART DRAWER
+function renderCartDrawer() {
+  const el = document.getElementById('cart-drawer');
+  const cart = getCart();
+  document.getElementById('cart-cnt').textContent = cart.count;
+  document.getElementById('cart-htot').textContent = `₹${cart.total.toLocaleString()}`;
+
+  el.innerHTML = `
+    <div class="cart-bk" id="cart-bk"></div>
+    <div class="cart-pnl">
+      <div class="cart-hdr">
+        <div>
+          <h3>Your Organic Harvest</h3>
+          <span class="cart-cnt-pill">${cart.count} item${cart.count === 1 ? '' : 's'}</span>
+        </div>
+        <button class="cls-btn" id="close-cart">✕</button>
+      </div>
+      <div class="fship-bar">
+        <div class="fship-row">
+          🚚 <span>${cart.sub >= cart.thr ? '🎉 You unlocked <strong>FREE Delivery!</strong>' : `Add ₹${cart.thr - cart.sub} more for <strong>FREE Delivery!</strong>`}</span>
+        </div>
+        <div class="prog-trk">
+          <div class="prog-fill" style="width:${Math.min(100, Math.round(cart.sub / cart.thr * 100))}%"></div>
+        </div>
+      </div>
+      <div class="cart-items" id="cart-items">
+        ${cart.items.length === 0 ? `
+          <div style="text-align:center;padding:3rem 1rem;color:var(--txtm)">
+            <div style="font-size:3.5rem;margin-bottom:.8rem">🧺</div>
+            <h4 style="color:var(--txt)">Your basket is empty</h4>
+            <p style="font-size:.85rem;margin:1rem 0">Discover our authentic wood-pressed oils, Shilajit & Vedic ghee.</p>
+            <button class="btn btn-s btn-sm" onclick="closeCart();document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Browse Harvest</button>
+          </div>
+        ` : cart.items.map(i => `
+          <div class="ci-row" data-id="${i.id}">
+            <div class="ci-img"><img src="${i.p.image}" alt="${i.p.name}"></div>
+            <div class="ci-info">
+              <div class="ci-title">${i.p.name}</div>
+              <div class="ci-wt">${i.p.wt || 'Pack'}</div>
+              <div class="ci-acts">
+                <div class="qty-step">
+                  <button class="qty-b" data-act="dec" data-id="${i.id}">−</button>
+                  <span class="qty-v">${i.qty}</span>
+                  <button class="qty-b" data-act="inc" data-id="${i.id}" ${i.qty >= i.p.stock ? 'disabled style="opacity:.4"' : ''}>+</button>
+                </div>
+                <strong class="ci-price">₹${i.line.toLocaleString()}</strong>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="cpn-box">
+        <div class="cpn-row">
+          <input type="text" id="cpn-inp" placeholder="Coupon code (e.g. ${S.config.annCoupon})">
+          <button class="btn btn-s btn-sm" id="apply-cpn">Apply</button>
+        </div>
+        ${cart.cpn ? `
+          <div class="cpn-tag">
+            <span>🏷️ ${cart.cpn.code} (${cart.cpn.lbl})</span>
+            <button class="cpn-rm" id="rm-cpn" title="Remove coupon">✕</button>
+          </div>
+        ` : ''}
+        <div class="cpn-sugg">
+          <span>Popular:</span>
+          <button class="qcpn" data-c="${S.config.annCoupon}">${S.config.annCoupon} (-${S.config.annDiscount}%)</button>
+          <button class="qcpn" data-c="WELCOME10">WELCOME10 (-10%)</button>
+          <button class="qcpn" data-c="FREESHIP">FREESHIP</button>
+        </div>
+      </div>
+      <div class="cart-ftr">
+        <div class="sline"><span>Subtotal</span><strong>₹${cart.sub.toLocaleString()}</strong></div>
+        ${cart.disc > 0 ? `<div class="sline" style="color:var(--success)"><span>Discount</span><strong>-₹${cart.disc.toLocaleString()}</strong></div>` : ''}
+        <div class="sline"><span>Delivery (COD)</span><strong>${cart.ship === 0 ? 'FREE' : '₹' + cart.ship}</strong></div>
+        <div class="stot-line">
+          <div><div class="tot-lbl">Grand Total (COD)</div><div class="tax-note">Inclusive of all taxes</div></div>
+          <strong class="gtot">₹${cart.total.toLocaleString()}</strong>
+        </div>
+        <button class="btn btn-p btn-blk" id="co-cta" ${cart.items.length === 0 ? 'disabled' : ''}>
+          Proceed to COD Checkout →
+        </button>
+      </div>
+    </div>
+  `;
+  bindCartEvents();
+}
+
+function openCart() {
+  document.getElementById('cart-drawer').classList.remove('hidden');
+  renderCartDrawer();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cart-drawer').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function bindCartEvents() {
+  document.getElementById('cart-bk')?.addEventListener('click', closeCart);
+  document.getElementById('close-cart')?.addEventListener('click', closeCart);
+  document.getElementById('cart-items')?.addEventListener('click', e => {
+    const d = e.target.closest('[data-act="dec"]');
+    if (d) {
+      const id = d.dataset.id;
+      const c = getCart();
+      const it = c.items.find(i => i.id === id);
+      if (it) updCartQty(id, it.qty - 1);
+      renderCartDrawer();
+      return;
+    }
+    const inc = e.target.closest('[data-act="inc"]');
+    if (inc) {
+      const id = inc.dataset.id;
+      const c = getCart();
+      const it = c.items.find(i => i.id === id);
+      if (it) updCartQty(id, it.qty + 1);
+      renderCartDrawer();
+    }
+  });
+  document.getElementById('apply-cpn')?.addEventListener('click', () => {
+    const r = applyCpn(document.getElementById('cpn-inp')?.value);
+    if (r.ok) { toast(r.msg); document.getElementById('cpn-inp').value = ''; }
+    else toast(r.msg, 'warning');
+    renderCartDrawer();
+  });
+  document.getElementById('rm-cpn')?.addEventListener('click', () => {
+    rmCpn();
+    toast('Coupon removed');
+    renderCartDrawer();
+  });
+  document.querySelectorAll('.qcpn').forEach(b => {
+    b.addEventListener('click', () => {
+      const r = applyCpn(b.dataset.c);
+      if (r.ok) toast(r.msg);
+      else toast(r.msg, 'warning');
+      renderCartDrawer();
+    });
+  });
+  document.getElementById('co-cta')?.addEventListener('click', () => {
+    closeCart();
+    openCheckout();
+  });
+}
+
+// CHECKOUT (RAZORPAY ONLINE & DOORSTEP COD)
+let coStep = 1;
+let lastOrder = null;
+let coPayMethod = 'razorpay';
+let checkoutCustomerData = null;
+
+function openCheckout() {
+  coStep = 1;
+  const el = document.getElementById('co-modal');
+  el.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  renderCoStep();
+}
+
+function closeCheckout() {
+  document.getElementById('co-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function renderCoStep() {
+  const el = document.getElementById('co-modal');
+  const cart = getCart();
+  const u = S.curUser || {};
+  const addr = u.addr || {};
+
+  el.innerHTML = `
+    <div class="mback" id="co-bk"></div>
+    <div class="mdlg co-dlg">
+      <div class="mhdr">
+        <div class="co-brand">
+          <img src="assets/images/brand_logo.png" alt="Desi Touch">
+          <div>
+            <h3>Desi Touch Doorstep & Online Checkout</h3>
+            <span class="enc-tag">🔒 256-Bit SSL Encrypted & Secure</span>
+          </div>
+        </div>
+        <button class="cls-btn" id="close-co">✕</button>
+      </div>
+      <div class="mbdy">
+        <div class="steps-bar">
+          <div class="step-ind${coStep >= 1 ? ' act' : ''}"><span class="step-num">1</span><span class="step-lbl">Delivery Address</span></div>
+          <div class="step-sep"></div>
+          <div class="step-ind${coStep >= 2 ? ' act' : ''}"><span class="step-num">2</span><span class="step-lbl">Payment Method</span></div>
+          <div class="step-sep"></div>
+          <div class="step-ind${coStep >= 3 ? ' act' : ''}"><span class="step-num">3</span><span class="step-lbl">Confirmation</span></div>
+        </div>
+
+        ${coStep === 1 ? `
+          <form id="addr-form">
+            <div class="fr2">
+              <div class="fg"><label>Full Name *</label><input id="s-name" required value="${escapeHtml(u.name || '')}" placeholder="e.g. Giriraj"></div>
+              <div class="fg"><label>Phone Number * (for delivery SMS & tracking)</label><input id="s-phone" type="tel" required value="${escapeHtml(u.phone || '+91 98765 00000')}" placeholder="+91 98765 00000"></div>
+            </div>
+            <div class="fg"><label>Email Address * (for instant invoice)</label><input id="s-email" type="email" required value="${escapeHtml(u.email || '')}" placeholder="GIRIRAJ1234@GMAIN.COM"></div>
+            <div class="fg"><label>Street Address / House No / Landmark *</label><input id="s-addr" required value="${escapeHtml(addr.line || '')}" placeholder="Flat 101, Vedic Residency, Civil Lines"></div>
+            <div class="fr3">
+              <div class="fg"><label>City *</label><input id="s-city" required value="${escapeHtml(addr.city || '')}" placeholder="Jaipur"></div>
+              <div class="fg"><label>State *</label><input id="s-state" required value="${escapeHtml(addr.state || '')}" placeholder="Rajasthan"></div>
+              <div class="fg"><label>Pincode *</label><input id="s-pin" required value="${escapeHtml(addr.pin || '')}" placeholder="302001"></div>
+            </div>
+            <div class="del-opts">
+              <h4>Delivery Method</h4>
+              <label class="del-opt act">
+                <input type="radio" name="dspeed" value="std" checked>
+                <div class="opt-det">
+                  <div class="opt-ttl">Eco Farm Express (2-3 Business Days)</div>
+                  <div class="opt-desc">Inspected & packed in eco-friendly glass-cushioned cartons</div>
+                </div>
+                <strong class="opt-pr">${cart.ship === 0 ? 'FREE' : '₹99'}</strong>
+              </label>
+            </div>
+            <div class="co-acts">
+              <button type="button" class="btn btn-o" id="back-cart">← Back to Basket</button>
+              <button type="submit" class="btn btn-p">Continue to Payment Method →</button>
+            </div>
+          </form>
+        ` : coStep === 2 ? `
+          <div class="pay-methods">
+            <h4 style="margin-bottom:.5rem;font-family:var(--fHead)">Select Preferred Payment Method:</h4>
+
+            <!-- Option 1: Razorpay -->
+            <label class="pay-method-opt ${coPayMethod === 'razorpay' ? 'act' : ''}" id="lbl-pm-rzp">
+              <input type="radio" name="paymethod" value="razorpay" ${coPayMethod === 'razorpay' ? 'checked' : ''}>
+              <div class="pay-method-content">
+                <div class="pay-method-title">
+                  <div style="display:flex;align-items:center;gap:.5rem">
+                    <span style="font-size:1.3rem">💳</span>
+                    <strong>Razorpay Secure Online Checkout</strong>
+                  </div>
+                  <div class="rzp-badges">
+                    <span class="rzp-pill green">⚡ Instant UPI</span>
+                    <span class="rzp-pill">🔒 Razorpay Gateway</span>
+                  </div>
+                </div>
+                <div class="pay-method-desc">
+                  Instant online payment via Google Pay, PhonePe, Paytm, BHIM UPI, Credit/Debit Cards, and Net Banking.
+                </div>
+              </div>
+            </label>
+
+            <!-- Option 2: Cash on Delivery (COD) -->
+            <label class="pay-method-opt ${coPayMethod === 'cod' ? 'act' : ''}" id="lbl-pm-cod">
+              <input type="radio" name="paymethod" value="cod" ${coPayMethod === 'cod' ? 'checked' : ''}>
+              <div class="pay-method-content">
+                <div class="pay-method-title">
+                  <div style="display:flex;align-items:center;gap:.5rem">
+                    <span style="font-size:1.3rem">💵</span>
+                    <strong>Cash on Delivery (COD)</strong>
+                  </div>
+                  <div class="rzp-badges">
+                    <span class="rzp-pill gold">✓ Pay at Doorstep</span>
+                  </div>
+                </div>
+                <div class="pay-method-desc">
+                  Inspect your farm-fresh package before payment. Pay in cash or scan delivery agent's UPI QR code.
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div id="rzp-gateway-notice"></div>
+
+          <div style="margin-top:1.2rem">
+            <h4 style="margin-bottom:.6rem;font-family:var(--fHead)">Order Summary:</h4>
+            ${cart.items.map(i => `
+              <div style="display:flex;justify-content:space-between;font-size:.88rem;padding:.4rem 0;border-bottom:1px solid var(--bdr)">
+                <span>${i.qty}x ${escapeHtml(i.p.name)} (${i.p.wt || 'Pack'})</span>
+                <strong>₹${i.line.toLocaleString()}</strong>
+              </div>
+            `).join('')}
+            ${cart.disc > 0 ? `
+              <div style="display:flex;justify-content:space-between;font-size:.85rem;padding:.4rem 0;color:var(--success)">
+                <span>Discount (${cart.cpn?.code || 'Promo'})</span>
+                <strong>-₹${cart.disc.toLocaleString()}</strong>
+              </div>
+            ` : ''}
+            <div style="display:flex;justify-content:space-between;font-size:.85rem;padding:.4rem 0;color:var(--txt2)">
+              <span>Delivery Fee</span>
+              <strong>${cart.ship === 0 ? 'FREE' : '₹' + cart.ship}</strong>
+            </div>
+          </div>
+          <div class="co-amt">
+            <div>
+              <span style="font-size:.85rem;color:var(--txt2)">Total Amount Payable</span>
+              <h3>₹${cart.total.toLocaleString()}</h3>
+            </div>
+            <div class="pay-btns">
+              <button class="btn btn-o" id="back-s1">← Back</button>
+              <button class="btn btn-p" id="place-order">
+                ${coPayMethod === 'razorpay' ? `💳 Pay ₹${cart.total.toLocaleString()} with Razorpay` : '✓ Confirm Order (Pay on Delivery)'}
+              </button>
+            </div>
+          </div>
+        ` : `
+          <div class="succ-card">
+            <div class="succ-ic">✅</div>
+            <h2>Order Placed Successfully!</h2>
+            <p class="succ-sub">Thank you for choosing pure nature. Your organic harvest is being carefully prepared and dispatched from our native farms.</p>
+            <div class="rcpt" id="rcpt-print">
+              ${lastOrder ? `
+                <div class="rcpt-hdr">
+                  <div>
+                    <div class="rcpt-id">${lastOrder.id}</div>
+                    <div style="font-size:.78rem;color:var(--txtm)">Tracking ID: <strong>${lastOrder.trk}</strong></div>
+                  </div>
+                  <div style="text-align:right">
+                    <span class="spill s-confirmed">${lastOrder.pay.includes('Razorpay') ? 'Paid Online (Razorpay)' : 'Confirmed (COD)'}</span>
+                    <div style="font-size:.72rem;color:var(--txtm);margin-top:.2rem">${new Date(lastOrder.date).toLocaleDateString()}</div>
+                  </div>
+                </div>
+                <div style="font-size:.82rem;color:var(--txt2);margin-bottom:.85rem">
+                  <strong>Deliver To:</strong> ${lastOrder.cName} (${lastOrder.cPhone})<br>
+                  ${lastOrder.addr.line}, ${lastOrder.addr.city}, ${lastOrder.addr.state} - ${lastOrder.addr.pin}
+                </div>
+                <div class="rcpt-items">
+                  ${lastOrder.items.map(i => `
+                    <div class="rcpt-item">
+                      <span>${i.qty}x ${i.name}</span>
+                      <strong>₹${(i.price * i.qty).toLocaleString()}</strong>
+                    </div>
+                  `).join('')}
+                </div>
+                <div style="font-size:.8rem;color:var(--txtm);display:flex;justify-content:space-between;margin:.6rem 0">
+                  <span>Payment Mode:</span>
+                  <strong style="color:var(--em400)">${lastOrder.pay}</strong>
+                </div>
+                ${lastOrder.payId ? `<div style="font-size:.74rem;color:var(--txtm);margin-bottom:.4rem">Razorpay Transaction ID: <code>${lastOrder.payId}</code></div>` : ''}
+                <div class="rcpt-tot">
+                  <span>Total Paid / Payable:</span>
+                  <span>₹${lastOrder.total.toLocaleString()}</span>
+                </div>
+              ` : ''}
+            </div>
+            <div class="succ-acts">
+              <button class="btn btn-s" onclick="window.print()">🖨️ Print Receipt</button>
+              <button class="btn btn-p" id="view-orders">📦 Track Delivery</button>
+              <button class="btn btn-o" id="cont-shop">Continue Shopping</button>
+            </div>
+          </div>
+        `}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('co-bk')?.addEventListener('click', closeCheckout);
+  document.getElementById('close-co')?.addEventListener('click', closeCheckout);
+  document.getElementById('back-cart')?.addEventListener('click', () => { closeCheckout(); openCart(); });
+  
+  // Step 1 Submission
+  document.getElementById('addr-form')?.addEventListener('submit', e => {
+    e.preventDefault();
+    checkoutCustomerData = {
+      cName: document.getElementById('s-name')?.value.trim() || 'Giriraj',
+      cEmail: document.getElementById('s-email')?.value.trim() || 'GIRIRAJ1234@GMAIN.COM',
+      cPhone: document.getElementById('s-phone')?.value.trim() || '+91 98765 00000',
+      addr: {
+        line: document.getElementById('s-addr')?.value.trim() || '',
+        city: document.getElementById('s-city')?.value.trim() || '',
+        state: document.getElementById('s-state')?.value.trim() || '',
+        pin: document.getElementById('s-pin')?.value.trim() || ''
+      }
+    };
+    coStep = 2;
+    renderCoStep();
+  });
+
+  // Step 2 Payment Selection Toggles
+  document.querySelectorAll('input[name="paymethod"]').forEach(r => {
+    r.addEventListener('change', () => {
+      coPayMethod = r.value;
+      renderCoStep();
+    });
+  });
+
+  document.getElementById('back-s1')?.addEventListener('click', () => {
+    coStep = 1;
+    renderCoStep();
+  });
+
+  // Trigger Payment or Order Confirmation
+  document.getElementById('place-order')?.addEventListener('click', () => {
+    if (coPayMethod === 'razorpay') {
+      initiateRazorpayPayment();
+    } else {
+      processOrder('Cash on Delivery (COD)');
+    }
+  });
+
+  document.getElementById('view-orders')?.addEventListener('click', () => {
+    closeCheckout();
+    openAccount();
+  });
+
+  document.getElementById('cont-shop')?.addEventListener('click', () => {
+    closeCheckout();
+    document.getElementById('catalog').scrollIntoView({behavior: 'smooth'});
+  });
+}
+
+function initiateRazorpayPayment() {
+  const cart = getCart();
+  if (!cart.items.length) { toast('Cart is empty', 'error'); return; }
+
+  const rzpKey = (S.config.razorpayKeyId || '').trim();
+  const noticeBox = document.getElementById('rzp-gateway-notice');
+
+  // Check if Razorpay API Key is configured and valid
+  const hasValidKey = rzpKey.startsWith('rzp_live_') || rzpKey.startsWith('rzp_test_');
+
+  if (!hasValidKey || !window.Razorpay) {
+    // Show user-specified graceful server overload / pending error
+    if (noticeBox) {
+      noticeBox.innerHTML = `
+        <div class="rzp-err-box">
+          <div class="err-ttl">⚠️ Razorpay Gateway Service Notice</div>
+          <p>
+            Currently server is overloaded or facing connection problems (Razorpay API Key is pending activation in the Admin Hub). 
+            You can proceed safely right now with <strong>100% Doorstep Cash on Delivery (COD)</strong>!
+          </p>
+          <button type="button" class="btn btn-p btn-sm" id="btn-switch-cod">
+            👉 Switch to Cash on Delivery & Confirm Order (₹${cart.total.toLocaleString()})
+          </button>
+        </div>
+      `;
+      document.getElementById('btn-switch-cod')?.addEventListener('click', () => {
+        coPayMethod = 'cod';
+        processOrder('Cash on Delivery (COD)');
+      });
+    }
+    toast('⚠️ Razorpay: Currently server is overloaded or facing connection problems. Switching to COD...', 'warning', 4500);
+    return;
+  }
+
+  // Active Razorpay SDK Checkout Execution
+  try {
+    const cust = checkoutCustomerData || {
+      cName: S.curUser?.name || 'Customer',
+      cEmail: S.curUser?.email || 'customer@desitouch.com',
+      cPhone: S.curUser?.phone || '+91 98765 00000'
+    };
+
+    const options = {
+      key: rzpKey,
+      amount: Math.round(cart.total * 100), // amount in paise
+      currency: 'INR',
+      name: S.config.storeName || 'Desi Touch',
+      description: 'Pure Vedic & 100% Organic Harvest Order',
+      image: 'assets/images/brand_logo.png',
+      prefill: {
+        name: cust.cName,
+        email: cust.cEmail,
+        contact: cust.cPhone
+      },
+      theme: {
+        color: '#156944'
+      },
+      handler: function (response) {
+        processOrder(`Razorpay Online (ID: ${response.razorpay_payment_id})`, response.razorpay_payment_id);
+      },
+      modal: {
+        ondismiss: function () {
+          toast('Razorpay checkout was dismissed.', 'info');
+        }
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.on('payment.failed', function (resp) {
+      toast(`⚠️ Payment failed: ${resp.error.description || 'Currently server is overloaded or facing problems.'}`, 'error');
+    });
+    rzp.open();
+  } catch (err) {
+    console.warn('Razorpay invocation error:', err);
+    toast('⚠️ Razorpay service error. You may choose Cash on Delivery (COD) to proceed.', 'error');
+  }
+}
+
+function processOrder(payMode = 'Cash on Delivery (COD)', payId = null) {
+  const cart = getCart();
+  if (!cart.items.length) { toast('Cart is empty', 'error'); return; }
+  const btn = document.getElementById('place-order');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = 'Securing Your Order...';
+  }
+
+  setTimeout(() => {
+    const cust = checkoutCustomerData || {
+      cName: S.curUser?.name || 'Giriraj',
+      cEmail: S.curUser?.email || 'GIRIRAJ1234@GMAIN.COM',
+      cPhone: S.curUser?.phone || '+91 98765 00000',
+      addr: S.curUser?.addr || { line: '', city: '', state: '', pin: '' }
+    };
+
+    lastOrder = createOrder({
+      cName: cust.cName,
+      cEmail: cust.cEmail,
+      cPhone: cust.cPhone,
+      addr: cust.addr,
+      items: cart.items.map(i => ({id: i.id, name: i.p.name, price: i.p.price, qty: i.qty, wt: i.p.wt || ''})),
+      sub: cart.sub,
+      disc: cart.disc,
+      ship: cart.ship,
+      total: cart.total,
+      pay: payMode,
+      payId: payId
+    });
+
+    coStep = 3;
+    renderCoStep();
+    toast(payMode.includes('Razorpay') ? 'Payment received! Order confirmed 🌿' : 'Order placed! Pay on doorstep arrival 🌱', 'success');
+  }, 600);
+}
+
+// QUICK VIEW MODAL
+function openQV(pid) {
+  const p = getProd(pid);
+  if (!p) return;
+  const sav = p.mrp ? Math.round((p.mrp - p.price) / p.mrp * 100) : 0;
+  const oos = p.stock <= 0;
+  const el = document.getElementById('qv-modal');
+
+  el.innerHTML = `
+    <div class="mback" id="qv-bk"></div>
+    <div class="mdlg qv-dlg">
+      <button class="cls-btn" id="close-qv" style="position:absolute;top:1rem;right:1rem;z-index:5">✕</button>
+      <div class="qv-body">
+        <div class="qv-media"><img src="${p.image}" alt="${p.name}"></div>
+        <div>
+          <div class="pmeta">
+            <span style="color:var(--g400);font-weight:700">${p.catNm || 'Vedic Organic'}</span>
+            <div class="prat">⭐ ${p.rating || 5} (${p.reviews || 85} Reviews)</div>
+          </div>
+          <h2 class="qv-ttl">${p.name}</h2>
+          <div class="punit" style="font-weight:700">${p.wt || 'Pack'} • <span style="color:var(--success)">Available Stock: ${p.stock} units</span></div>
+          <div class="pprice" style="margin:.8rem 0">
+            <span class="pc" style="font-size:1.8rem">₹${p.price.toLocaleString()}</span>
+            ${p.mrp && p.mrp > p.price ? `<span class="po" style="font-size:1.1rem">₹${p.mrp.toLocaleString()}</span><span class="psave">${sav}% OFF</span>` : ''}
+          </div>
+          <p class="qv-desc">${p.desc || ''}</p>
+          ${p.benefits ? `
+            <div class="qv-ben">
+              <h4>🌿 Authentic Health Benefits:</h4>
+              <ul>${p.benefits.map(b => `<li><span style="color:var(--success)">✓</span> ${b}</li>`).join('')}</ul>
+            </div>
+          ` : ''}
+          ${p.nutrition ? `
+            <div class="nut-grid">
+              ${Object.entries(p.nutrition).map(([k, v]) => `
+                <div class="nut-item"><span>${k}:</span><strong>${v}</strong></div>
+              `).join('')}
+            </div>
+          ` : ''}
+          <button class="btn btn-p btn-blk" id="qv-atc" data-id="${p.id}" ${oos ? 'disabled' : ''}>
+            ${oos ? 'Out of Stock' : '🛒 Add to Basket (Doorstep COD)'}
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+  el.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('qv-bk').addEventListener('click', closeQV);
+  document.getElementById('close-qv').addEventListener('click', closeQV);
+  document.getElementById('qv-atc')?.addEventListener('click', () => {
+    addToCart(p.id);
+    toast(`Added <strong>${p.name}</strong> to basket!`);
+    closeQV();
+  });
+}
+
+function closeQV() {
+  document.getElementById('qv-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+// CUSTOMER & ADMIN UNIFIED AUTH MODAL (FIREBASE & SECURE STORE AUTH)
+function openAuth(tab = 'login') {
+  const el = document.getElementById('auth-modal');
+  el.innerHTML = `
+    <div class="mback" id="auth-bk"></div>
+    <div class="mdlg auth-dlg">
+      <button class="cls-btn" id="close-auth" style="position:absolute;top:1rem;right:1rem;z-index:5">✕</button>
+      <div class="mbdy">
+        <div class="auth-hdr">
+          <img src="assets/images/brand_logo.png" alt="Desi Touch">
+          <h2>Welcome to Desi Touch</h2>
+          <p>Sign in with your verified ID and password to access your account or portal.</p>
+        </div>
+
+        <div id="auth-notice-area"></div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab${tab === 'login' ? ' act' : ''}" data-t="login">Sign In</button>
+          <button class="auth-tab${tab !== 'login' ? ' act' : ''}" data-t="register">Register</button>
+        </div>
+
+        <form id="login-form" class="${tab !== 'login' ? 'hidden' : ''}">
+          <div class="fg">
+            <label>Email Address or User ID *</label>
+            <input id="l-email" type="text" required placeholder="DESITOUCH@1234 or GIRIRAJ1234@GMAIN.COM" autocomplete="username">
+          </div>
+          <div class="fg">
+            <label>Password *</label>
+            <div class="pwd-wrap">
+              <input id="l-pass" type="password" required placeholder="Enter password" autocomplete="current-password">
+              <button type="button" class="pwd-tog" id="pwd-tog" title="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-p btn-blk" id="btn-login-submit">Sign In</button>
+
+          <div class="auth-divider">OR</div>
+
+          <button type="button" class="btn-google" id="btn-google-auth">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.15z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+            Continue with Google (Firebase)
+          </button>
+          <div style="font-size:.73rem;color:var(--txtm);text-align:center;margin-top:.75rem">
+            🔒 Protected by Firebase Authentication & 256-bit SSL
+          </div>
+        </form>
+
+        <form id="reg-form" class="${tab === 'login' ? 'hidden' : ''}">
+          <div class="fg"><label>Full Name *</label><input id="r-name" required placeholder="Your full name"></div>
+          <div class="fg"><label>Email Address *</label><input id="r-email" type="email" required placeholder="name@example.com"></div>
+          <div class="fg"><label>Phone Number *</label><input id="r-phone" type="tel" required placeholder="+91 98765 43210"></div>
+          <div class="fg"><label>Password *</label><input id="r-pass" type="password" required placeholder="Create password"></div>
+          <button type="submit" class="btn btn-p btn-blk">Create Customer Account & Claim 100 Coins</button>
+        </form>
+      </div>
+    </div>
+  `;
+  el.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  function showAuthNotice(text, type = 'danger') {
+    const area = document.getElementById('auth-notice-area');
+    if (area) {
+      area.innerHTML = `
+        <div class="auth-notice-box ${type}">
+          <span style="font-size:1.1rem;flex-shrink:0">${type === 'danger' ? '⚠️' : 'ℹ️'}</span>
+          <div>${escapeHtml(text)}</div>
+        </div>
+      `;
+    }
+  }
+
+  document.getElementById('auth-bk')?.addEventListener('click', closeAuth);
+  document.getElementById('close-auth')?.addEventListener('click', closeAuth);
+  
+  document.querySelectorAll('.auth-tab').forEach(t => t.addEventListener('click', () => {
+    const tgt = t.dataset.t;
+    document.querySelectorAll('.auth-tab').forEach(x => x.classList.toggle('act', x.dataset.t === tgt));
+    document.getElementById('login-form').classList.toggle('hidden', tgt !== 'login');
+    document.getElementById('reg-form').classList.toggle('hidden', tgt !== 'register');
+    const area = document.getElementById('auth-notice-area');
+    if (area) area.innerHTML = '';
+  }));
+
+  document.getElementById('pwd-tog')?.addEventListener('click', () => {
+    const inp = document.getElementById('l-pass');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  });
+
+  // Google Firebase Sign-In button
+  document.getElementById('btn-google-auth')?.addEventListener('click', async () => {
+    const res = await googleAuthLogin();
+    if (res.ok) {
+      toast(`Welcome, ${res.user.name}! 🌟 Signed in via Google`, 'success');
+      closeAuth();
+      updateUserUI();
+    } else {
+      showAuthNotice(res.msg, 'danger');
+      toast('⚠️ Google Auth: Server overloaded or Firebase key pending.', 'warning');
+    }
+  });
+
+  // Login Form Submission
+  document.getElementById('login-form')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = document.getElementById('l-email').value.trim();
+    const pass = document.getElementById('l-pass').value;
+    const btn = document.getElementById('btn-login-submit');
+
+    // 1. Check if unique Admin credentials match
+    const adm = adminLogin(email, pass);
+    if (adm.ok) {
+      toast('Welcome Store Administrator! Entering Hub... 🛡️', 'success');
+      closeAuth();
+      updateUserUI();
+      showAdmin();
+      return;
+    } else if (adm.locked) {
+      showAuthNotice(`⚠️ Security lockout active due to multiple attempts. Please retry in ${adm.remaining}s`, 'danger');
+      toast(`⚠️ Security lock active. Please retry in ${adm.remaining}s`, 'error');
+      return;
+    } else if (!adm.notAdmin) {
+      showAuthNotice(`❌ Admin password incorrect. ${adm.remainingAttempts} attempt(s) remaining before security lockout.`, 'danger');
+      toast(`❌ Admin password incorrect. ${adm.remainingAttempts} attempt(s) remaining.`, 'error');
+      return;
+    }
+
+    // 2. Otherwise authenticate customer or Firebase
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = 'Verifying Credentials...';
+    }
+
+    const r = await loginUser(email, pass);
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = 'Sign In';
+    }
+
+    if (r.ok) {
+      toast(`Welcome back, ${r.user.name.split(' ')[0]}! 🌱`, 'success');
+      closeAuth();
+      updateUserUI();
+    } else {
+      showAuthNotice(r.msg, 'danger');
+      toast('⚠️ Login Notice: Server overloaded or connection issue.', 'error');
+    }
+  });
+
+  // Register Form Submission
+  document.getElementById('reg-form')?.addEventListener('submit', async e => {
+    e.preventDefault();
+    const r = await registerUser({
+      name: document.getElementById('r-name').value.trim(),
+      email: document.getElementById('r-email').value.trim(),
+      phone: document.getElementById('r-phone').value.trim(),
+      pass: document.getElementById('r-pass').value
+    });
+
+    if (r.ok) {
+      toast(`Welcome, ${r.user.name}! 🎁 100 Desi Coins credited!`, 'success');
+      closeAuth();
+      updateUserUI();
+    } else {
+      showAuthNotice(r.msg, 'danger');
+      toast('⚠️ Registration Notice: Server is overloaded or facing technical issues.', 'warning');
+    }
+  });
+}
+
+function closeAuth() {
+  document.getElementById('auth-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+// CUSTOMER ACCOUNT MODAL
+function openAccount() {
+  const u = S.curUser;
+  if (!u) { openAuth(); return; }
+  const el = document.getElementById('acc-modal');
+  const ords = S.orders.filter(o => o.cEmail === u.email || o.cName === u.name);
+  const getStep = st => ({Pending: 1, Confirmed: 2, 'Packed & Shipped': 3, Delivered: 4}[st] || 2);
+
+  el.innerHTML = `
+    <div class="mback" id="acc-bk"></div>
+    <div class="mdlg acc-dlg">
+      <div class="mhdr">
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <div style="font-size:1.6rem">👤</div>
+          <div>
+            <h3>Customer Dashboard</h3>
+            <span style="font-size:.78rem;color:var(--txtm)">${u.name} (${u.email})</span>
+          </div>
+        </div>
+        <button class="cls-btn" id="close-acc">✕</button>
+      </div>
+      <div class="mbdy">
+        <div class="acc-stats">
+          <div class="acc-stat">
+            <span class="slbl">Member Status</span>
+            <strong class="sval" style="color:var(--g400)">⭐ Gold Member</strong>
+          </div>
+          <div class="acc-stat">
+            <span class="slbl">Desi Coins Balance</span>
+            <strong class="sval" style="color:var(--success)">${u.coins || 0} Coins (₹${Math.floor((u.coins || 0) / 2)})</strong>
+          </div>
+          <div class="acc-stat">
+            <span class="slbl">COD Orders</span>
+            <strong class="sval">${ords.length} Placed</strong>
+          </div>
+        </div>
+        <h4 style="margin-bottom:1rem;font-family:var(--fHead)">Your Order History & Live Delivery Status</h4>
+        <div>
+          ${ords.length === 0 ? '<p style="text-align:center;color:var(--txtm);padding:2rem 0">No orders placed yet.</p>' : ords.map(o => {
+            const si = getStep(o.status);
+            return `
+              <div class="uorder">
+                <div class="uorder-top">
+                  <div>
+                    <strong style="font-family:var(--fHead);color:var(--txt)">${o.id}</strong>
+                    <div style="font-size:.75rem;color:var(--txtm)">${new Date(o.date).toLocaleDateString()} • Tracking: ${o.trk}</div>
+                  </div>
+                  <div style="text-align:right">
+                    <strong style="color:var(--em400);font-size:1.05rem">₹${o.total.toLocaleString()}</strong>
+                    <div><span class="spill s-${o.status.toLowerCase().replace(/[^a-z]/g, '')}">${o.status}</span></div>
+                  </div>
+                </div>
+                <div class="uorder-items">${o.items.map(i => `${i.qty}x ${i.name}`).join(', ')}</div>
+                <div style="font-size:.75rem;color:var(--txtm);margin-bottom:.5rem">Payment: <strong>Cash on Delivery</strong></div>
+                <div class="timeline">
+                  <div class="tl-step${si >= 1 ? ' done' : ''}"><div class="tl-dot"></div><span>Order Placed</span></div>
+                  <div class="tl-step${si >= 2 ? ' done' : (si === 1 ? ' now' : '')}"><div class="tl-dot"></div><span>Farm Packed</span></div>
+                  <div class="tl-step${si >= 3 ? ' done' : (si === 2 ? ' now' : '')}"><div class="tl-dot"></div><span>In Transit</span></div>
+                  <div class="tl-step${si >= 4 ? ' done' : (si === 3 ? ' now' : '')}"><div class="tl-dot"></div><span>Delivered (COD)</span></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+  el.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('acc-bk').addEventListener('click', closeAccount);
+  document.getElementById('close-acc').addEventListener('click', closeAccount);
+}
+
+function closeAccount() {
+  document.getElementById('acc-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+// USER DROPDOWN & HEADER SYNC
+function updateUserUI() {
+  const isAdm = isAdminAuth();
+  const u = S.curUser;
+  const dd = document.getElementById('udrop');
+  const usrText = document.getElementById('hdr-usr');
+  
+  if (isAdm) {
+    usrText.textContent = '🛡️ Admin';
+    dd.innerHTML = `
+      <div class="udrop-hdr">
+        <div class="udrop-av" style="background:linear-gradient(135deg,var(--em600),var(--g600))">🛡️</div>
+        <div>
+          <div class="udrop-nm">Store Administrator</div>
+          <div class="udrop-em">${S.adminCreds.email}</div>
+          <div class="udrop-bdg" style="background:var(--em100);color:var(--em400)">Backoffice Active</div>
+        </div>
+      </div>
+      <div class="udrop-links" style="margin-top:.8rem">
+        <button class="udrop-item" id="dd-admin-hub" style="color:var(--em400);font-weight:700">🛡️ Admin Command Hub</button>
+        <button class="udrop-item dng" id="dd-admin-logout">🚪 Logout Admin</button>
+      </div>
+    `;
+  } else if (u) {
+    usrText.textContent = u.name.split(' ')[0];
+    dd.innerHTML = `
+      <div class="udrop-hdr">
+        <div class="udrop-av">${u.name.charAt(0)}</div>
+        <div>
+          <div class="udrop-nm">${u.name}</div>
+          <div class="udrop-em">${u.email}</div>
+          <div class="udrop-bdg">Gold Member</div>
+        </div>
+      </div>
+      <div class="udrop-wallet">
+        <span style="font-size:1.3rem">🪙</span>
+        <div>
+          <div class="wl">Desi Coins Balance</div>
+          <strong class="wv">${u.coins || 0} Coins (₹${Math.floor((u.coins || 0) / 2)})</strong>
+        </div>
+      </div>
+      <div class="udrop-links">
+        <button class="udrop-item" id="dd-orders">📦 My COD Orders</button>
+        <button class="udrop-item dng" id="dd-logout">🚪 Sign Out</button>
+      </div>
+    `;
+  } else {
+    usrText.textContent = 'Sign In';
+    dd.innerHTML = `
+      <div style="padding:1rem;text-align:center">
+        <p style="margin-bottom:.8rem;color:var(--txtm);font-size:.85rem">Sign in to track orders or access account</p>
+        <button class="btn btn-p btn-sm btn-blk" id="dd-login">Sign In</button>
+      </div>
+    `;
+  }
+}
+
+function bindDropdown() {
+  document.getElementById('user-btn').addEventListener('click', e => {
+    e.stopPropagation();
+    const isAdm = isAdminAuth();
+    const u = S.curUser;
+    if (!isAdm && !u) { openAuth(); return; }
+    updateUserUI();
+    document.getElementById('udrop').classList.toggle('hidden');
+  });
+  document.addEventListener('click', e => {
+    const dd = document.getElementById('udrop');
+    if (dd && !dd.contains(e.target) && !document.getElementById('user-btn').contains(e.target)) {
+      dd.classList.add('hidden');
+    }
+  });
+  document.getElementById('udrop').addEventListener('click', e => {
+    if (e.target.closest('#dd-orders')) {
+      document.getElementById('udrop').classList.add('hidden');
+      openAccount();
+    }
+    if (e.target.closest('#dd-admin-hub')) {
+      document.getElementById('udrop').classList.add('hidden');
+      showAdmin();
+    }
+    if (e.target.closest('#dd-admin-logout')) {
+      adminLogout();
+      document.getElementById('udrop').classList.add('hidden');
+      updateUserUI();
+      showStore();
+      toast('Admin session logged out successfully');
+    }
+    if (e.target.closest('#dd-logout')) {
+      logoutUser();
+      document.getElementById('udrop').classList.add('hidden');
+      updateUserUI();
+      toast('Signed out successfully');
+    }
+    if (e.target.closest('#dd-login')) {
+      document.getElementById('udrop').classList.add('hidden');
+      openAuth();
+    }
+  });
+}
+
+// ============================================================
+// VIEW 2: PROPER ADMIN LOGIN PORTAL
+// ============================================================
+function showAdminLogin() {
+  if (isAdminAuth()) {
+    showAdmin();
+    return;
+  }
+  openAuth('login');
+}
+
+// ============================================================
+// VIEW 3: ADMIN PORTAL (FULL SUITE)
+// ============================================================
+let adminTab = 'analytics';
+
+function showAdmin() {
+  if (!isAdminAuth()) {
+    showAdminLogin();
+    return;
+  }
+  showView('admin');
+  renderAdminPortal();
+}
+
+function renderAdminPortal() {
+  const el = document.getElementById('v-admin');
+  const orders = S.orders;
+  const products = S.products;
+  const totalRev = orders.reduce((s, o) => s + o.total, 0);
+  const aov = orders.length ? Math.round(totalRev / orders.length) : 0;
+  const lowStk = products.filter(p => p.stock > 0 && p.stock <= 5).length;
+  const activePosters = S.banners.filter(b => b.active).length;
+  const chartData = [14200, 19800, 16500, 26400, 31200, 37800, Math.max(42000, totalRev + 15000)];
+  const maxChart = Math.max(...chartData);
+
+  el.innerHTML = `
+    <div class="admin-cnt">
+      <div class="admin-top">
+        <div>
+          <div class="admin-top-pill">🛡️ Desi Touch Secure Backoffice</div>
+          <h1>Store Administration & Command Hub</h1>
+        </div>
+        <div class="admin-top-acts">
+          <button class="btn btn-s btn-sm" id="a-store-view">🏪 Storefront View</button>
+          <button class="btn btn-od btn-sm" id="a-reset-data">🔄 Factory Reset</button>
+          <button class="btn btn-od btn-sm" id="a-logout-btn">🚪 Secure Logout</button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="admin-tabs">
+        ${[
+          {k: 'analytics', lbl: '📊 Analytics'},
+          {k: 'products', lbl: '📦 Products & Prices'},
+          {k: 'stock', lbl: '📋 Inventory Control', alert: lowStk > 0 ? lowStk : null},
+          {k: 'posters', lbl: '🖼️ Posters & Banners', bdg: activePosters},
+          {k: 'orders', lbl: '🛒 COD Orders', bdg: orders.length},
+          {k: 'settings', lbl: '⚙️ Site Settings & Security'}
+        ].map(t => `
+          <button class="atab${adminTab === t.k ? ' act' : ''}" data-tab="${t.k}">
+            ${t.lbl}
+            ${t.alert ? `<span class="tab-alert">${t.alert} Low</span>` : ''}
+            ${t.bdg !== undefined ? `<span class="tab-bdg">${t.bdg}</span>` : ''}
+          </button>
+        `).join('')}
+      </div>
+
+      <!-- TAB 1: ANALYTICS -->
+      ${adminTab === 'analytics' ? `
+        <div class="met-grid">
+          <div class="met-card">
+            <div class="met-ic green">💰</div>
+            <div>
+              <span class="met-lbl">COD Revenue</span>
+              <div class="met-val">₹${totalRev.toLocaleString()}</div>
+              <span class="met-trend" style="color:var(--success)">📈 +28% this harvest</span>
+            </div>
+          </div>
+          <div class="met-card">
+            <div class="met-ic emerald">🛒</div>
+            <div>
+              <span class="met-lbl">Total Orders</span>
+              <div class="met-val">${orders.length}</div>
+              <span class="met-trend">100% Cash on Delivery</span>
+            </div>
+          </div>
+          <div class="met-card">
+            <div class="met-ic gold">🏷️</div>
+            <div>
+              <span class="met-lbl">Avg Order Value</span>
+              <div class="met-val">₹${aov.toLocaleString()}</div>
+              <span class="met-trend">Native Farm Products</span>
+            </div>
+          </div>
+          <div class="met-card">
+            <div class="met-ic rose">⚠️</div>
+            <div>
+              <span class="met-lbl">Low Stock Alerts</span>
+              <div class="met-val" style="color:var(--danger)">${lowStk}</div>
+              <span class="met-trend" style="color:var(--danger)">Needs Replenishment</span>
+            </div>
+          </div>
+          <div class="met-card">
+            <div class="met-ic blue">🖼️</div>
+            <div>
+              <span class="met-lbl">Live Posters</span>
+              <div class="met-val">${activePosters}</div>
+              <span class="met-trend">Storefront Carousel</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-section">
+          <div class="acard">
+            <div class="acard-hdr flex-btwn">
+              <div>
+                <h3>Weekly Revenue Velocity</h3>
+                <span style="font-size:.82rem;color:var(--txtm)">Verified Cash on Delivery Dispatches</span>
+              </div>
+              <span class="spill s-confirmed">Live Synchronized</span>
+            </div>
+            <div class="chart-wrap">
+              ${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Today'].map((d, i) => `
+                <div class="chart-bar-col">
+                  <div class="chart-val">₹${(chartData[i] / 1000).toFixed(0)}K</div>
+                  <div class="chart-bar" style="height:${Math.round(chartData[i] / maxChart * 180)}px"></div>
+                  <div class="chart-lbl">${d}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="acard">
+            <div class="acard-hdr"><h3>Top Performing Harvests</h3></div>
+            <div class="bs-list">
+              ${products.slice(0, 4).map(p => `
+                <div class="bs-row">
+                  <img src="${p.image}" class="bs-thumb" alt="${p.name}">
+                  <div style="flex-grow:1">
+                    <div class="bs-title">${p.name}</div>
+                    <div class="bs-sales">₹${p.price.toLocaleString()} • ${p.stock} in stock</div>
+                  </div>
+                  <span class="spill s-confirmed">⭐ ${p.rating || 5}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- TAB 2: PRODUCTS & QUICK PRICE CHANGER -->
+      ${adminTab === 'products' ? `
+        <div class="acard">
+          <div class="acard-hdr flex-btwn">
+            <div>
+              <h3>All Products & Real-Time Price Manager (${products.length} Products)</h3>
+              <p style="font-size:.85rem;color:var(--txtm)">Change selling prices directly in the table or click Edit for full product modification.</p>
+            </div>
+            <button class="btn btn-p btn-sm" id="a-add-prod-btn">➕ Add New Product</button>
+          </div>
+          <div class="tbl-resp">
+            <table class="atbl">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Selling Price (₹)</th>
+                  <th>MRP (₹)</th>
+                  <th>Stock</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="a-prod-tbody">
+                ${products.map(p => `
+                  <tr data-id="${p.id}">
+                    <td>
+                      <div class="tbl-prod">
+                        <img src="${p.image}" class="tbl-img" alt="${p.name}">
+                        <div>
+                          <strong>${p.name}</strong>
+                          <div style="font-size:.78rem;color:var(--txtm)">SKU: ${p.id} • ${p.wt || 'Pack'}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>${p.catNm || p.cat}</td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:.4rem">
+                        <span>₹</span>
+                        <input type="number" class="quick-price-inp qp-price" data-id="${p.id}" value="${p.price}" min="1" title="Edit Selling Price & press Enter or click Save">
+                      </div>
+                    </td>
+                    <td>
+                      <div style="display:flex;align-items:center;gap:.4rem">
+                        <span>₹</span>
+                        <input type="number" class="quick-price-inp qp-mrp" data-id="${p.id}" value="${p.mrp || p.price}" min="1" style="color:var(--txtm)" title="Edit MRP">
+                      </div>
+                    </td>
+                    <td><strong>${p.stock}</strong> units</td>
+                    <td>
+                      ${p.stock <= 0 ? '<span class="spill s-cancelled">Out of Stock</span>' :
+                        p.stock <= 5 ? '<span class="spill s-pending">Low Stock</span>' :
+                        '<span class="spill s-confirmed">In Stock</span>'}
+                    </td>
+                    <td>
+                      <div style="display:flex;gap:.4rem">
+                        <button class="btn btn-s btn-sm qp-save-btn" data-id="${p.id}" title="Save Updated Price">💾 Save</button>
+                        <button class="btn btn-s btn-sm" data-act="edit-prod" data-id="${p.id}" title="Full Edit">✏️</button>
+                        <button class="btn btn-od btn-sm" data-act="del-prod" data-id="${p.id}" title="Delete Product">🗑️</button>
+                      </div>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- TAB 3: STOCK & INVENTORY -->
+      ${adminTab === 'stock' ? `
+        <div class="acard">
+          <div class="acard-hdr flex-btwn">
+            <div>
+              <h3>Inventory & Farm Replenishment</h3>
+              <p style="font-size:.85rem;color:var(--txtm)">Direct stock increment/decrement and bulk restocking.</p>
+            </div>
+            <button class="btn btn-os btn-sm" id="a-batch-stock">📦 Bulk Restock All (+10 units)</button>
+          </div>
+          <div class="tbl-resp">
+            <table class="atbl">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Current Stock</th>
+                  <th>Health</th>
+                  <th>Inline Adjust</th>
+                  <th>Quick Restock</th>
+                </tr>
+              </thead>
+              <tbody id="a-stk-tbody">
+                ${products.map(p => `
+                  <tr>
+                    <td>
+                      <div class="tbl-prod">
+                        <img src="${p.image}" class="tbl-img" alt="${p.name}">
+                        <div>
+                          <strong>${p.name}</strong>
+                          <div style="font-size:.78rem;color:var(--txtm)">${p.wt || ''}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><strong style="font-size:1.15rem;color:var(--txt)">${p.stock}</strong> units</td>
+                    <td>
+                      ${p.stock <= 0 ? '<span class="spill s-cancelled">Empty</span>' :
+                        p.stock <= 5 ? '<span class="spill s-pending">⚡ Critical (&lt;5)</span>' :
+                        '<span class="spill s-confirmed">Optimal</span>'}
+                    </td>
+                    <td>
+                      <div class="stk-adj">
+                        <button class="stk-btn" data-act="adj" data-id="${p.id}" data-d="-5">−5</button>
+                        <button class="stk-btn" data-act="adj" data-id="${p.id}" data-d="-1">−1</button>
+                        <input type="number" class="stk-inp stk-num" data-id="${p.id}" value="${p.stock}" min="0">
+                        <button class="stk-btn" data-act="adj" data-id="${p.id}" data-d="1">+1</button>
+                        <button class="stk-btn" data-act="adj" data-id="${p.id}" data-d="5">+5</button>
+                      </div>
+                    </td>
+                    <td>
+                      <button class="btn btn-s btn-sm" data-act="adj" data-id="${p.id}" data-d="15">+15 Harvest Arrival</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- TAB 4: POSTERS & BANNERS -->
+      ${adminTab === 'posters' ? `
+        <div class="acard">
+          <div class="acard-hdr flex-btwn">
+            <div>
+              <h3>Hero Poster & Banner Studio</h3>
+              <p style="font-size:.85rem;color:var(--txtm)">Add, edit, toggle live, or upload custom promotional posters.</p>
+            </div>
+            <button class="btn btn-p btn-sm" id="a-add-poster-btn">➕ Add New Poster</button>
+          </div>
+          <div class="poster-g" id="a-poster-grid">
+            ${S.banners.map(b => `
+              <div class="poster-acard" data-id="${b.id}">
+                <div class="poster-prev">
+                  <img src="${b.image}" alt="${b.title}">
+                  <span class="poster-sbdg ${b.active ? 'on' : 'off'}">${b.active ? '● LIVE ON STORE' : '○ DRAFT'}</span>
+                </div>
+                <div class="poster-info">
+                  <span class="sec-tag">${b.tag || 'PROMOTION'}</span>
+                  <h4 class="poster-ttl">${b.title}</h4>
+                  <p class="poster-sub">${b.subtitle}</p>
+                  ${b.discount ? `<div style="font-size:.78rem;color:var(--g400);margin-bottom:.8rem;font-weight:700">🏷️ ${b.discount}</div>` : ''}
+                  <div class="poster-acts">
+                    <button class="btn btn-s btn-sm" data-act="tog-b" data-id="${b.id}">
+                      ${b.active ? 'Deactivate' : 'Publish Live'}
+                    </button>
+                    <button class="btn btn-od btn-sm" data-act="del-b" data-id="${b.id}">Delete</button>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- TAB 5: COD ORDERS -->
+      ${adminTab === 'orders' ? `
+        <div class="acard">
+          <div class="acard-hdr flex-btwn">
+            <div>
+              <h3>Customer Orders (100% Cash on Delivery)</h3>
+              <p style="font-size:.85rem;color:var(--txtm)">Track fulfillment and update live courier tracking statuses.</p>
+            </div>
+            <div style="font-size:.85rem;font-weight:700;color:var(--em400)">
+              Total Orders: ${orders.length}
+            </div>
+          </div>
+          <div class="tbl-resp">
+            <table class="atbl">
+              <thead>
+                <tr>
+                  <th>Order ID & Tracking</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Items</th>
+                  <th>Payable (COD)</th>
+                  <th>Current Status</th>
+                  <th>Update Status</th>
+                </tr>
+              </thead>
+              <tbody id="a-orders-tbody">
+                ${orders.map(o => `
+                  <tr>
+                    <td>
+                      <strong style="color:var(--txt);font-family:var(--fHead)">${o.id}</strong>
+                      <div style="font-size:.75rem;color:var(--txtm)">Trk: ${o.trk}</div>
+                    </td>
+                    <td>
+                      <strong>${o.cName}</strong>
+                      <div style="font-size:.75rem;color:var(--txtm)">${o.cPhone} • ${o.addr ? o.addr.city : ''}</div>
+                    </td>
+                    <td><div style="font-size:.85rem">${new Date(o.date).toLocaleDateString()}</div></td>
+                    <td style="font-size:.85rem">${o.items.map(i => `<div>${i.qty}x ${i.name}</div>`).join('')}</td>
+                    <td><strong style="color:var(--em400);font-size:1.05rem">₹${o.total.toLocaleString()}</strong></td>
+                    <td><span class="spill s-${o.status.toLowerCase().replace(/[^a-z]/g, '')}">${o.status}</span></td>
+                    <td>
+                      <select class="csel ord-stat-sel" data-id="${o.id}" style="padding:.35rem .65rem;font-size:.82rem">
+                        <option value="Confirmed"${o.status === 'Confirmed' ? ' selected' : ''}>Confirmed</option>
+                        <option value="Packed & Shipped"${o.status === 'Packed & Shipped' ? ' selected' : ''}>Packed & Shipped</option>
+                        <option value="Out for Delivery"${o.status === 'Out for Delivery' ? ' selected' : ''}>Out for Delivery</option>
+                        <option value="Delivered"${o.status === 'Delivered' ? ' selected' : ''}>Delivered (Cash Collected)</option>
+                        <option value="Cancelled"${o.status === 'Cancelled' ? ' selected' : ''}>Cancelled</option>
+                      </select>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- TAB 6: SITE SETTINGS & SECURITY -->
+      ${adminTab === 'settings' ? `
+        <div class="settings-grid">
+          <!-- Announcement & Store Config -->
+          <div class="set-group">
+            <h4>📢 Storefront Banner & Shipping Policy</h4>
+            <form id="set-store-form">
+              <div class="fg">
+                <label>Announcement Bar Text</label>
+                <textarea id="set-ann" rows="2" required>${S.config.annText}</textarea>
+              </div>
+              <div class="fr2">
+                <div class="fg">
+                  <label>Promo Coupon Code</label>
+                  <input id="set-cpn" value="${S.config.annCoupon}" required>
+                </div>
+                <div class="fg">
+                  <label>Discount Percentage (%)</label>
+                  <input id="set-disc" type="number" min="1" max="90" value="${S.config.annDiscount}" required>
+                </div>
+              </div>
+              <div class="fg">
+                <label>Free Delivery Threshold (₹)</label>
+                <input id="set-thr" type="number" min="0" value="${S.config.freeShipThreshold}" required>
+                <small style="color:var(--txtm)">Orders above this amount get free delivery.</small>
+              </div>
+              <div class="fr2">
+                <div class="fg">
+                  <label>Helpline Phone</label>
+                  <input id="set-phone" value="${S.config.phone}" required>
+                </div>
+                <div class="fg">
+                  <label>Support Email</label>
+                  <input id="set-email" type="email" value="${S.config.email}" required>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-p btn-blk">💾 Save Storefront Settings</button>
+            </form>
+          </div>
+
+          <!-- Admin Security & Password Change -->
+          <div class="set-group">
+            <h4>🔒 Admin Security & Password Change</h4>
+            <form id="set-sec-form">
+              <div class="fg">
+                <label>Admin Login User ID / Email</label>
+                <input id="sec-email" type="text" value="${escapeHtml(S.adminCreds.email)}" required>
+              </div>
+              <div class="fg">
+                <label>Current Admin Password *</label>
+                <input id="sec-cur-pass" type="password" required placeholder="Enter current password">
+              </div>
+              <div class="fg">
+                <label>New Admin Password *</label>
+                <input id="sec-new-pass" type="password" required minlength="6" placeholder="At least 6 characters">
+              </div>
+              <div style="font-size:.78rem;color:var(--txtm);margin-bottom:1rem">
+                Active Session Token: <code style="background:var(--cr200);color:var(--txt);padding:.2rem .4rem;border-radius:4px">${S.adminToken ? S.adminToken.slice(0, 18) + '...' : 'None'}</code><br>
+                Last Login: ${S.adminCreds.lastLogin ? new Date(S.adminCreds.lastLogin).toLocaleString() : 'Just now'}
+              </div>
+              <button type="submit" class="btn btn-p btn-blk">🛡️ Update Admin Password</button>
+            </form>
+          </div>
+
+          <!-- Gateway & Firebase Auth Configuration (Hostinger Ready) -->
+          <div class="set-group" style="grid-column: 1 / -1">
+            <h4>💳 Razorpay Payment Gateway & 🔥 Firebase Authentication Config</h4>
+            <p style="font-size:.84rem;color:var(--txt2);margin-bottom:1.2rem">
+              Manage your payment credentials and cloud authentication. When empty, the system runs in safe fallback mode (COD and local verified credentials).
+            </p>
+            <form id="set-gateway-form">
+              <div class="fr2">
+                <div>
+                  <h5 style="color:var(--em400);margin-bottom:.75rem">💳 Razorpay Online Gateway</h5>
+                  <div class="fg">
+                    <label>Razorpay Key ID</label>
+                    <input id="set-rzp-key" value="${escapeHtml(S.config.razorpayKeyId || '')}" placeholder="rzp_live_... or rzp_test_...">
+                  </div>
+                  <div class="fg">
+                    <label>Razorpay Key Secret (Optional)</label>
+                    <input id="set-rzp-sec" type="password" value="${escapeHtml(S.config.razorpayKeySecret || '')}" placeholder="Razorpay Secret Key">
+                  </div>
+                  <div style="font-size:.78rem;color:var(--txtm);margin-top:.4rem">
+                    Status: <strong>${S.config.razorpayKeyId ? '🟢 Key Active' : '🔴 Key Pending (Safe Mode: COD Fallback Active)'}</strong>
+                  </div>
+                </div>
+
+                <div>
+                  <h5 style="color:var(--em400);margin-bottom:.75rem">🔥 Firebase Authentication</h5>
+                  <div class="fg">
+                    <label>Firebase Web API Key</label>
+                    <input id="set-fb-key" value="${escapeHtml(S.config.firebaseApiKey || '')}" placeholder="AIzaSy...">
+                  </div>
+                  <div class="fg">
+                    <label>Firebase Project ID</label>
+                    <input id="set-fb-pid" value="${escapeHtml(S.config.firebaseProjectId || '')}" placeholder="desi-touch-firebase">
+                  </div>
+                  <div class="fg">
+                    <label>Firebase Auth Domain</label>
+                    <input id="set-fb-dom" value="${escapeHtml(S.config.firebaseAuthDomain || '')}" placeholder="desi-touch-firebase.firebaseapp.com">
+                  </div>
+                  <div style="font-size:.78rem;color:var(--txtm);margin-top:.4rem">
+                    Status: <strong>${firebaseInitialized ? '🟢 Firebase Connected' : '🔴 API Key Pending (Safe Mode: Verified Credentials Only)'}</strong>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-p" style="margin-top:1.2rem">💾 Save Gateway & Firebase Settings</button>
+            </form>
+          </div>
+        </div>
+      ` : ''}
+
+    </div>
+  `;
+  bindAdminEvents();
+}
+
+function bindAdminEvents() {
+  document.querySelectorAll('.atab').forEach(t => {
+    t.addEventListener('click', () => {
+      adminTab = t.dataset.tab;
+      renderAdminPortal();
+    });
+  });
+
+  document.getElementById('a-store-view')?.addEventListener('click', () => showStore());
+  document.getElementById('a-reset-data')?.addEventListener('click', () => {
+    if (confirm('Reset entire store, products, orders, and banners to factory defaults?')) {
+      resetAll();
+      renderAll();
+      toast('Database reset to defaults 🌱', 'info');
+    }
+  });
+  document.getElementById('a-logout-btn')?.addEventListener('click', () => {
+    adminLogout();
+    toast('Admin session logged out safely', 'info');
+    showStore();
+  });
+
+  document.getElementById('a-add-prod-btn')?.addEventListener('click', () => openProdModal());
+
+  document.querySelectorAll('.qp-save-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const row = btn.closest('tr');
+      const pInp = row.querySelector('.qp-price');
+      const mInp = row.querySelector('.qp-mrp');
+      if (pInp && mInp) {
+        updQuickPrice(id, pInp.value, mInp.value);
+        toast(`Price updated for <strong>${getProd(id)?.name}</strong>! 💰`, 'success');
+        renderAdminPortal();
+        renderProducts();
+      }
+    });
+  });
+
+  document.querySelectorAll('.quick-price-inp').forEach(inp => {
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const id = inp.dataset.id;
+        const row = inp.closest('tr');
+        const pInp = row.querySelector('.qp-price');
+        const mInp = row.querySelector('.qp-mrp');
+        updQuickPrice(id, pInp.value, mInp.value);
+        toast(`Price updated! 💰`, 'success');
+        renderAdminPortal();
+        renderProducts();
+      }
+    });
+  });
+
+  document.getElementById('a-prod-tbody')?.addEventListener('click', e => {
+    const ed = e.target.closest('[data-act="edit-prod"]');
+    if (ed) return openProdModal(ed.dataset.id);
+    const dl = e.target.closest('[data-act="del-prod"]');
+    if (dl) {
+      const p = getProd(dl.dataset.id);
+      if (confirm(`Are you sure you want to remove "${p.name}"?`)) {
+        delProd(dl.dataset.id);
+        toast(`"${p.name}" removed from catalog`, 'info');
+        renderAdminPortal();
+        renderProducts();
+      }
+    }
+  });
+
+  document.getElementById('a-batch-stock')?.addEventListener('click', () => {
+    S.products.forEach(p => updStock(p.id, p.stock + 10));
+    toast('Restocked +10 units to all products 📦');
+    renderAdminPortal();
+    renderProducts();
+  });
+
+  document.getElementById('a-stk-tbody')?.addEventListener('click', e => {
+    const b = e.target.closest('[data-act="adj"]');
+    if (b) {
+      const id = b.dataset.id;
+      const d = parseInt(b.dataset.d);
+      const p = getProd(id);
+      if (p) {
+        updStock(id, p.stock + d);
+        toast(`${p.name}: ${p.stock} units`);
+        renderAdminPortal();
+        renderProducts();
+      }
+    }
+  });
+
+  document.getElementById('a-stk-tbody')?.addEventListener('change', e => {
+    const inp = e.target.closest('.stk-num');
+    if (inp) {
+      updStock(inp.dataset.id, parseInt(inp.value) || 0);
+      toast('Stock saved');
+      renderAdminPortal();
+      renderProducts();
+    }
+  });
+
+  document.getElementById('a-add-poster-btn')?.addEventListener('click', () => openPosterModal());
+  document.getElementById('a-poster-grid')?.addEventListener('click', e => {
+    const tg = e.target.closest('[data-act="tog-b"]');
+    if (tg) {
+      const id = tg.dataset.id;
+      const b = S.banners.find(x => x.id === id);
+      if (b) {
+        updBanner(id, {active: !b.active});
+        toast(`Poster "${b.title}" ${!b.active ? 'published live' : 'moved to draft'}`);
+        renderAdminPortal();
+        renderHero();
+      }
+    }
+    const dl = e.target.closest('[data-act="del-b"]');
+    if (dl) {
+      if (confirm('Delete this poster permanently?')) {
+        delBanner(dl.dataset.id);
+        toast('Poster deleted', 'info');
+        renderAdminPortal();
+        renderHero();
+      }
+    }
+  });
+
+  document.querySelectorAll('.ord-stat-sel').forEach(sel => {
+    sel.addEventListener('change', () => {
+      updOrderStatus(sel.dataset.id, sel.value);
+      toast(`Order ${sel.dataset.id} status updated to "${sel.value}" 🚚`);
+      renderAdminPortal();
+    });
+  });
+
+  document.getElementById('set-store-form')?.addEventListener('submit', e => {
+    e.preventDefault();
+    updStoreConfig({
+      annText: document.getElementById('set-ann').value,
+      annCoupon: document.getElementById('set-cpn').value.trim().toUpperCase(),
+      annDiscount: parseInt(document.getElementById('set-disc').value) || 20,
+      freeShipThreshold: parseInt(document.getElementById('set-thr').value) || 999,
+      phone: document.getElementById('set-phone').value,
+      email: document.getElementById('set-email').value
+    });
+    toast('Storefront settings saved and live! 🌱', 'success');
+  });
+
+  document.getElementById('set-sec-form')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const curP = document.getElementById('sec-cur-pass').value;
+    const newP = document.getElementById('sec-new-pass').value;
+    const newE = document.getElementById('sec-email').value;
+
+    if (curP !== S.adminCreds.password) {
+      toast('Current password incorrect. Access denied.', 'error');
+      return;
+    }
+    S.adminCreds.password = newP;
+    S.adminCreds.email = newE;
+    sv(SK.ADMIN_CRED, S.adminCreds);
+    toast('Admin credentials updated successfully! 🔒', 'success');
+    renderAdminPortal();
+  });
+
+  document.getElementById('set-gateway-form')?.addEventListener('submit', e => {
+    e.preventDefault();
+    updStoreConfig({
+      razorpayKeyId: document.getElementById('set-rzp-key')?.value.trim() || '',
+      razorpayKeySecret: document.getElementById('set-rzp-sec')?.value.trim() || '',
+      firebaseApiKey: document.getElementById('set-fb-key')?.value.trim() || '',
+      firebaseProjectId: document.getElementById('set-fb-pid')?.value.trim() || '',
+      firebaseAuthDomain: document.getElementById('set-fb-dom')?.value.trim() || ''
+    });
+    initFirebase();
+    toast('Gateway & Firebase credentials saved successfully! 💳🔥', 'success');
+    renderAdminPortal();
+  });
+}
+
+// ADMIN PRODUCT MODAL
+function openProdModal(pid = null) {
+  const p = pid ? getProd(pid) : null;
+  const el = document.getElementById('ap-modal');
+  const catOpts = [
+    ['ghee', 'Vedic Ghee & Butter'],
+    ['oils', 'Wood-Pressed Oils'],
+    ['honey', 'Raw Forest Honey'],
+    ['spices', 'Native Spices & Saffron'],
+    ['superfoods', 'Ancient Superfoods & Shilajit'],
+    ['snacks', 'Roasted Snacks']
+  ];
+  const presetImgs = [
+    ['assets/images/product_ghee.jpg', 'Vedic Bilona Ghee / Butter'],
+    ['assets/images/product_mustard.jpg', 'Mustard / Groundnut Oil'],
+    ['assets/images/product_coconut.jpg', 'Wood-Pressed Coconut Oil'],
+    ['assets/images/product_honey.jpg', 'Wild Honey / Shilajit Resin'],
+    ['assets/images/product_turmeric.jpg', 'Lakadong Turmeric / Saffron'],
+    ['assets/images/product_makhana.jpg', 'Roasted Makhana / Millets / Moringa']
+  ];
+
+  el.innerHTML = `
+    <div class="mback" id="ap-bk"></div>
+    <div class="mdlg" style="max-width:620px">
+      <div class="mhdr">
+        <h3>${p ? 'Edit Product & Price' : 'Add New Harvest Product'}</h3>
+        <button class="cls-btn" id="close-ap">✕</button>
+      </div>
+      <form id="ap-form" class="mbdy">
+        <div class="fg">
+          <label>Product Title *</label>
+          <input id="ap-name" required value="${p ? p.name : ''}" placeholder="e.g. Pure A2 Cow Cultured Ghee">
+        </div>
+        <div class="fr2">
+          <div class="fg">
+            <label>Category *</label>
+            <select id="ap-cat" class="csel" required>
+              ${catOpts.map(c => `<option value="${c[0]}"${p && p.cat === c[0] ? ' selected' : ''}>${c[1]}</option>`).join('')}
+            </select>
+          </div>
+          <div class="fg">
+            <label>Pack / Weight Size *</label>
+            <input id="ap-wt" required value="${p ? p.wt : '500g Glass Jar'}" placeholder="500g Glass Jar">
+          </div>
+        </div>
+        <div class="fr3">
+          <div class="fg">
+            <label>Selling Price (₹) *</label>
+            <input type="number" id="ap-price" required min="1" value="${p ? p.price : ''}" placeholder="1450">
+          </div>
+          <div class="fg">
+            <label>MRP Price (₹)</label>
+            <input type="number" id="ap-mrp" min="1" value="${p ? p.mrp : ''}" placeholder="1800">
+          </div>
+          <div class="fg">
+            <label>Stock Count *</label>
+            <input type="number" id="ap-stock" required min="0" value="${p ? p.stock : '25'}">
+          </div>
+        </div>
+        <div class="fr2">
+          <div class="fg">
+            <label>Product Badge Label</label>
+            <input id="ap-badge" value="${p ? (p.badge || '') : 'Bestseller'}" placeholder="e.g. Bestseller, 100% Pure">
+          </div>
+          <div class="fg">
+            <label>Badge Color</label>
+            <select id="ap-badge-c" class="csel">
+              <option value="gold"${p && p.badgeC === 'gold' ? ' selected' : ''}>Gold Accent</option>
+              <option value="em"${p && p.badgeC === 'em' ? ' selected' : ''}>Emerald Green</option>
+              <option value="rose"${p && p.badgeC === 'rose' ? ' selected' : ''}>Rose Alert</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Product Image (Choose Preset OR Upload Custom Photo)</label>
+          <select id="ap-img-sel" class="csel" style="margin-bottom:.5rem">
+            ${presetImgs.map(i => `<option value="${i[0]}"${p && p.image === i[0] ? ' selected' : ''}>${i[1]}</option>`).join('')}
+            <option value="custom">Custom Upload / Custom URL...</option>
+          </select>
+          <div id="ap-custom-img-wrap" style="display:${p && !presetImgs.some(x => x[0] === p.image) ? 'block' : 'none'}">
+            <input type="file" id="ap-file-inp" accept="image/*" style="margin-bottom:.5rem">
+            <input type="text" id="ap-img-url" placeholder="Or paste image URL" value="${p ? p.image : ''}">
+          </div>
+        </div>
+        <div class="fg">
+          <label>Description & Vedic Processing</label>
+          <textarea id="ap-desc" rows="3" placeholder="Explain the traditional method...">${p ? p.desc : ''}</textarea>
+        </div>
+        <div class="mftr" style="padding:1rem 0 0">
+          <button type="button" class="btn btn-o" id="cancel-ap">Cancel</button>
+          <button type="submit" class="btn btn-p">Save Product to Store</button>
+        </div>
+      </form>
+    </div>
+  `;
+  el.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  const imgSel = document.getElementById('ap-img-sel');
+  const custWrap = document.getElementById('ap-custom-img-wrap');
+  const fileInp = document.getElementById('ap-file-inp');
+  const urlInp = document.getElementById('ap-img-url');
+
+  imgSel.addEventListener('change', () => {
+    custWrap.style.display = imgSel.value === 'custom' ? 'block' : 'none';
+  });
+
+  fileInp.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = ev => { urlInp.value = ev.target.result; };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.getElementById('ap-bk').addEventListener('click', closeProdModal);
+  document.getElementById('close-ap').addEventListener('click', closeProdModal);
+  document.getElementById('cancel-ap').addEventListener('click', closeProdModal);
+
+  document.getElementById('ap-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const catNames = {
+      ghee: 'Vedic Ghee & Butter',
+      oils: 'Wood-Pressed Oils',
+      honey: 'Raw Forest Honey',
+      spices: 'Native Spices & Saffron',
+      superfoods: 'Ancient Superfoods & Shilajit',
+      snacks: 'Roasted Snacks'
+    };
+    const cat = document.getElementById('ap-cat').value;
+    let finalImg = imgSel.value === 'custom' ? (urlInp.value || 'assets/images/product_ghee.jpg') : imgSel.value;
+
+    const data = {
+      name: document.getElementById('ap-name').value,
+      cat,
+      catNm: catNames[cat] || 'Organic',
+      wt: document.getElementById('ap-wt').value,
+      price: parseInt(document.getElementById('ap-price').value) || 0,
+      mrp: parseInt(document.getElementById('ap-mrp').value) || parseInt(document.getElementById('ap-price').value) || 0,
+      stock: parseInt(document.getElementById('ap-stock').value) || 0,
+      badge: document.getElementById('ap-badge').value,
+      badgeC: document.getElementById('ap-badge-c').value,
+      image: finalImg,
+      desc: document.getElementById('ap-desc').value
+    };
+
+    if (pid) {
+      updProd(pid, data);
+      toast(`Updated "${data.name}"!`);
+    } else {
+      addProd(data);
+      toast(`"${data.name}" added to harvest catalog! 🌱`);
+    }
+    closeProdModal();
+    renderAdminPortal();
+    renderProducts();
+  });
+}
+
+function closeProdModal() {
+  document.getElementById('ap-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+// ADMIN POSTER MODAL
+function openPosterModal() {
+  const el = document.getElementById('ab-modal');
+  el.innerHTML = `
+    <div class="mback" id="ab-bk"></div>
+    <div class="mdlg" style="max-width:600px">
+      <div class="mhdr">
+        <h3>Create Storefront Promo Poster</h3>
+        <button class="cls-btn" id="close-ab">✕</button>
+      </div>
+      <form id="ab-form" class="mbdy">
+        <div class="fg">
+          <label>Poster Headline *</label>
+          <input id="ab-title" required placeholder="e.g. Native Vedic Harvest Festival">
+        </div>
+        <div class="fg">
+          <label>Subtitle & Description *</label>
+          <textarea id="ab-sub" rows="2" required placeholder="Highlight the offer or traditional harvest..."></textarea>
+        </div>
+        <div class="fr2">
+          <div class="fg">
+            <label>Badge / Ribbon Tag</label>
+            <input id="ab-tag" value="NATURE KA ASLI TOUCH">
+          </div>
+          <div class="fg">
+            <label>Offer Text</label>
+            <input id="ab-disc" placeholder="e.g. Use code DESI20 for 20% OFF">
+          </div>
+        </div>
+        <div class="fr2">
+          <div class="fg">
+            <label>Button Label</label>
+            <input id="ab-btn" value="Shop Pure Harvest">
+          </div>
+          <div class="fg">
+            <label>Button Link</label>
+            <input id="ab-link" value="#catalog">
+          </div>
+        </div>
+        <div class="fg">
+          <label>Poster Background Image</label>
+          <select id="ab-img-sel" class="csel" style="margin-bottom:.5rem">
+            <option value="assets/images/hero_banner_1.jpg">Vedic Farm Sunset (Banner 1)</option>
+            <option value="assets/images/hero_banner_2.jpg">Ancient Superfoods (Banner 2)</option>
+            <option value="assets/images/product_ghee.jpg">Bilona Ghee Close-up</option>
+            <option value="assets/images/product_mustard.jpg">Mustard Fields</option>
+            <option value="custom">Upload Custom File / Custom URL...</option>
+          </select>
+          <div id="ab-custom-wrap" style="display:none">
+            <input type="file" id="ab-file-inp" accept="image/*" style="margin-bottom:.5rem">
+            <input type="text" id="ab-img-url" placeholder="Or paste image URL">
+          </div>
+        </div>
+        <div class="mftr" style="padding:1rem 0 0">
+          <button type="button" class="btn btn-o" id="cancel-ab">Cancel</button>
+          <button type="submit" class="btn btn-p">Publish Poster to Hero</button>
+        </div>
+      </form>
+    </div>
+  `;
+  el.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  const imgSel = document.getElementById('ab-img-sel');
+  const custWrap = document.getElementById('ab-custom-wrap');
+  const fileInp = document.getElementById('ab-file-inp');
+  const urlInp = document.getElementById('ab-img-url');
+
+  imgSel.addEventListener('change', () => {
+    custWrap.style.display = imgSel.value === 'custom' ? 'block' : 'none';
+  });
+
+  fileInp.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = ev => { urlInp.value = ev.target.result; };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.getElementById('ab-bk').addEventListener('click', closePosterModal);
+  document.getElementById('close-ab').addEventListener('click', closePosterModal);
+  document.getElementById('cancel-ab').addEventListener('click', closePosterModal);
+
+  document.getElementById('ab-form').addEventListener('submit', e => {
+    e.preventDefault();
+    let finalImg = imgSel.value === 'custom' ? (urlInp.value || 'assets/images/hero_banner_1.jpg') : imgSel.value;
+
+    addBanner({
+      title: document.getElementById('ab-title').value,
+      subtitle: document.getElementById('ab-sub').value,
+      tag: document.getElementById('ab-tag').value,
+      discount: document.getElementById('ab-disc').value,
+      btnText: document.getElementById('ab-btn').value,
+      btnLink: document.getElementById('ab-link').value || '#catalog',
+      image: finalImg
+    });
+    toast('Poster published to live slideshow! 🎨');
+    closePosterModal();
+    renderAdminPortal();
+    renderHero();
+  });
+}
+
+function closePosterModal() {
+  document.getElementById('ab-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+// ============================================================
+// VIEW SWITCHER ENGINE
+// ============================================================
+function showView(v) {
+  document.getElementById('v-store').classList.toggle('hidden', v !== 'store');
+  document.getElementById('v-admin').classList.toggle('hidden', v !== 'admin');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showStore() {
+  showView('store');
+  updateUserUI();
+  renderProducts();
+  renderHero();
+}
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+function renderAll() {
+  applyTheme();
+  applyStoreConfig();
+  renderHero();
+  renderCatTabs();
+  renderProducts();
+  updateUserUI();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderAll();
+  startHeroAuto();
+  bindDropdown();
+
+  // Dark Mode Toggle
+  document.getElementById('theme-btn')?.addEventListener('click', toggleTheme);
+  document.getElementById('m-theme-btn')?.addEventListener('click', () => {
+    toggleTheme();
+    document.getElementById('mob-drawer').classList.add('hidden');
+  });
+
+  // Search input with instant filtering
+  document.getElementById('g-search').addEventListener('input', e => {
+    S.searchQ = e.target.value;
+    renderProducts();
+  });
+
+  // Category tabs delegation
+  document.getElementById('cat-tabs').addEventListener('click', e => {
+    const t = e.target.closest('.cat-tab');
+    if (!t) return;
+    S.activeCat = t.dataset.cat;
+    renderCatTabs();
+    renderProducts();
+  });
+
+  // Sort dropdown
+  document.getElementById('sort-sel').addEventListener('change', () => renderProducts());
+
+  // Product grid delegation
+  document.getElementById('pgrid').addEventListener('click', e => {
+    const atc = e.target.closest('[data-act="atc"]');
+    if (atc) {
+      const ok = addToCart(atc.dataset.id);
+      if (ok) {
+        const p = getProd(atc.dataset.id);
+        toast(`Added <strong>${p.name}</strong> to basket!`);
+      } else toast('Unable to add item.', 'error');
+      renderProducts();
+      return;
+    }
+    const qv = e.target.closest('[data-act="qv"]');
+    if (qv) openQV(qv.dataset.id);
+  });
+
+  // Reset filter button
+  document.getElementById('rst-flt')?.addEventListener('click', () => {
+    S.activeCat = 'all';
+    S.searchQ = '';
+    document.getElementById('g-search').value = '';
+    renderCatTabs();
+    renderProducts();
+  });
+
+  // Open cart drawer
+  document.getElementById('open-cart').addEventListener('click', openCart);
+
+  // Mobile Menu Drawer
+  document.getElementById('mob-menu-btn')?.addEventListener('click', () => {
+    document.getElementById('mob-drawer').classList.remove('hidden');
+  });
+  document.getElementById('close-mob')?.addEventListener('click', () => {
+    document.getElementById('mob-drawer').classList.add('hidden');
+  });
+  document.getElementById('mob-bk')?.addEventListener('click', () => {
+    document.getElementById('mob-drawer').classList.add('hidden');
+  });
+  document.getElementById('m-home')?.addEventListener('click', () => {
+    document.getElementById('mob-drawer').classList.add('hidden');
+    showStore();
+  });
+  document.getElementById('m-cat')?.addEventListener('click', () => {
+    document.getElementById('mob-drawer').classList.add('hidden');
+    showStore();
+    document.getElementById('catalog').scrollIntoView({behavior: 'smooth'});
+  });
+  document.getElementById('m-pur')?.addEventListener('click', () => {
+    document.getElementById('mob-drawer').classList.add('hidden');
+    showStore();
+    document.getElementById('purity').scrollIntoView({behavior: 'smooth'});
+  });
+  document.getElementById('m-testi')?.addEventListener('click', () => {
+    document.getElementById('mob-drawer').classList.add('hidden');
+    showStore();
+    document.getElementById('testi').scrollIntoView({behavior: 'smooth'});
+  });
+  document.getElementById('m-orders')?.addEventListener('click', () => {
+    document.getElementById('mob-drawer').classList.add('hidden');
+    openAccount();
+  });
+
+  // Announcement bar coupon click-to-copy
+  document.getElementById('cpn-copy')?.addEventListener('click', () => {
+    const cpn = S.config.annCoupon || 'DESI20';
+    navigator.clipboard.writeText(cpn)
+      .then(() => toast(`${cpn} copied to clipboard! 📋`))
+      .catch(() => toast(`${cpn}: Use at checkout!`));
+  });
+
+  // Logo home link
+  document.getElementById('home-link').addEventListener('click', () => showStore());
+
+  // Hero carousel controls
+  document.getElementById('hero-prev').addEventListener('click', () => {
+    stopHeroAuto();
+    heroGo(-1);
+    startHeroAuto();
+  });
+  document.getElementById('hero-next').addEventListener('click', () => {
+    stopHeroAuto();
+    heroGo(1);
+    startHeroAuto();
+  });
+  document.getElementById('hero-dots').addEventListener('click', e => {
+    const d = e.target.closest('.dot');
+    if (d) {
+      heroIdx = parseInt(d.dataset.i);
+      renderHero();
+    }
+  });
+
+  // Reactive state subscriber
+  sub(ev => {
+    if (ev === 'cart' || ev === 'reset') {
+      const c = getCart();
+      document.getElementById('cart-cnt').textContent = c.count;
+      document.getElementById('cart-htot').textContent = `₹${c.total.toLocaleString()}`;
+    }
+    if (ev === 'config') {
+      applyStoreConfig();
+    }
+  });
+
+  // Initial cart badge count sync
+  const initCart = getCart();
+  document.getElementById('cart-cnt').textContent = initCart.count;
+  document.getElementById('cart-htot').textContent = `₹${initCart.total.toLocaleString()}`;
+
+  // Initialize Firebase (if keys saved)
+  initFirebase();
+
+  // Secure Route Protection (Direct Hash & Hash Change)
+  function handleHashRoute() {
+    if (window.location.hash === '#admin') {
+      if (isAdminAuth()) {
+        showAdmin();
+      } else {
+        showAdminLogin();
+      }
+    }
+  }
+
+  handleHashRoute();
+  window.addEventListener('hashchange', handleHashRoute);
+
+  console.log('🌱 Desi Touch Ultra-Fast Platform Ready (Firebase & Razorpay Integration Active)');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "desi-touch-ecommerce",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3000 --host",
+    "build": "vite build",
+    "preview": "vite preview --port 3000"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "chart.js": "^4.4.8",
+    "lucide": "^1.41.0"
+  }
+}
